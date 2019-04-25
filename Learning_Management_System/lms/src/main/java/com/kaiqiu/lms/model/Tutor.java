@@ -1,10 +1,15 @@
 package com.kaiqiu.lms.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +29,9 @@ public class Tutor {
 	private String password;
 	@Column(name="mobile")
 	private String mobile;
+	@OneToMany(mappedBy = "tutor", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
+			CascadeType.REFRESH })
+	private List<Lesson> lessons;
 	
 	public Tutor() {
 		
@@ -84,12 +92,25 @@ public class Tutor {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
+	
+	
+	
+	// add convenience methods for bi-directional relationship
 
-	@Override
+		@Override
 	public String toString() {
 		return "Tutor [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", password=" + password + ", mobile=" + mobile + "]";
+				+ ", password=" + password + ", mobile=" + mobile + ", lessons=" + lessons + "]";
 	}
-	
-	
+
+		public void add(Lesson tempLesson) {
+
+			if (lessons == null) {
+				lessons = new ArrayList<>();
+			}
+
+			lessons.add(tempLesson);
+
+			tempLesson.setTutor(this);
+		}
 }
