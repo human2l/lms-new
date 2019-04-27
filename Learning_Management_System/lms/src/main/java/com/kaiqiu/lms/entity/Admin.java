@@ -1,20 +1,16 @@
-package com.kaiqiu.lms.model;
+package com.kaiqiu.lms.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tutor")
-public class Tutor {
+@Table(name="admin")
+public class Admin {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
@@ -27,22 +23,16 @@ public class Tutor {
 	private String email;
 	@Column(name="password")
 	private String password;
-	@Column(name="mobile")
-	private String mobile;
-	@OneToMany(mappedBy = "tutor", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
-			CascadeType.REFRESH })
-	private List<Lesson> lessons;
 	
-	public Tutor() {
+	public Admin() {
 		
 	}
-
-	public Tutor(String firstName, String lastName, String email, String password, String mobile) {
+	
+	public Admin(String firstName, String lastName, String email, String password) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
-		this.mobile = mobile;
 	}
 
 	public int getId() {
@@ -85,32 +75,11 @@ public class Tutor {
 		this.password = password;
 	}
 
-	public String getMobile() {
-		return mobile;
-	}
-
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-	
-	
-	
-	// add convenience methods for bi-directional relationship
-
-		@Override
+	@Override
 	public String toString() {
-		return "Tutor [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", password=" + password + ", mobile=" + mobile + ", lessons=" + lessons + "]";
+		return "Admin [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", password=" + password + "]";
 	}
-
-		public void add(Lesson tempLesson) {
-
-			if (lessons == null) {
-				lessons = new ArrayList<>();
-			}
-
-			lessons.add(tempLesson);
-
-			tempLesson.setTutor(this);
-		}
+	
+	
 }

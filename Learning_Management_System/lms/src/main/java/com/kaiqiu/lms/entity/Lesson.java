@@ -1,4 +1,4 @@
-package com.kaiqiu.lms.model;
+package com.kaiqiu.lms.entity;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -134,10 +134,12 @@ public class Lesson {
 	
 	// add convenience methods for bi-directional relationship
 
+	
+
 		@Override
 	public String toString() {
-		return "Lesson [id=" + id + ", tittle=" + tittle + ", description=" + description + ", startDate=" + DateUtils.formatDate(startDate)
-				+ ", endDate=" + DateUtils.formatDate(endDate) + ", course=" + course + ", tutor=" + tutor + ", students=" + students + "]";
+		return "Lesson [id=" + id + ", tittle=" + tittle + ", description=" + description + ", startDate=" + startDate
+				+ ", endDate=" + endDate + "]";
 	}
 
 		public void addStudent(Student theStudent) {

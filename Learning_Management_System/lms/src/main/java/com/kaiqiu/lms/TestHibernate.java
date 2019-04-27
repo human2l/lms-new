@@ -6,11 +6,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import com.kaiqiu.lms.model.Admin;
-import com.kaiqiu.lms.model.Course;
-import com.kaiqiu.lms.model.Lesson;
-import com.kaiqiu.lms.model.Student;
-import com.kaiqiu.lms.model.Tutor;
+import com.kaiqiu.lms.entity.Admin;
+import com.kaiqiu.lms.entity.Course;
+import com.kaiqiu.lms.entity.Lesson;
+import com.kaiqiu.lms.entity.Student;
+import com.kaiqiu.lms.entity.Tutor;
 import com.kaiqiu.lms.utils.DateUtils;;
 
 public class TestHibernate {
@@ -38,6 +38,8 @@ public class TestHibernate {
 			//create data
 //			createData(session);
 //			createAdvancedData(session);
+			Student a = session.get(Student.class, 1);
+			System.out.println(a);
 			
 			
 			

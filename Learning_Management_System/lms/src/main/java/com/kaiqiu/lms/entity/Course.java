@@ -1,4 +1,4 @@
-package com.kaiqiu.lms.model;
+package com.kaiqiu.lms.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,11 +84,7 @@ public class Course {
 
 	// add convenience methods for bi-directional relationship
 
-	@Override
-	public String toString() {
-		return "Course [id=" + id + ", tittle=" + tittle + ", description=" + description + ", students=" + students
-				+ ", lessons=" + lessons + "]";
-	}
+	
 
 	public void add(Student tempStudent) {
 
@@ -99,6 +95,11 @@ public class Course {
 		students.add(tempStudent);
 
 		tempStudent.setCourse(this);
+	}
+
+	@Override
+	public String toString() {
+		return "Course [id=" + id + ", tittle=" + tittle + ", description=" + description + "]";
 	}
 
 	public void add(Lesson tempLesson) {
