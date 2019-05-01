@@ -1,4 +1,4 @@
-package com.kaiqiu.lms.service;
+package com.kaiqiu.lms.service.impl;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kaiqiu.lms.dao.StudentDAO;
 import com.kaiqiu.lms.entity.Student;
+import com.kaiqiu.lms.service.StudentService;
 
 @Service
 public class StudentServiceImpl implements StudentService {
