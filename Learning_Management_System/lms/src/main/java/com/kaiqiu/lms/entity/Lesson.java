@@ -19,7 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.kaiqiu.lms.utils.DateUtils;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="lesson")
@@ -46,6 +46,7 @@ public class Lesson {
 			 CascadeType.DETACH, CascadeType.REFRESH})
 	@JoinColumn(name="tutor_id")
 	private Tutor tutor;
+	@JsonIgnore
 	@ManyToMany(fetch=FetchType.LAZY,
 			cascade= {CascadeType.PERSIST, CascadeType.MERGE,
 			 CascadeType.DETACH, CascadeType.REFRESH})
