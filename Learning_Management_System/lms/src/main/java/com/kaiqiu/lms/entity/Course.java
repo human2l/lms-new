@@ -1,6 +1,5 @@
 package com.kaiqiu.lms.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -80,36 +79,9 @@ public class Course {
 		this.lessons = lessons;
 	}
 
-	
-
-	// add convenience methods for bi-directional relationship
-
-	
-
-	public void add(Student tempStudent) {
-
-		if (students == null) {
-			students = new ArrayList<>();
-		}
-
-		students.add(tempStudent);
-
-		tempStudent.setCourse(this);
-	}
-
 	@Override
 	public String toString() {
 		return "Course [id=" + id + ", tittle=" + tittle + ", description=" + description + "]";
 	}
 
-	public void add(Lesson tempLesson) {
-
-		if (lessons == null) {
-			lessons = new ArrayList<>();
-		}
-
-		lessons.add(tempLesson);
-
-		tempLesson.setCourse(this);
-	}
 }

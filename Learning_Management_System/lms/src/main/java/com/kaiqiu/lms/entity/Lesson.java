@@ -1,6 +1,5 @@
 package com.kaiqiu.lms.entity;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,45 +15,46 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+
 @Entity
-@Table(name="lesson")
+@Table(name = "lesson")
 public class Lesson {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private int id;
-	@Column(name="tittle")
+	@Column(name = "tittle")
 	private String tittle;
-	@Column(name="description")
+	@Column(name = "description")
 	private String description;
-	@Column(name="start_date")
-	@Temporal(TemporalType.DATE) 
+	@Column(name = "start_date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date startDate;
-	@Column(name="end_date")
-	@Temporal(TemporalType.DATE) 
+	@Column(name = "end_date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date endDate;
-	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-			 CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinColumn(name="course_id")
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+	@JoinColumn(name = "course_id")
 	private Course course;
-	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-			 CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinColumn(name="tutor_id")
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+	@JoinColumn(name = "tutor_id")
 	private Tutor tutor;
 	@JsonIgnore
-	@ManyToMany(fetch=FetchType.LAZY,
-			cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-			 CascadeType.DETACH, CascadeType.REFRESH})
+	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
+			CascadeType.REFRESH })
 	@JoinTable(name = "lesson_student", joinColumns = @JoinColumn(name = "lesson_id"), inverseJoinColumns = @JoinColumn(name = "student_id"))
 	private List<Student> students;
-	
+
 	public Lesson() {
-		
+
 	}
 
 	public Lesson(String tittle, String description, Date startDate, Date endDate) {
@@ -104,8 +104,6 @@ public class Lesson {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	
-	
 
 	public Course getCourse() {
 		return course;
@@ -131,24 +129,10 @@ public class Lesson {
 		this.students = students;
 	}
 
-	
-	
-	// add convenience methods for bi-directional relationship
-
-	
-
-		@Override
+	@Override
 	public String toString() {
 		return "Lesson [id=" + id + ", tittle=" + tittle + ", description=" + description + ", startDate=" + startDate
 				+ ", endDate=" + endDate + "]";
 	}
 
-		public void addStudent(Student theStudent) {
-
-			if (students == null) {
-				students = new ArrayList<>();
-			}
-
-			students.add(theStudent);
-		}
 }
