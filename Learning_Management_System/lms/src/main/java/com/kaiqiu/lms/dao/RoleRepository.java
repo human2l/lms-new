@@ -8,5 +8,5 @@ import com.kaiqiu.lms.entity.User;
 
 @Repository("roleRepository")
 public interface RoleRepository extends JpaRepository<Role, Integer> {
-	User findByRole(String role);
+	Role findByRole(String role);
 }

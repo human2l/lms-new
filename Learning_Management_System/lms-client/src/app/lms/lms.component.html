@@ -1,0 +1,30 @@
+<nb-layout>
+
+  <nb-layout-header fixed>
+      <a href="#" (click)="toggle()"><i class="nb-menu"></i></a>
+      Learning Management System
+      <nb-actions size='medium'>
+        <nb-action class='left'>
+            <nb-user name='Donald Trump' title='President'></nb-user>
+        </nb-action>
+      </nb-actions>
+      
+      
+      
+    </nb-layout-header>
+  <nb-sidebar>
+    <nb-menu [items]="items" autoCollapse="true"></nb-menu>
+  </nb-sidebar>
+  
+
+  <nb-layout-column>
+    Page Content
+    <!-- <router-outlet></router-outlet> -->
+    
+  </nb-layout-column>
+
+  <!-- <nb-layout-footer fixed>
+  Footer
+  </nb-layout-footer> -->
+
+</nb-layout>

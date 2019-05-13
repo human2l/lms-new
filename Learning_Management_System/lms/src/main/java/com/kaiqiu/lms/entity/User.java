@@ -13,6 +13,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name="user")
@@ -23,15 +27,23 @@ public class User {
 	@Column(name="id")
 	private int id;
 	@Column(name = "first_name")
+	@NotEmpty(message = "*Please provide your first name")
 	private String firstName;
 	@Column(name = "last_name")
+	@NotEmpty(message = "*Please provide your last name")
 	private String lastName;
 	@Column(name = "email")
+	@Email(message = "*Please provide a valid Email")
+    @NotEmpty(message = "*Please provide an email")
 	private String email;
 	@Column(name = "password")
+	@Length(min = 5, message = "*Your password must have at least 5 characters")
+    @NotEmpty(message = "*Please provide your password")
 	private String password;
 	@Column(name = "mobile")
 	private String mobile;
+	@Column(name = "active")
+	private int active;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "admin_id")
 	private Admin admin;
@@ -49,14 +61,19 @@ public class User {
 		
 	}
 
-	public User(String firstName, String lastName, String email, String password, String mobile) {
-		super();
+	
+
+	public User(int id, String firstName, String lastName, String email, String password, String mobile, int active) {
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 		this.mobile = mobile;
+		this.active = active;
 	}
+
+
 
 	public String getFirstName() {
 		return firstName;
@@ -137,12 +154,24 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+	
+	
+
+	public int getActive() {
+		return active;
+	}
+
+	public void setActive(int active) {
+		this.active = active;
+	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", password=" + password + ", mobile=" + mobile + "]";
+				+ ", password=" + password + ", mobile=" + mobile + ", active=" + active + "]";
 	}
+
+	
 	
 	
 }

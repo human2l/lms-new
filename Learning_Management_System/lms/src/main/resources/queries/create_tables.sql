@@ -10,11 +10,12 @@ DROP TABLE IF EXISTS `user`;
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(45) DEFAULT NULL,
-  `last_name` varchar(45) DEFAULT NULL,
-  `email` varchar(45) DEFAULT NULL,
-  `password` varchar(45) DEFAULT NULL,
+  `first_name` varchar(45) NOT NULL,
+  `last_name` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `password` char(68) NOT NULL,
   `mobile` varchar(45) DEFAULT NULL,
+  `active` tinyint(1) NOT NULL,
   `admin_id` int(11) DEFAULT NULL,
   `tutor_id` int(11) DEFAULT NULL,
   `student_id` int(11) DEFAULT NULL,
@@ -34,7 +35,7 @@ DROP TABLE IF EXISTS `role`;
 
 CREATE TABLE `role` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `role` varchar(45) DEFAULT NULL,
+  `role` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
@@ -42,7 +43,7 @@ DROP TABLE IF EXISTS `admin`;
 
 CREATE TABLE `admin` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_USER_idx` (`user_id`),
   CONSTRAINT `FK_USER_A` FOREIGN KEY (`user_id`) 
@@ -53,7 +54,7 @@ DROP TABLE IF EXISTS `tutor`;
 
 CREATE TABLE `tutor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_USER_idx` (`user_id`),
   CONSTRAINT `FK_USER_T` FOREIGN KEY (`user_id`) 
@@ -65,7 +66,7 @@ DROP TABLE IF EXISTS `student`;
 
 CREATE TABLE `student` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
   `course_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_COURSE_idx` (`course_id`),
@@ -81,7 +82,7 @@ DROP TABLE IF EXISTS `course`;
 
 CREATE TABLE `course` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `tittle` varchar(45) DEFAULT NULL,
+  `tittle` varchar(45) NOT NULL,
   `description` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
@@ -91,7 +92,7 @@ DROP TABLE IF EXISTS `lesson`;
 
 CREATE TABLE `lesson` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `tittle` varchar(45) DEFAULT NULL,
+  `tittle` varchar(45) NOT NULL,
   `description` varchar(128) DEFAULT NULL,
   `start_date` DATE DEFAULT NULL,
   `end_date` DATE DEFAULT NULL,
