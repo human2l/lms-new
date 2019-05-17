@@ -2,6 +2,9 @@ import { LmsComponent } from './lms/lms.component';
 import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { DashboardComponent } from './lms/dashboard/dashboard.component';
+import { CourseComponent } from './lms/course/course.component';
+import { LessonComponent } from './lms/lesson/lesson.component';
 // import {
 //   NbAuthComponent,
 //   NbLoginComponent,
@@ -14,7 +17,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   { path: '', redirectTo:'/lms', pathMatch:'full'}, 
-  { path: 'lms', component: LmsComponent}, 
+  { path: 'lms', component: LmsComponent, children: [
+      { path: 'dashboard', component: DashboardComponent}, 
+      { path: 'course', component: CourseComponent}, 
+      { path: 'lesson', component: LessonComponent}, 
+  ]}, 
+  
   // { path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule' },
   // {
   //   path: 'auth',

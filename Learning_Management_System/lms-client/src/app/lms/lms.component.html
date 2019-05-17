@@ -1,25 +1,34 @@
 <nb-layout>
 
   <nb-layout-header fixed>
-      <a href="#" (click)="toggle()"><i class="nb-menu"></i></a>
-      Learning Management System
-      <nb-actions size='medium'>
-        <nb-action class='left'>
-            <nb-user name='Donald Trump' title='President'></nb-user>
+    <nb-actions size='large'>
+      <nb-action>
+          <a href="#" (click)="toggle()" class='navigation'><i class="nb-menu"></i></a>
+      </nb-action>
+      <nb-action>
+          <h5>Learning Management System</h5>
+      </nb-action>
+    </nb-actions>
+      <nb-actions size='large'>
+        <nb-action>
+            <nb-user [nbContextMenu]="contextMenuItems"
+            nbContextMenuTag="my-context-menu" size='medium' name='Donald Trump' title='President'></nb-user>
         </nb-action>
-      </nb-actions>
-      
-      
-      
+      </nb-actions>      
     </nb-layout-header>
   <nb-sidebar>
+      <!-- <nb-sidebar-header>
+          <a href="#" class="btn btn-hero-success main-btn">
+            <i class="ion ion-social-github"></i> <span>Support Us</span>
+          </a>
+        </nb-sidebar-header> -->
     <nb-menu [items]="items" autoCollapse="true"></nb-menu>
   </nb-sidebar>
   
 
   <nb-layout-column>
     Page Content
-    <!-- <router-outlet></router-outlet> -->
+    <router-outlet></router-outlet>
     
   </nb-layout-column>
 

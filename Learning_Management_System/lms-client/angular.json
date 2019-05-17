@@ -24,8 +24,10 @@
             ],
             "styles": [
               "./node_modules/@nebular/theme/styles/prebuilt/cosmic.css",
+              "node_modules/@nebular/bootstrap/styles/prebuilt/cosmic.css",
               "src/styles.css",
-              "./node_modules/nebular-icons/css/nebular-icons.css"
+              "./node_modules/nebular-icons/css/nebular-icons.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.css"
             ],
             "scripts": [],
             "es5BrowserSupport": true

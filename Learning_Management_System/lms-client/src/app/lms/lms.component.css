@@ -1,6 +1,15 @@
-:host nb-layout-header a {
+:host nb-layout-header /deep/ a {
     font-size: 2rem;
     text-decoration: none;
+  }
+
+
+  
+  /* :host nb-layout-column {
+    height: 50vw;
+  } */
+  :host nb-layout-header /deep/ nav {
+    justify-content: space-between;
   }
   /* :host nb-layout-column {
     height: 50vw;
@@ -8,7 +17,7 @@
   :host nb-layout-column:first-child {
     background: #f4f4f7;
   } */
-  .left {
+  /* .left {
     display: flex;
     width: 100%;
     order: 0;
@@ -17,4 +26,4 @@
   .right {
     order: 1;
     flex-direction: row-reverse;
-  }
+  } */

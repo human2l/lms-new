@@ -7,16 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lms.component.css']
 })
 export class LmsComponent implements OnInit {
-  base64image = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAG1BMVEVEeef///+4zPaKq/ChvPPn7' +
-    'vxymu3Q3flbieqI1HvuAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAQUlEQVQ4jWNgGAWjgP6ASdncAEaiAhaGiACmFhCJLsMaIiDAEQEi0WXYEiMC' +
-    'OCJAJIY9KuYGTC0gknpuHwXDGwAA5fsIZw0iYWYAAAAASUVORK5CYII='
+  
+  contextMenuItems = [
+    { title: 'Profile' },
+    { title: 'Logout' },
+  ];
+
 
   items = [
     {
       title: 'Dashboard',
       icon: 'nb-home',
       expanded: false,
-      link: [],
+      link: ['/lms/dashboard'],
     },
     {
       title: 'Learning Management',
@@ -25,11 +28,11 @@ export class LmsComponent implements OnInit {
       children: [
         {
           title: 'Courses',
-          link: [],
+          link: ['/lms/course'],
         },
         {
           title: 'Lessons',
-          link: [],
+          link: ['/lms/lesson'],
         },
       ],
     },
@@ -49,5 +52,9 @@ export class LmsComponent implements OnInit {
   toggle() {
     this.sidebarService.toggle(true);
     return false;
+  }
+
+  goToHome(){
+    console.log('go to home')
   }
 }
