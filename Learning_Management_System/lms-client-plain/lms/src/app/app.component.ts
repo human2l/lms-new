@@ -7,4 +7,17 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'lms';
+  manageItems: string[] = [
+    'course',
+    'lesson'
+  ];
+  manageItemsAfterDivider: string[] = [
+    'personnel'
+  ];
+  userItems: string[] = [
+    'profile'
+  ];
+  userItemsAfterDivider: string[] = [
+    'logout'
+  ];
 }
