@@ -10,11 +10,13 @@ import { AppComponent } from './app.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { PopoverModule } from 'ngx-bootstrap/popover';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { LmsComponent } from './lms/lms.component';
 import { PageNotFoundComponent } from './lms/page-not-found/page-not-found.component';
 import { PersonnelComponent } from './lms/personnel/personnel.component';
 import { ProfileComponent } from './lms/profile/profile.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,9 +30,11 @@ import { ProfileComponent } from './lms/profile/profile.component';
     DashboardComponent
   ],
   imports: [
+    ModalModule.forRoot(),
     PopoverModule.forRoot(),
     ButtonsModule.forRoot(),
     BsDropdownModule.forRoot(),
+    FormsModule,
     BrowserModule,
     AppRoutingModule
   ],

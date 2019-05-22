@@ -5,6 +5,13 @@
     </div>
   </div>
   <div class="row">
+    <div class="col">
+      <p>Lessons under [User.Course], add the lessons you want!(for student) 
+        /All of lessons you taught(for tutor)
+      /All lessons(for admin)</p>
+    </div>
+  </div>
+  <div class="row">
     <div class="table-responsive">
       <table class="table table-hover table-bordered">
         <thead>
@@ -41,6 +48,13 @@
                   class="btn btn-danger"
                 >
                   Delete
+                </button>
+                <button
+                  *ngIf="el.id === 3"
+                  type="button"
+                  class="btn btn-warning"
+                >
+                  Edit
                 </button>
               </div>
             </td>
