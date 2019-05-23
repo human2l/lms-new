@@ -1,67 +1,65 @@
-<div class="container">
-  <div class="row my-3 justify-content-center">
-    <h3>Profile</h3>
-  </div>
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <form (ngSubmit)="onSubmit()" #profileForm="ngForm">
-        <div class="form-group">
-          <label for="firstName">First Name:</label>
-          <input
-            type="text"
-            id="firstName"
-            class="form-control"
-            [(ngModel)]="userProfile.firstName"
-            name="firstName"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="lastName">Last Name:</label>
-          <input
-            type="text"
-            id="lastName"
-            class="form-control"
-            [(ngModel)]="userProfile.lastName"
-            name="lastName"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            class="form-control"
-            [(ngModel)]="userProfile.email"
-            name="email"
-            required
-            email
-            #email="ngModel"
-          />
-        </div>
-        <div class="form-group">
-          <label for="mobile">Mobile:</label>
-          <input
-            type="text"
-            id="mobile"
-            class="form-control"
-            [(ngModel)]="userProfile.mobile"
-            name="mobile"
-            required
-          />
-        </div>
-        <div class="row justify-content-between m-auto">
-          <input
-            class="btn btn-warning"
-            type="button"
-            value="Change Password"
-            (click)="openModal(template)"
-          />
-          <input class="btn btn-primary" type="submit" value="Save" />
-        </div>
-      </form>
-    </div>
+<div class="row my-3 pt-3 justify-content-center">
+  <h3>Profile</h3>
+</div>
+<div class="row pb-3 justify-content-center">
+  <div class="col-md-8">
+    <form (ngSubmit)="onSubmit()" #profileForm="ngForm">
+      <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input
+          type="text"
+          id="firstName"
+          class="form-control"
+          [(ngModel)]="userProfile.firstName"
+          name="firstName"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <input
+          type="text"
+          id="lastName"
+          class="form-control"
+          [(ngModel)]="userProfile.lastName"
+          name="lastName"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          class="form-control"
+          [(ngModel)]="userProfile.email"
+          name="email"
+          required
+          email
+          #email="ngModel"
+        />
+      </div>
+      <div class="form-group">
+        <label for="mobile">Mobile:</label>
+        <input
+          type="text"
+          id="mobile"
+          class="form-control"
+          [(ngModel)]="userProfile.mobile"
+          name="mobile"
+          required
+        />
+      </div>
+      <div class="row justify-content-between m-auto">
+        <input
+          class="btn btn-warning"
+          type="button"
+          value="Change Password"
+          (click)="openModal(template)"
+        />
+        <input class="btn btn-primary" type="submit" value="Save" />
+      </div>
+    </form>
   </div>
 </div>
 
@@ -78,7 +76,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <form  (ngSubmit)="onSubmitPassword()" #passwordForm="ngForm">
+    <form (ngSubmit)="onSubmitPassword()" #passwordForm="ngForm">
       <div class="form-group">
         <label for="newPassword">New Passowrd:</label>
         <input

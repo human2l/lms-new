@@ -6,7 +6,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lms.component.css']
 })
 export class LmsComponent implements OnInit {
-
+  title = 'lms';
+  manageItems: string[] = [
+    'course',
+    'lesson'
+  ];
+  manageItemsAfterDivider: string[] = [
+    'personnel'
+  ];
+  userItems: string[] = [
+    'profile'
+  ];
+  userItemsAfterDivider: string[] = [
+    'logout'
+  ];
   constructor() { }
 
   ngOnInit() {

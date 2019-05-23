@@ -6,18 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'lms';
-  manageItems: string[] = [
-    'course',
-    'lesson'
-  ];
-  manageItemsAfterDivider: string[] = [
-    'personnel'
-  ];
-  userItems: string[] = [
-    'profile'
-  ];
-  userItemsAfterDivider: string[] = [
-    'logout'
-  ];
+  
 }

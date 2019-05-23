@@ -1,66 +1,57 @@
-<div class="container">
-  <div class="row">
-    <div class="col my-3">
-      <h3>Lesson Management</h3>
-    </div>
+<div class="row mt-3">
+  <div class="col my-3">
+    <h3>Lesson Management</h3>
   </div>
-  <div class="row">
-    <div class="col">
-      <p>Lessons under [User.Course], add the lessons you want!(for student) 
-        /All of lessons you taught(for tutor)
-      /All lessons(for admin)</p>
-    </div>
+</div>
+<div class="row">
+  <div class="col">
+    <p>
+      Lessons under [User.Course], add the lessons you want!(for student) /All
+      of lessons you taught(for tutor) /All lessons(for admin)
+    </p>
   </div>
-  <div class="row">
-    <div class="table-responsive">
-      <table class="table table-hover table-bordered">
-        <thead>
-          <tr>
-            <th *ngFor="let head of headElements" scope="col">{{ head }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- TODO:check if the current lesson is belong to the user -->
-          <tr
-            *ngFor="let el of elements"
-            [ngClass]="checked() ? 'table-warning' : ''"
-          >
-            <th scope="row">{{ el.id }}</th>
-            <td>{{ el.title }}</td>
-            <td>{{ el.start_date }}</td>
-            <td>{{ el.end_date }}</td>
-            <td>
-              <div>
-                <button type="button" class="btn btn-primary mr-2">
-                  Details
-                </button>
-                <!-- TODO: -->
-                <button
-                  *ngIf="el.id === 1"
-                  type="button"
-                  class="btn btn-success mr-2"
-                >
-                  Add
-                </button>
-                <button
-                  *ngIf="el.id === 2"
-                  type="button"
-                  class="btn btn-danger"
-                >
-                  Delete
-                </button>
-                <button
-                  *ngIf="el.id === 3"
-                  type="button"
-                  class="btn btn-warning"
-                >
-                  Edit
-                </button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+</div>
+<div class="row">
+  <div class="table-responsive">
+    <table class="table table-hover table-bordered">
+      <thead>
+        <tr>
+          <th *ngFor="let head of headElements" scope="col">{{ head }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- TODO:check if the current lesson is belong to the user -->
+        <tr
+          *ngFor="let el of elements"
+          [ngClass]="checked() ? 'table-warning' : ''"
+        >
+          <th scope="row">{{ el.id }}</th>
+          <td>{{ el.title }}</td>
+          <td>{{ el.start_date }}</td>
+          <td>{{ el.end_date }}</td>
+          <td>
+            <div>
+              <button type="button" class="btn btn-primary mr-2">
+                Details
+              </button>
+              <!-- TODO: -->
+              <button
+                *ngIf="el.id === 1"
+                type="button"
+                class="btn btn-success mr-2"
+              >
+                Add
+              </button>
+              <button *ngIf="el.id === 2" type="button" class="btn btn-danger">
+                Delete
+              </button>
+              <button *ngIf="el.id === 3" type="button" class="btn btn-warning">
+                Edit
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

@@ -1,0 +1,11 @@
+.bg{
+    background: url(../../assets/study.jpg);
+    background-size: cover;
+    background-position:50% 50%;
+    height:50em;
+    width: auto;
+}
+
+.navbar-trans{
+    background: transparent;
+}

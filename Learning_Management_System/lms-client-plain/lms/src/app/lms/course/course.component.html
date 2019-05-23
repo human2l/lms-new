@@ -1,19 +1,16 @@
-
-<div class="container">
-  <h3>Course Management</h3>
-  <table class="table table-hover table-bordered">
-    <thead>
-      <tr>
-        <th *ngFor="let head of headElements" scope="col">{{ head }}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let el of elements">
-        <th scope="row">{{ el.id }}</th>
-        <td>{{ el.first }}</td>
-        <td>{{ el.last }}</td>
-        <td>{{ el.handle }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<h3>Course Management</h3>
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <th *ngFor="let head of headElements" scope="col">{{ head }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let el of elements">
+      <th scope="row">{{ el.id }}</th>
+      <td>{{ el.first }}</td>
+      <td>{{ el.last }}</td>
+      <td>{{ el.handle }}</td>
+    </tr>
+  </tbody>
+</table>
