@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="col mt-3">
+    <h3>Course Management</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <p>
+      Courses available, choose the course you want!(for student)/All courses(for admin)
+    </p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4 my-3">
+    <div class="list-group">
+      <a
+        *ngFor="let course of courses"
+        class="list-group-item list-group-item-action"
+        (click)="onSelectCourse(course)"
+        [class.list-group-item-warning]="course === currentCourse"
+        [class.list-group-item-primary]="course === selectedCourse"
+      >
+        {{ course.title }}
+      </a>
+
+      <!-- <a class="list-group-item list-group-item-action active" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
+            Cras justo odio
+          </a>
+          <a class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+          <a class="list-group-item list-group-item-action">Morbi leo risus</a>
+          <a class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+          <a class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">Vestibulum at eros</a> -->
+    </div>
+
+    <!-- <button
+      type="button"
+      class="btn btn-primary"
+      (click)="isCollapsed = !isCollapsed"
+      [attr.aria-expanded]="!isCollapsed"
+      aria-controls="collapseBasic"
+    >
+      Toggle collapse
+    </button> -->
+  </div>
+  <div class="col-md-8 my-3">
+    <div class="card" *ngIf="!isCollapsed">
+      <div class="card-header">
+        Description
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{ selectedCourse.title }}</h5>
+        <p class="card-text">{{ selectedCourse.description }}</p>
+        <button class="btn btn-primary" *ngIf="!hasCourse()" (click)="onSaveCourse()">Choose and Save</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="row mt-3">
+  <div class="col my-3">
+    <h3>Lesson Management</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <p>
+      Lessons under [User.Course], add the lessons you want!(for student) /All
+      of lessons you taught(for tutor) /All lessons(for admin)
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="table-responsive">
+    <table class="table table-hover table-bordered">
+      <thead>
+        <tr>
+          <th *ngFor="let head of lessonHeader" scope="col">{{ head }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- TODO:check if the current lesson is belong to the user -->
+        <tr
+          *ngFor="let lesson of lessons"
+          [ngClass]="hasLesson(lesson) ? 'table-warning' : ''"
+        >
+          <th scope="row">{{ lesson.id }}</th>
+          <td>{{ lesson.title }}</td>
+          <td>{{ lesson.start_date }}</td>
+          <td>{{ lesson.end_date }}</td>
+          <td>
+            <div>
+              <button type="button" class="btn btn-primary mx-1 my-1" (click)="showDetails(template, lesson)">
+                Details
+              </button>
+              <!-- TODO: -->
+              <button
+                *ngIf="!hasLesson(lesson)"
+                type="button"
+                class="btn btn-success mx-1 my-1"
+              >
+                Add
+              </button>
+              <button *ngIf="hasLesson(lesson)" type="button" class="btn btn-warning mx-1 my-1">
+                Edit
+              </button>
+              <button *ngIf="hasLesson(lesson)" type="button" class="btn btn-danger mx-1 my-1">
+                Delete
+              </button>
+              
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Details</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{ details }}
+  </div>
+</ng-template>

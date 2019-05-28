@@ -11,12 +11,16 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 import { LmsComponent } from './lms/lms.component';
 import { PageNotFoundComponent } from './lms/page-not-found/page-not-found.component';
 import { PersonnelComponent } from './lms/personnel/personnel.component';
 import { ProfileComponent } from './lms/profile/profile.component';
 import { FormsModule } from '@angular/forms';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +34,8 @@ import { FormsModule } from '@angular/forms';
     DashboardComponent
   ],
   imports: [
+    BrowserAnimationsModule,
+    CollapseModule.forRoot(),
     ModalModule.forRoot(),
     PopoverModule.forRoot(),
     ButtonsModule.forRoot(),
