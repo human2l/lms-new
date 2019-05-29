@@ -1,3 +1,24 @@
-<p>
-  dashboard works!
-</p>
+<div class="row">
+  <div class="col mt-3">
+    <h3>Dashboard</h3>
+    <hr>
+  </div>
+</div>
+<div class="row">
+  <div class="col mt-3">
+    <h5>Your Course: <span class="text-primary h3">{{ currentCourse.title }}</span></h5>
+  </div>
+</div>
+<div class="row">
+  <div class="col mt-3">
+    <h5>Your Lessons:</h5>
+  </div>
+</div>
+<div class="row">
+  <div class="col my-3">
+      <ul class="list-group list-group-flush" *ngFor="let lesson of currentLessons">
+          <!-- <li class="list-group-item">Cras justo odio</li> -->
+          <li class="list-group-item">{{ lesson.title }}</li>
+        </ul>
+  </div>
+</div>

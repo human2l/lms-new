@@ -1,3 +1,4 @@
+import { LmsService } from './../../service/lms.service';
 import { Lesson } from './../../shared/models/lesson.model';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
@@ -5,40 +6,58 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 @Component({
   selector: 'app-lesson',
   templateUrl: './lesson.component.html',
-  styleUrls: ['./lesson.component.css']
+  styleUrls: ['./lesson.component.css'],
+  providers: [LmsService]
 })
 export class LessonComponent implements OnInit {
+  currentRole: string = null;
   //updated to the details which belong to the user clicked lesson
   details="";
   modalRef: BsModalRef;
-  lessons = [];
+  allLessons: Lesson[] = [];
+  currentLessons: Lesson[] = [];
 
   lessonHeader = ['ID', 'Title', 'Start Date', 'End Date', 'Options'];
   
-  constructor(private modalService: BsModalService) { }
+  constructor(private modalService: BsModalService, private lmsService: LmsService) { }
 
   ngOnInit() {
-    //TODO: set lessons to all lessons we have
-    var lesson1: Lesson = {id:1,title:'title1',description:'des1', start_date:'sd1', end_date:'ed1'};
-    var lesson2: Lesson = {id:2,title:'title2',description:'des2', start_date:'sd2', end_date:'ed2'}
-    this.lessons.push(lesson1);
-    this.lessons.push(lesson2);
-  }
-
-  //TODO
-  checked(){
-    return true;
+    this.currentRole = this.lmsService.getCurrentRole();
+    this.allLessons = this.lmsService.getAllLessons();
+    this.currentLessons = this.lmsService.getCurrentLessons();
+    console.log(this.lmsService.getCurrentUser());
   }
 
   hasLesson(lesson: Lesson){
-    //TODO: check if the student has this lesson
-    // console.log(lesson);
-    return lesson.id === 1;
+    for(let l of this.currentLessons){
+      if(lesson.id === l.id){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  canEdit(lesson: Lesson){
+    return this.currentRole === "tutor"||this.currentRole === "admin";
   }
 
   showDetails(template: TemplateRef<any>, lesson: Lesson) {
     this.modalRef = this.modalService.show(template);
     this.details = lesson.description;
+  }
+
+  add(lesson: Lesson){
+    //no need to update currentLessons in lmsService, it is auto double bind, which is weird
+    this.lmsService.getCurrentLessons().push(lesson);
+    //TODO: http
+  }
+
+  delete(lesson: Lesson){
+    const index: number = this.currentLessons.indexOf(lesson);
+    if (index !== -1) {
+        this.currentLessons.splice(index, 1);
+    } 
+    //TODO: http
   }
 }
 

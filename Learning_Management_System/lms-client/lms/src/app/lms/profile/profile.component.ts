@@ -1,3 +1,4 @@
+import { LmsService } from './../../service/lms.service';
 import { Component, OnInit, ViewChild, TemplateRef } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
@@ -5,31 +6,29 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 @Component({
   selector: "app-profile",
   templateUrl: "./profile.component.html",
-  styleUrls: ["./profile.component.css"]
+  styleUrls: ["./profile.component.css"],
+  providers: [LmsService]
 })
 export class ProfileComponent implements OnInit {
   modalRef: BsModalRef;
   @ViewChild("profileForm") profileForm: NgForm;
   @ViewChild("passwordForm") passwordForm: NgForm;
 //TODO: validation, front-back transmission, onSubmit
-  userProfile = {
-    firstName: "aaa",
-    lastName: "bbb",
-    email: "a@a.com",
-    mobile: 123123
-  };
+  userProfile:{firstName:string,lastName:string,email:string,mobile:string} = {firstName:"",lastName:"",email:"",mobile:""};
 
   userPassword = {
     newPassword: "",
     confirmPassword: ""
   }
 
-  constructor(private modalService: BsModalService) {}
+  constructor(private modalService: BsModalService, private lmsService: LmsService) {}
 
   ngOnInit() {
-    // setTimeout(() => {
-    //   this.profileForm.form.setValue(this.userProfile);
-    // });
+    this.userProfile.firstName = this.lmsService.getCurrentUser().firstName;
+    this.userProfile.lastName = this.lmsService.getCurrentUser().lastName;
+    this.userProfile.email = this.lmsService.getCurrentUser().email;
+    this.userProfile.mobile = this.lmsService.getCurrentUser().mobile;
+    console.log(this.lmsService.getCurrentUser());
   }
 
   openModal(template: TemplateRef<any>) {
@@ -37,10 +36,13 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    
+    // this.lmsService.updateUser(this.userProfile);
+    console.log(this.lmsService.getCurrentUser());
+    //TODO: http
   }
 
-  onSubmitPassword(){
+  //no need, should included in onSubmit method
+  // onSubmitPassword(){
 
-  }
+  // }
 }

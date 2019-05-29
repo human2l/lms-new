@@ -15,7 +15,7 @@
   <div class="col-md-4 my-3">
     <div class="list-group">
       <a
-        *ngFor="let course of courses"
+        *ngFor="let course of allCourses"
         class="list-group-item list-group-item-action"
         (click)="onSelectCourse(course)"
         [class.list-group-item-warning]="course === currentCourse"
@@ -23,25 +23,7 @@
       >
         {{ course.title }}
       </a>
-
-      <!-- <a class="list-group-item list-group-item-action active" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
-            Cras justo odio
-          </a>
-          <a class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
-          <a class="list-group-item list-group-item-action">Morbi leo risus</a>
-          <a class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
-          <a class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">Vestibulum at eros</a> -->
     </div>
-
-    <!-- <button
-      type="button"
-      class="btn btn-primary"
-      (click)="isCollapsed = !isCollapsed"
-      [attr.aria-expanded]="!isCollapsed"
-      aria-controls="collapseBasic"
-    >
-      Toggle collapse
-    </button> -->
   </div>
   <div class="col-md-8 my-3">
     <div class="card" *ngIf="!isCollapsed">
@@ -50,8 +32,10 @@
       </div>
       <div class="card-body">
         <h5 class="card-title">{{ selectedCourse.title }}</h5>
+        <p *ngIf="hasCourse()">(This is your current course)</p>
         <p class="card-text">{{ selectedCourse.description }}</p>
-        <button class="btn btn-primary" *ngIf="!hasCourse()" (click)="onSaveCourse()">Choose and Save</button>
+        <button class="btn btn-primary" *ngIf="!hasCourse() && !isAdmin()" (click)="onSaveCourse()">Choose and Save</button>
+        <button class="btn btn-warning" *ngIf="isAdmin()" (click)="onEdit()">Edit</button>
       </div>
     </div>
   </div>
