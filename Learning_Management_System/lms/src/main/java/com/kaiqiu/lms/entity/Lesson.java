@@ -29,17 +29,17 @@ public class Lesson {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
-	@Column(name = "tittle")
-	private String tittle;
+	@Column(name = "title")
+	private String title;
 	@Column(name = "description")
 	private String description;
 	@Column(name = "start_date")
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date startDate;
 	@Column(name = "end_date")
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date endDate;
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "course_id")
@@ -57,9 +57,9 @@ public class Lesson {
 
 	}
 
-	public Lesson(String tittle, String description, Date startDate, Date endDate) {
+	public Lesson(String title, String description, Date startDate, Date endDate) {
 		super();
-		this.tittle = tittle;
+		this.title = title;
 		this.description = description;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -73,12 +73,12 @@ public class Lesson {
 		this.id = id;
 	}
 
-	public String getTittle() {
-		return tittle;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setTittle(String tittle) {
-		this.tittle = tittle;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getDescription() {
@@ -131,7 +131,7 @@ public class Lesson {
 
 	@Override
 	public String toString() {
-		return "Lesson [id=" + id + ", tittle=" + tittle + ", description=" + description + ", startDate=" + startDate
+		return "Lesson [id=" + id + ", title=" + title + ", description=" + description + ", startDate=" + startDate
 				+ ", endDate=" + endDate + "]";
 	}
 

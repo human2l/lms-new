@@ -3,6 +3,7 @@ import { LessonComponent } from './lms/lesson/lesson.component';
 import { CourseComponent } from './lms/course/course.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,6 +35,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DashboardComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserAnimationsModule,
     CollapseModule.forRoot(),
     ModalModule.forRoot(),

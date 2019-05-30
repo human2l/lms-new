@@ -25,10 +25,10 @@
           *ngFor="let lesson of allLessons"
           [ngClass]="hasLesson(lesson) ? 'table-warning' : ''"
         >
-          <th scope="row">{{ lesson.id }}</th>
-          <td>{{ lesson.title }}</td>
-          <td>{{ lesson.start_date }}</td>
-          <td>{{ lesson.end_date }}</td>
+          <!-- <th scope="row">{{ lesson.id }}</th> -->
+          <th scope="row">{{ lesson.title }}</th>
+          <td>{{ lesson.startDate }}</td>
+          <td>{{ lesson.endDate }}</td>
           <td>
             <div>
               <button type="button" class="btn btn-primary mx-1 my-1" (click)="showDetails(template, lesson)">

@@ -1,5 +1,5 @@
 import { LmsService } from './../../service/lms.service';
-import { Lesson } from './../../shared/models/lesson.model';
+// import { Lesson } from './../../shared/models/lesson.model';
 import { Component, OnInit } from '@angular/core';
 import { Course } from 'src/app/shared/models/course.model';
 
@@ -11,7 +11,7 @@ import { Course } from 'src/app/shared/models/course.model';
 })
 export class DashboardComponent implements OnInit {
   currentCourse:Course;
-  currentLessons:{id:number,title:string,description:string,start_date:string,end_date:string}[]=[];
+  currentLessons:[]=[];
   constructor(private lmsService: LmsService) { }
 
   ngOnInit() {
@@ -22,7 +22,8 @@ export class DashboardComponent implements OnInit {
     // this.lessons.push(lessonb);
     // this.lessons.push(lessonc);
     this.currentCourse = this.lmsService.getCurrentCourse();
-    this.currentLessons = this.lmsService.getCurrentLessons();
+    //TODO, uncomment
+    // this.currentLessons = this.lmsService.getCurrentLessons();
   }
 
 }

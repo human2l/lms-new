@@ -1,7 +1,6 @@
-export class Lesson {
-    id: number;
-    title: string;
-    description: string;
-    start_date: string;
-    end_date: string;
-}
+// export interface Lesson {
+//     title: string;
+//     description: string;
+//     startDate: string;
+//     endDate: string;
+// }
