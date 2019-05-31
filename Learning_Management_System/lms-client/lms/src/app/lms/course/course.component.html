@@ -18,8 +18,8 @@
         *ngFor="let course of allCourses"
         class="list-group-item list-group-item-action"
         (click)="onSelectCourse(course)"
-        [class.list-group-item-warning]="course === currentCourse"
-        [class.list-group-item-primary]="course === selectedCourse"
+        [class.list-group-item-warning]="isCurrentCourse(course)"
+        [class.list-group-item-primary]="isSelectedCourse(course)"
       >
         {{ course.title }}
       </a>

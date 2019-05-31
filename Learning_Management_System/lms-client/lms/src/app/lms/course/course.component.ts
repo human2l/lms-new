@@ -1,45 +1,83 @@
-import { LmsService } from './../../service/lms.service';
-import { Course } from './../../shared/models/course.model';
-import { Component, OnInit } from '@angular/core';
+import { LmsService } from "./../../service/lms.service";
+// import { Course } from './../../shared/models/course.model';
+import { Component, OnInit } from "@angular/core";
+import { Utils } from "src/app/utils/utils";
 
 @Component({
-  selector: 'app-course',
-  templateUrl: './course.component.html',
-  styleUrls: ['./course.component.css'],
-  providers:[LmsService]
+  selector: "app-course",
+  templateUrl: "./course.component.html",
+  styleUrls: ["./course.component.css"],
+  providers: [LmsService]
 })
 export class CourseComponent implements OnInit {
+  error = null;
   isCollapsed = true;
   allCourses = [];
-  selectedCourse: Course = null;
-  currentCourse: Course = null;
-  constructor(private lmsService: LmsService) { }
+  selectedCourse = null;
+  currentCourse = null;
+  constructor(private lmsService: LmsService) {}
 
   ngOnInit() {
-    this.allCourses = this.lmsService.getAllCourses();
-    this.currentCourse = this.lmsService.getCurrentCourse();
+    this.fetchAllCourses();
+    this.fetchCurrentCourse();
   }
 
-  onSelectCourse(course: Course){
+  onSelectCourse(course) {
     this.isCollapsed = false;
     this.selectedCourse = course;
   }
 
-  hasCourse(){
-    return this.selectedCourse === this.currentCourse;
+  hasCourse() {
+    return Utils.areSame(this.currentCourse, this.selectedCourse);
   }
 
-  onSaveCourse(){
-    this.currentCourse = this.selectedCourse;
-    this.lmsService.setCurrentCourse(this.currentCourse);
-    //TODO: http
+  isCurrentCourse(course) {
+    return (
+      this.currentCourse !== null && Utils.areSame(course, this.currentCourse)
+    );
   }
 
-  isAdmin(){
+  isSelectedCourse(course) {
+    return (
+      this.selectedCourse !== null && Utils.areSame(course, this.selectedCourse)
+    );
+  }
+
+  onSaveCourse() {
+    this.lmsService
+      .setCurrentCourseById(Utils.getIdFromLink(this.selectedCourse))
+      .subscribe(() => {
+        this.fetchCurrentCourse();
+      });
+  }
+
+  isAdmin() {
     return this.lmsService.getCurrentRole() === "admin";
   }
 
-  onEdit(){
+  onEdit() {
     //TODO: edit the course selected
+  }
+
+  fetchAllCourses() {
+    this.lmsService.getAllCourses().subscribe(
+      allCourses => {
+        this.allCourses = allCourses;
+      },
+      error => {
+        this.error = error.message;
+      }
+    );
+  }
+
+  fetchCurrentCourse() {
+    this.lmsService.getCurrentCourse().subscribe(
+      currentCourse => {
+        this.currentCourse = currentCourse;
+      },
+      error => {
+        this.error = error.message;
+      }
+    );
   }
 }

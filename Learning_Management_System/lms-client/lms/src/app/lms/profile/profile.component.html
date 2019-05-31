@@ -3,14 +3,14 @@
 </div>
 <div class="row pb-3 justify-content-center">
   <div class="col-md-8">
-    <form (ngSubmit)="onSubmit()" #profileForm="ngForm">
+    <form *ngIf="!loading" (ngSubmit)="onSubmit()" #profileForm="ngForm">
       <div class="form-group">
         <label for="firstName">First Name:</label>
         <input
           type="text"
           id="firstName"
           class="form-control"
-          [(ngModel)]="userProfile.firstName"
+          [(ngModel)]="currentUser.firstName"
           name="firstName"
           required
         />
@@ -21,7 +21,7 @@
           type="text"
           id="lastName"
           class="form-control"
-          [(ngModel)]="userProfile.lastName"
+          [(ngModel)]="currentUser.lastName"
           name="lastName"
           required
         />
@@ -32,7 +32,7 @@
           type="email"
           id="email"
           class="form-control"
-          [(ngModel)]="userProfile.email"
+          [(ngModel)]="currentUser.email"
           name="email"
           required
           email
@@ -45,7 +45,7 @@
           type="text"
           id="mobile"
           class="form-control"
-          [(ngModel)]="userProfile.mobile"
+          [(ngModel)]="currentUser.mobile"
           name="mobile"
           required
         />

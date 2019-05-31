@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kaiqiu.lms.entity.User;
 
-@Repository("userRepository")
+//@Repository("userRepository")
 public interface UserRepository extends JpaRepository<User, Integer> {
-	User findByEmail(String email);
+//	User findByEmail(String email);
 }

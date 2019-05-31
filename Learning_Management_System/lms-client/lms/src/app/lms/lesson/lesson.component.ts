@@ -20,6 +20,7 @@ export class LessonComponent implements OnInit {
   modalRef: BsModalRef;
   allLessons: [] = [];
   currentLessons: [] = [];
+  currentCourse = null;
 
   lessonHeader = ['Title', 'Start Date', 'End Date', 'Options'];
   
@@ -27,21 +28,9 @@ export class LessonComponent implements OnInit {
 
   ngOnInit() {
     this.currentRole = this.lmsService.getCurrentRole();
+    this.fetchCurrentCourse();
     this.fetchAllLessons();
-    // this.allLessons = this.lmsService.getAllLessons();
     this.fetchCurrentLessons();
-    // this.currentLessons = this.lmsService.getCurrentLessons();
-    // console.log(this.lmsService.getCurrentUser());
-
-
-    //for test
-    // this.http
-    //     .get(
-    //         'http://localhost:8080/lms/lessons'
-    //     )
-    //     .subscribe(responseData => {
-    //         console.log(responseData);
-    //     });
   }
 
   hasLesson(lesson){
@@ -63,35 +52,53 @@ export class LessonComponent implements OnInit {
   }
 
   add(lesson){
-    //no need to update currentLessons in lmsService, it is auto double bind, which is weird
-
-    //TODO: uncomment
-    // this.lmsService.getCurrentLessons().push(lesson);
-
-    //TODO: http
-  }
-
-  delete(lesson){
-    console.log(lesson);
-    const lessonId = Utils.getIdFromLink(lesson["_links"]["self"]["href"]);
-    console.log(lesson["_links"]["self"]["href"]);
-    this.lmsService.deleteOneOfCurrentLessonsById(lessonId).subscribe(
+    const lessonId = Utils.getIdFromLink(lesson);
+    this.lmsService.addOneLessonToCurrentLessonsById(lessonId).subscribe(
       () => {
         this.fetchCurrentLessons();
+      },
+      error => {
+        this.error = error.message;
       }
     )
   }
 
-  fetchAllLessons(){
-    this.lmsService.getAllLessons().subscribe(
-      allLessons => {
-        this.allLessons = allLessons;
-        console.log(allLessons);
-        },
-        error => {
-          this.error = error.message;
-        }
+  delete(lesson){
+    const lessonId = Utils.getIdFromLink(lesson);
+    this.lmsService.deleteOneOfCurrentLessonsById(lessonId).subscribe(
+      () => {
+        this.fetchCurrentLessons();
+      },
+      error => {
+        this.error = error.message;
+      }
     )
+  }
+
+  // fetchAllLessons(){
+  //   this.lmsService.getAllLessons().subscribe(
+  //     allLessons => {
+  //       this.allLessons = allLessons;
+  //       },
+  //       error => {
+  //         this.error = error.message;
+  //       }
+  //   )
+  // }
+
+  fetchAllLessons(){
+    // if(this.currentCourse != null){
+      console.log(this.lmsService.getAllLessonsOfCurrentCourse());
+      // this.lmsService.getAllLessonsOfCurrentCourse().subscribe(
+      //   currentLessons => {
+      //     this.currentLessons = currentLessons;
+      //     },
+      //     error => {
+      //       this.error = error.message;
+      //     }
+      // )
+    // }
+    
   }
 
   fetchCurrentLessons(){
@@ -103,6 +110,17 @@ export class LessonComponent implements OnInit {
           this.error = error.message;
         }
     )
+  }
+
+  fetchCurrentCourse() {
+    this.lmsService.getCurrentCourse().subscribe(
+      currentCourse => {
+        this.currentCourse = currentCourse;
+      },
+      error => {
+        this.error = error.message;
+      }
+    );
   }
 }
 

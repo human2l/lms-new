@@ -10,11 +10,12 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
   providers: [LmsService]
 })
 export class ProfileComponent implements OnInit {
+  error = null;
   modalRef: BsModalRef;
   @ViewChild("profileForm") profileForm: NgForm;
   @ViewChild("passwordForm") passwordForm: NgForm;
-//TODO: validation, front-back transmission, onSubmit
-  userProfile:{firstName:string,lastName:string,email:string,mobile:string} = {firstName:"",lastName:"",email:"",mobile:""};
+  currentUser = null;
+  loading = true;
 
   userPassword = {
     newPassword: "",
@@ -24,11 +25,19 @@ export class ProfileComponent implements OnInit {
   constructor(private modalService: BsModalService, private lmsService: LmsService) {}
 
   ngOnInit() {
-    this.userProfile.firstName = this.lmsService.getCurrentUser().firstName;
-    this.userProfile.lastName = this.lmsService.getCurrentUser().lastName;
-    this.userProfile.email = this.lmsService.getCurrentUser().email;
-    this.userProfile.mobile = this.lmsService.getCurrentUser().mobile;
-    console.log(this.lmsService.getCurrentUser());
+    this.fetchCurrentUser();
+  }
+
+  fetchCurrentUser(){
+    this.lmsService.getCurrentUser().subscribe(
+      currentUser => {
+        this.currentUser = currentUser;
+        this.loading = false;
+      },
+      error => {
+        this.error = error.message;
+      }
+    )
   }
 
   openModal(template: TemplateRef<any>) {
@@ -37,7 +46,6 @@ export class ProfileComponent implements OnInit {
 
   onSubmit() {
     // this.lmsService.updateUser(this.userProfile);
-    console.log(this.lmsService.getCurrentUser());
     //TODO: http
   }
 

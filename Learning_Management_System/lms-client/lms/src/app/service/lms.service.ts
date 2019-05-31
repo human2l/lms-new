@@ -1,74 +1,41 @@
-import { HttpClient } from "@angular/common/http";
-import { Course } from "../shared/models/course.model";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+// import { Course } from "../shared/models/course.model";
 // import { Lesson } from "../shared/models/lesson.model";
 
 import { map, catchError } from "rxjs/operators";
-import { Subject, throwError } from 'rxjs';
-import { Injectable } from '@angular/core';
+import { Subject, throwError } from "rxjs";
+import { Injectable } from "@angular/core";
+import { Utils } from "../utils/utils";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class LmsService {
-    private serverUrl:string = "http://localhost:8080/";
-    error = new Subject<string>();
+  private serverUrl: string = "http://localhost:8080/";
+  error = new Subject<string>();
   private currentRole: string = null;
-  private currentCourse: Course = null;
-  private currentLessons: [] = [];
-  private allCourses: Course[] = [];
-  private allLessons: [] = [];
-  private currentUser: {
-    id: number;
-    firstName: string;
-    lastName: string;
-    email: string;
-    mobile: string;
+
+  private manyToManyHttpOptions = {
+    headers: new HttpHeaders({
+      "Content-Type": "text/uri-list"
+    })
   };
 
-  constructor(private http: HttpClient) {
-    // let lesson1: Lesson = {
-    //   id: 1,
-    //   title: "title1",
-    //   description: "des1",
-    //   start_date: "sd1",
-    //   end_date: "ed1"
-    // };
-    // let lesson2: Lesson = {
-    //   id: 2,
-    //   title: "title2",
-    //   description: "des2",
-    //   start_date: "sd2",
-    //   end_date: "ed2"
-    // };
-    // let lesson3: Lesson = {
-    //   id: 3,
-    //   title: "title3",
-    //   description: "des3",
-    //   start_date: "sd3",
-    //   end_date: "ed3"
-    // };
-    // this.allLessons.push(lesson1, lesson2, lesson3);
-    // this.currentLessons.push(lesson2, lesson3);
-
-    let course1: Course = { id: 1, title: "title1", description: "des1" };
-    let course2: Course = { id: 2, title: "title2", description: "des2" };
-    let course3: Course = { id: 3, title: "title3", description: "des3" };
-    let course4: Course = { id: 4, title: "title4", description: "des4" };
-    this.allCourses.push(course1, course2, course3, course4);
-
-    this.currentCourse = course1;
-
-    this.currentUser = {
-      id: 1,
-      firstName: "aaa",
-      lastName: "bbb",
-      email: "a@a.com",
-      mobile: "123123"
-    };
-  }
+  constructor(private http: HttpClient) {}
 
   //TODO: change password method
 
   getCurrentUser() {
-    return this.currentUser;
+    // return this.currentUser;
+    return this.http.get(this.serverUrl + "lms/users/1").pipe(
+      map(responseData => {
+        console.log(responseData);
+        const currentUser = responseData;
+        return currentUser;
+      }),
+      catchError(errorRes => {
+        // Send to analytics server
+        return throwError(errorRes);
+      })
+    );
   }
 
   getCurrentRole() {
@@ -79,22 +46,43 @@ export class LmsService {
   }
 
   getCurrentCourse() {
-    return this.currentCourse;
-  }
-
-  setCurrentCourse(course: Course) {
-    this.currentCourse = course;
+    return this.http.get(this.serverUrl + "lms/students/1/course").pipe(
+      map(responseData => {
+        const currentCourse = responseData;
+        return currentCourse;
+      }),
+      catchError(errorRes => {
+        // Send to analytics server
+        return throwError(errorRes);
+      })
+    );
   }
 
   getAllCourses() {
-    return this.allCourses;
+    return this.http.get(this.serverUrl + "lms/courses").pipe(
+      map(responseData => {
+        const allCourses = responseData["_embedded"]["courses"];
+        return allCourses;
+      }),
+      catchError(errorRes => {
+        // Send to analytics server
+        return throwError(errorRes);
+      })
+    );
+  }
+
+  setCurrentCourseById(id: number) {
+    return this.http.put(
+      this.serverUrl + "lms/students/1/course",
+      this.serverUrl + "lms/courses/" + id,
+      this.manyToManyHttpOptions
+    );
   }
 
   getCurrentLessons() {
-    return this.http.get("http://localhost:8080/lms/students/1/lessons")
-    .pipe(
+    return this.http.get(this.serverUrl + "lms/students/1/lessons").pipe(
       map(responseData => {
-        const currentLessons=responseData["_embedded"]["lessons"];
+        const currentLessons = responseData["_embedded"]["lessons"];
         return currentLessons;
       }),
       catchError(errorRes => {
@@ -105,11 +93,9 @@ export class LmsService {
   }
 
   getAllLessons() {
-    // return this.allLessons;
-    return this.http.get("http://localhost:8080/lms/lessons")
-    .pipe(
+    return this.http.get(this.serverUrl + "lms/lessons").pipe(
       map(responseData => {
-        const allLessons=responseData["_embedded"]["lessons"];
+        const allLessons = responseData["_embedded"]["lessons"];
         return allLessons;
       }),
       catchError(errorRes => {
@@ -119,16 +105,41 @@ export class LmsService {
     );
   }
 
-  //   updateUser(userProfile: {firstName:string,lastName:string,email:string,mobile:string}){
-  //     this.currentUser.firstName = userProfile.firstName;
-  //     this.currentUser.lastName = userProfile.lastName;
-  //     this.currentUser.email = userProfile.email;
-  //     this.currentUser.mobile = userProfile.mobile;
-  //     //TODO: http
-  //   }
+  getAllLessonsOfCurrentCourse() {
+    // let course = null;
+    // this.getCurrentCourse().subscribe(
+    //   course => {
+    //     const id = Utils.getIdFromLink(course);
+    //     return this.http
+    //       .get(this.serverUrl + "lms/courses/" + id + "/lessons")
+    //       .pipe(
+    //         map(responseData => {
+    //           const allLessons = responseData["_embedded"]["lessons"];
+    //           return allLessons;
+    //         }),
+    //         catchError(errorRes => {
+    //           // Send to analytics server
+    //           return throwError(errorRes);
+    //         })
+    //       );
+    //   },
+    //   error => {
+    //     this.error = error.message;
+    //   }
+    // );
+    return this.http.get(this.serverUrl + "lms/students/1/course")
+    .concatMap
+  }
 
+  addOneLessonToCurrentLessonsById(id: number) {
+    return this.http.post(
+      this.serverUrl + "lms/students/1/lessons",
+      this.serverUrl + "lms/lessons/" + id,
+      this.manyToManyHttpOptions
+    );
+  }
 
-  deleteOneOfCurrentLessonsById(id:number){
-      return this.http.delete("http://localhost:8080/lms/students/1/lessons/"+id);
+  deleteOneOfCurrentLessonsById(id: number) {
+    return this.http.delete(this.serverUrl + "lms/students/1/lessons/" + id);
   }
 }

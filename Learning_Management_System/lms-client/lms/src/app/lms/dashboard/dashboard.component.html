@@ -6,7 +6,7 @@
 </div>
 <div class="row">
   <div class="col mt-3">
-    <h5>Your Course: <span class="text-primary h3">{{ currentCourse.title }}</span></h5>
+    <h5>Your Course: <span class="text-primary h3" *ngIf="!loading">{{ currentCourse.title }}</span></h5>
   </div>
 </div>
 <div class="row">
