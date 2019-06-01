@@ -13,8 +13,25 @@ Student: Manage all the courses he/she has.
 Tutor: Manage all the lessons he/she taught.
 
 Course Management:
+  Student: 
+  
 
 Lesson Management:
+  Student: 
+    View all of the lessons under his/her course.
+    View all of the lessons he/she have chosen.
+    Choose one or more lessons as their lessons about to study.
+    Remove one or more lessons from their lesson list.
+  Tutor:
+    View all of the lessons he teach.
+    Create new lesson under one specific course.
+    Delete one or more of lessons he teach.
+    Modify one or more of lessons he teach.
+  Admin:
+    View all of the lessons.
+    Create one new lesson and assign to a tutor.
+    Delete one or more lessons.
+    Modify one or more lessons.
 
 Personnel Management:
 
