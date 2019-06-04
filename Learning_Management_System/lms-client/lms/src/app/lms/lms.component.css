@@ -1,11 +1,12 @@
 .bg{
-    background: url(../../assets/study.jpg);
+    background: url(../../assets/study-people.jpg);
     background-size: cover;
     background-position:50% 50%;
     height:50em;
     width: auto;
 }
 
-.navbar-trans{
+.trans{
     background: transparent;
+    opacity: 0.9;
 }

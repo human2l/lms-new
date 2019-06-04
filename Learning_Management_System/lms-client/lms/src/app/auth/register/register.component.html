@@ -1,0 +1,137 @@
+<div class="row justify-content-center py-5">
+  <div class="col-md-6 bg-light rounded-top trans py-3">
+    <div class="row justify-content-center my-4">
+      <h3>Register</h3>
+    </div>
+    <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="form-group">
+            <!-- <label for="firstName">First Name:</label> -->
+            <input
+              type="text"
+              id="firstName"
+              class="form-control"
+              [(ngModel)]="currentUser.firstName"
+              name="firstName"
+              required
+              placeholder="First Name"
+            />
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="form-group">
+            <!-- <label for="lastName">Last Name:</label> -->
+            <input
+              type="text"
+              id="lastName"
+              class="form-control"
+              [(ngModel)]="currentUser.lastName"
+              name="lastName"
+              required
+              placeholder="Last Name"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <!-- <label for="email">Email:</label> -->
+        <input
+          type="email"
+          id="email"
+          class="form-control"
+          [(ngModel)]="currentUser.email"
+          name="email"
+          required
+          email
+          #email="ngModel"
+          placeholder="Email"
+        />
+      </div>
+      <div class="form-group">
+        <!-- <label for="mobile">Mobile:</label> -->
+        <input
+          type="text"
+          id="mobile"
+          class="form-control"
+          [(ngModel)]="currentUser.mobile"
+          name="mobile"
+          required
+          placeholder="Mobile"
+        />
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="form-group">
+            <!-- <label for="password">Password:</label> -->
+            <input
+              type="text"
+              id="password"
+              class="form-control"
+              [(ngModel)]="currentUser.password"
+              name="password"
+              required
+              placeholder="Password"
+            />
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="form-group">
+            <!-- <label for="confirmPassword">Confirm Password:</label> -->
+            <input
+              type="text"
+              id="confirmPassword"
+              class="form-control"
+              [(ngModel)]="currentUser.confirmPassword"
+              name="confirmPassword"
+              required
+              placeholder="Confirm Password"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-around mt-3">
+        <div class="col-lg-4"><h5>Choose your role:</h5></div>
+        <div class="col-lg-6">
+          <div class="btn-group">
+            <label
+              class="btn btn-primary"
+              [(ngModel)]="role"
+              btnRadio="admin"
+              tabindex="0"
+              role="button"
+              name="admin"
+              >Admin</label
+            >
+            <label
+              class="btn btn-primary"
+              [(ngModel)]="role"
+              btnRadio="tutor"
+              tabindex="0"
+              role="button"
+              name="tutor"
+              >Tutor</label
+            >
+            <label
+              class="btn btn-primary"
+              [(ngModel)]="role"
+              btnRadio="student"
+              tabindex="0"
+              role="button"
+              name="student"
+              >Student</label
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-5 mb-2">
+        <input
+          class="btn btn-success btn-block mx-3"
+          type="submit"
+          value="Submit and Login"
+        />
+      </div>
+    </form>
+  </div>
+</div>

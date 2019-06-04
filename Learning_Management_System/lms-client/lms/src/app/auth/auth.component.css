@@ -1,0 +1,7 @@
+.bg{
+    background: url(../../assets/study-person.jpg);
+    background-size: cover;
+    background-position:50% 50%;
+    height:50em;
+    width: auto;
+}

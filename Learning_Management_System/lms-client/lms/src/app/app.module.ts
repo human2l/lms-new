@@ -15,12 +15,15 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 import { LmsComponent } from './lms/lms.component';
-import { PageNotFoundComponent } from './lms/page-not-found/page-not-found.component';
 import { PersonnelComponent } from './lms/personnel/personnel.component';
 import { ProfileComponent } from './lms/profile/profile.component';
 import { FormsModule } from '@angular/forms';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthComponent } from './auth/auth.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -32,7 +35,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PageNotFoundComponent,
     PersonnelComponent,
     ProfileComponent,
-    DashboardComponent
+    DashboardComponent,
+    AuthComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     HttpClientModule,

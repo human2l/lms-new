@@ -5,11 +5,14 @@ import { CourseComponent } from "./lms/course/course.component";
 import { DashboardComponent } from "./lms/dashboard/dashboard.component";
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { PageNotFoundComponent } from "./lms/page-not-found/page-not-found.component";
 import { LmsComponent } from './lms/lms.component';
+import { AuthComponent } from './auth/auth.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
-  { path: "", redirectTo: "lms/dashboard", pathMatch: "full" },
+  { path: "", redirectTo: "auth/login", pathMatch: "full" },
   {
     path: "lms",
     component: LmsComponent,
@@ -20,12 +23,19 @@ const routes: Routes = [
       { path: "lesson", component: LessonComponent },
       { path: "personnel", component: PersonnelComponent },
       { path: "profile", component: ProfileComponent },
-      { path: "logout", redirectTo: "dashboard" },
-      { path: "page-not-found", component: PageNotFoundComponent },
-      { path: "**", redirectTo: "page-not-found" }
+      //TODO: logout the current session
+      { path: "logout", redirectTo: "/auth/login" }
     ]
   },
-  { path: "**", redirectTo: "lms/page-not-found" }
+  { path: "auth",
+    component: AuthComponent,
+    children: [
+      { path: "", redirectTo: "login", pathMatch: "full" },
+      { path: "login", component: LoginComponent },
+      { path: "register", component: RegisterComponent }
+    ]},
+  { path: "page-not-found", component: PageNotFoundComponent },
+  { path: "**", redirectTo: "page-not-found" }
 ];
 
 @NgModule({

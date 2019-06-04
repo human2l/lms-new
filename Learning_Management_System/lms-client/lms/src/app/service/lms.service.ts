@@ -127,8 +127,11 @@ export class LmsService {
     //     this.error = error.message;
     //   }
     // );
-    return this.http.get(this.serverUrl + "lms/students/1/course")
-    .concatMap
+
+
+    //!!!!!!!
+    // return this.http.get(this.serverUrl + "lms/students/1/course")
+    // .concatMap
   }
 
   addOneLessonToCurrentLessonsById(id: number) {
