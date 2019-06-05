@@ -1,19 +1,26 @@
 <div class="row">
-  <div class="col mt-3">
+  <div class="col my-3">
     <h3>Course Management</h3>
   </div>
 </div>
 <div class="row">
   <div class="col">
-    <p>
-      Courses available, choose the course you want!(for student)/All courses(for admin)
+    <p *ngIf="currentRole === 'student'">
+      Courses available, choose the course you want!
     </p>
+    <p *ngIf="currentRole !== 'student'">All courses show below: </p>
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-4 my-3">
+      <a *ngIf="currentRole === 'admin'"
+      class="btn-lg btn btn-success btn-block text-white font-weight-bold mb-3"
+        >
+        Add New Course
+      </a>
     <div class="list-group">
+        
       <a
         *ngFor="let course of allCourses"
         class="list-group-item list-group-item-action"
@@ -23,6 +30,7 @@
       >
         {{ course.title }}
       </a>
+      
     </div>
   </div>
   <div class="col-md-8 my-3">
@@ -32,10 +40,47 @@
       </div>
       <div class="card-body">
         <h5 class="card-title">{{ selectedCourse.title }}</h5>
-        <p *ngIf="hasCourse()">(This is your current course)</p>
+        <p *ngIf="currentRole === 'student' && hasCourse()">(This is your current course)</p>
         <p class="card-text">{{ selectedCourse.description }}</p>
-        <button class="btn btn-primary" *ngIf="!hasCourse() && !isAdmin()" (click)="onSaveCourse()">Choose and Save</button>
-        <button class="btn btn-warning" *ngIf="isAdmin()" (click)="onEdit()">Edit</button>
+        <button
+          class="btn btn-primary"
+          *ngIf="currentRole === 'student' && !hasCourse() && !isAdmin() && alerting == false"
+          (click)="alerting = true"
+        >
+          Choose and Save
+        </button>
+        <div
+          class="card border-danger"
+          *ngIf="currentRole === 'student' && !hasCourse() && !isAdmin() && alerting === true"
+        >
+          <div class="card-body text-danger">
+            <p class="card-text">
+              By choosing this course, all lessons from other
+              course will be deselected. Are you sure?
+            </p>
+            <div class="row justify-content-center">
+              <div class="col">
+                <button
+                  class="btn btn-warning btn-block"
+                  (click)="alerting = false"
+                >
+                  Cancel
+                </button>
+              </div>
+              <div class="col">
+                <button
+                  class="btn btn-success btn-block"
+                  (click)="onSaveCourse()"
+                >
+                  Yes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-warning" *ngIf="isAdmin()" (click)="onEdit()">
+          Edit
+        </button>
       </div>
     </div>
   </div>

@@ -9,6 +9,25 @@
       Lessons under [User.Course], add the lessons you want!(for student) /All
       of lessons you taught(for tutor) /All lessons(for admin)
     </p>
+    <div
+      class="row justify-content-start"
+      *ngIf="currentRole === 'student' && !loadingCourse"
+    >
+      <div class="col-sm-3">
+        <p>Available lessons for course:</p>
+      </div>
+      <div class="col-sm-3">
+        <h5 class="text-weight-bold text-primary">{{ currentCourse.title }}</h5>
+      </div>
+    </div>
+    <div
+      class="row justify-content-start"
+      *ngIf="currentRole === 'tutor' && !loadingCourse"
+    >
+      <div class="col-sm-3">
+        <p>All lessons you are teaching: </p>
+      </div>
+    </div>
   </div>
 </div>
 <div class="row">
@@ -31,7 +50,11 @@
           <td>{{ lesson.endDate }}</td>
           <td>
             <div>
-              <button type="button" class="btn btn-primary mx-1 my-1" (click)="showDetails(template, lesson)">
+              <button
+                type="button"
+                class="btn btn-primary mx-1 my-1"
+                (click)="showDetails(template, lesson)"
+              >
                 Details
               </button>
               <button
@@ -42,13 +65,21 @@
               >
                 Add
               </button>
-              <button *ngIf="hasLesson(lesson) && canEdit(lesson)" type="button" class="btn btn-warning mx-1 my-1">
+              <button
+                *ngIf="hasLesson(lesson) && canEdit(lesson)"
+                type="button"
+                class="btn btn-warning mx-1 my-1"
+              >
                 Edit
               </button>
-              <button *ngIf="hasLesson(lesson)" type="button" class="btn btn-danger mx-1 my-1" (click)="delete(lesson)">
+              <button
+                *ngIf="hasLesson(lesson)"
+                type="button"
+                class="btn btn-danger mx-1 my-1"
+                (click)="delete(lesson)"
+              >
                 Delete
               </button>
-              
             </div>
           </td>
         </tr>
@@ -60,7 +91,12 @@
 <ng-template #template>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Details</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
       <span aria-hidden="true">&times;</span>
     </button>
   </div>

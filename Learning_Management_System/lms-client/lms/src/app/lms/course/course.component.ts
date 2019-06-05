@@ -1,3 +1,6 @@
+import { UserService } from './../../service/user.service';
+import { CourseService } from './../../service/course.service';
+import { LessonService } from './../../service/lesson.service';
 import { LmsService } from "./../../service/lms.service";
 // import { Course } from './../../shared/models/course.model';
 import { Component, OnInit } from "@angular/core";
@@ -15,16 +18,26 @@ export class CourseComponent implements OnInit {
   allCourses = [];
   selectedCourse = null;
   currentCourse = null;
-  constructor(private lmsService: LmsService) {}
+  alerting = false;
+  // canAdd = false;
+  currentRole = "";
+  constructor(private lmsService: LmsService, private lessonService:LessonService, private courseService: CourseService, private userService:UserService) {}
 
   ngOnInit() {
+    //TODO fetch currentrole, subscribe => if student => fetch current course
+    this.fetchCurrentRole();
+    console.log(this.currentRole);
     this.fetchAllCourses();
+    if(this.currentRole === "student")
     this.fetchCurrentCourse();
+    //need to modify when use http
+    // this.canAdd = this.userService.getCurrentRole() !== "student";
   }
 
   onSelectCourse(course) {
     this.isCollapsed = false;
     this.selectedCourse = course;
+    this.alerting = false;
   }
 
   hasCourse() {
@@ -44,15 +57,17 @@ export class CourseComponent implements OnInit {
   }
 
   onSaveCourse() {
-    this.lmsService
+    this.deleteAllCurrentLessons();
+    this.courseService
       .setCurrentCourseById(Utils.getIdFromLink(this.selectedCourse))
       .subscribe(() => {
         this.fetchCurrentCourse();
       });
+      this.alerting = false;
   }
 
   isAdmin() {
-    return this.lmsService.getCurrentRole() === "admin";
+    return this.userService.getCurrentRole() === "admin";
   }
 
   onEdit() {
@@ -60,7 +75,7 @@ export class CourseComponent implements OnInit {
   }
 
   fetchAllCourses() {
-    this.lmsService.getAllCourses().subscribe(
+    this.courseService.getAllCourses().subscribe(
       allCourses => {
         this.allCourses = allCourses;
       },
@@ -71,7 +86,7 @@ export class CourseComponent implements OnInit {
   }
 
   fetchCurrentCourse() {
-    this.lmsService.getCurrentCourse().subscribe(
+    this.courseService.getCurrentCourse().subscribe(
       currentCourse => {
         this.currentCourse = currentCourse;
       },
@@ -79,5 +94,16 @@ export class CourseComponent implements OnInit {
         this.error = error.message;
       }
     );
+  }
+
+  fetchCurrentRole(){
+    //TODO:modify
+    this.currentRole = this.userService.getCurrentRole();
+  }
+
+  deleteAllCurrentLessons(){
+    this.lessonService.deleteAllCurrentLessons().subscribe(
+      ()=> console.log("deleted")
+    )
   }
 }

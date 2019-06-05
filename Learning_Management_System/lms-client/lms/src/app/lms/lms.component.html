@@ -59,7 +59,7 @@
           </div>
         </div>
 
-        <div dropdown class="navbar-nav" container="body">
+        <div dropdown class="navbar-nav" container="body" *ngIf="!loading">
           <a
             class="nav-link dropdown-toggle"
             href
@@ -67,7 +67,7 @@
             dropdownToggle
             (click)="(false)"
             aria-controls="basic-link-dropdown"
-            >Somebody <span class="caret"></span
+            >Hi! {{ currentUser.firstName }} <span class="caret"></span
           ></a>
           <ul
             id="basic-link-dropdown"

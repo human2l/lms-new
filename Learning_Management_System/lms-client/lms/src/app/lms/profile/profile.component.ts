@@ -1,3 +1,4 @@
+import { UserService } from './../../service/user.service';
 import { LmsService } from './../../service/lms.service';
 import { Component, OnInit, ViewChild, TemplateRef } from "@angular/core";
 import { NgForm } from "@angular/forms";
@@ -22,14 +23,14 @@ export class ProfileComponent implements OnInit {
     confirmPassword: ""
   }
 
-  constructor(private modalService: BsModalService, private lmsService: LmsService) {}
+  constructor(private modalService: BsModalService, private lmsService: LmsService, private userService: UserService) {}
 
   ngOnInit() {
     this.fetchCurrentUser();
   }
 
   fetchCurrentUser(){
-    this.lmsService.getCurrentUser().subscribe(
+    this.userService.getCurrentUser().subscribe(
       currentUser => {
         this.currentUser = currentUser;
         this.loading = false;
@@ -45,7 +46,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    // this.lmsService.updateUser(this.userProfile);
+    // this.userService.updateUser(this.userProfile);
     //TODO: http
   }
 

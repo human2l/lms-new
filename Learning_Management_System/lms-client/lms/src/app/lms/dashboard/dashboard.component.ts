@@ -1,3 +1,5 @@
+import { CourseService } from './../../service/course.service';
+import { LessonService } from './../../service/lesson.service';
 import { LmsService } from "./../../service/lms.service";
 // import { Lesson } from './../../shared/models/lesson.model';
 import { Component, OnInit } from "@angular/core";
@@ -14,7 +16,7 @@ export class DashboardComponent implements OnInit {
   loading = true;
   currentCourse = null;
   currentLessons: [] = [];
-  constructor(private lmsService: LmsService) {}
+  constructor(private lmsService: LmsService, private lessonService:LessonService, private courseService:CourseService) {}
 
   ngOnInit() {
     this.fetchCurrentCourse();
@@ -22,7 +24,7 @@ export class DashboardComponent implements OnInit {
   }
 
   fetchCurrentCourse() {
-    this.lmsService.getCurrentCourse().subscribe(
+    this.courseService.getCurrentCourse().subscribe(
       currentCourse => {
         this.currentCourse = currentCourse;
         this.loading = false;
@@ -34,7 +36,7 @@ export class DashboardComponent implements OnInit {
   }
 
   fetchCurrentLessons() {
-    this.lmsService.getCurrentLessons().subscribe(
+    this.lessonService.getCurrentLessons().subscribe(
       currentLessons => {
         this.currentLessons = currentLessons;
       },
