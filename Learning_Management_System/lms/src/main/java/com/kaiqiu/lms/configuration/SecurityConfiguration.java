@@ -35,8 +35,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 jdbcAuthentication()
                 .usersByUsernameQuery(usersQuery)
                 .authoritiesByUsernameQuery(rolesQuery)
-                .dataSource(dataSource);
-//                .passwordEncoder(bCryptPasswordEncoder);
+                .dataSource(dataSource)
+                .passwordEncoder(bCryptPasswordEncoder);
         //TODO: disable bcryptpasswordencoder just for developint, need to uncomment
     }
 
@@ -48,7 +48,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("**").permitAll()
                 .and().csrf().disable()
                 .cors().disable();
-        //TODO: Disabled csrf just for developing, need to change back
+        //TODO: Disabled csrf,cors just for developing, need to change back
         
 //                .antMatchers("/").permitAll()
 //                .antMatchers("/login").permitAll()

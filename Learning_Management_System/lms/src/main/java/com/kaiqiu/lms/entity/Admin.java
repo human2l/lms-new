@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -17,8 +18,8 @@ public class Admin {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
-	@OneToOne(mappedBy = "admin",
-			cascade= {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id")
 	private User user;
 	
 	public Admin() {
@@ -27,10 +28,10 @@ public class Admin {
 	
 
 
-	public Admin(User user) {
-		super();
-		this.user = user;
-	}
+//	public Admin(User user) {
+//		super();
+//		this.user = user;
+//	}
 
 
 

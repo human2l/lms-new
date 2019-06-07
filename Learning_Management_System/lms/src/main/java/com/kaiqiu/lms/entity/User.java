@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -44,14 +45,17 @@ public class User {
 	private String mobile;
 	@Column(name = "active")
 	private int active;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "admin_id")
+	@OneToOne(mappedBy = "user",
+			cascade= {CascadeType.ALL})
+			@JoinColumn(name = "admin_id")
 	private Admin admin;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "user",
+	cascade= {CascadeType.ALL})
 	@JoinColumn(name = "student_id")
 	private Student student;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "tutor_id")
+	@OneToOne(mappedBy = "user",
+			cascade= {CascadeType.ALL})
+			@JoinColumn(name = "tutor_id")
 	private Tutor tutor;
 	@ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))

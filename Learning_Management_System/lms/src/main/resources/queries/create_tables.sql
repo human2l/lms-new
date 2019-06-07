@@ -148,3 +148,17 @@ CREATE TABLE `user_role` (
 
 SET FOREIGN_KEY_CHECKS = 1;
 
+ALTER TABLE `lms_kaiqiu`.`user` 
+DROP FOREIGN KEY `FK_TUTOR_U`,
+DROP FOREIGN KEY `FK_STUDENT_U`,
+DROP FOREIGN KEY `FK_ADMIN_U`;
+ALTER TABLE `lms_kaiqiu`.`user` 
+DROP COLUMN `student_id`,
+DROP COLUMN `tutor_id`,
+DROP COLUMN `admin_id`,
+DROP INDEX `FK_STUDENT_idx` ,
+DROP INDEX `FK_TUTOR_idx` ,
+DROP INDEX `FK_ADMIN_idx` ;
+;
+
+

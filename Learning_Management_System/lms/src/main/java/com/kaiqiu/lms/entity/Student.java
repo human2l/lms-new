@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -32,18 +33,12 @@ public class Student {
 			CascadeType.REFRESH })
 	@JoinTable(name = "lesson_student", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "lesson_id"))
 	private List<Lesson> lessons;
-	@OneToOne(mappedBy = "student",
-			cascade= {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id")
 	private User user;
 
 	public Student() {
 
-	}
-
-
-	public Student(User user) {
-		super();
-		this.user = user;
 	}
 
 
@@ -69,6 +64,16 @@ public class Student {
 
 	public void setLessons(List<Lesson> lessons) {
 		this.lessons = lessons;
+	}
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 
