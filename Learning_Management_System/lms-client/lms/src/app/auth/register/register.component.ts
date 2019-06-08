@@ -1,5 +1,7 @@
+import { UserService } from './../../service/user.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -12,13 +14,22 @@ export class RegisterComponent implements OnInit {
   // checkModel: any = { admin: false, tutor: true, student: false };
   role = "";
 
-  constructor() { }
+  constructor(private router:Router,private userService:UserService) { }
 
   ngOnInit() {
   }
 
   onSubmit(){
-    console.log("submit");
-    console.log(this.role);
+    this.userService.registNewUser(this.currentUser,this.role).subscribe(
+      responseData => {
+        if(responseData === true){
+          this.router.navigate(['/lms'])
+        }else{
+          //TODO:handle error
+          console.log("error");
+        }
+      }
+      // console.log(responseData)
+    );  
   }
 }

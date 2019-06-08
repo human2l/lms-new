@@ -30,15 +30,17 @@ export class ProfileComponent implements OnInit {
   }
 
   fetchCurrentUser(){
-    this.userService.getCurrentUser().subscribe(
-      currentUser => {
-        this.currentUser = currentUser;
-        this.loading = false;
-      },
-      error => {
-        this.error = error.message;
-      }
-    )
+    // this.userService.getCurrentUser().subscribe(
+    //   currentUser => {
+    //     this.currentUser = currentUser;
+    //     this.loading = false;
+    //   },
+    //   error => {
+    //     this.error = error.message;
+    //   }
+    // )
+    this.currentUser = this.userService.getCurrentUser();
+    this.loading = false;
   }
 
   openModal(template: TemplateRef<any>) {

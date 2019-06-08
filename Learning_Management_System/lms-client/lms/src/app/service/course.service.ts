@@ -14,17 +14,24 @@ export class CourseService{
 
     getCurrentCourse() {
       //TODO: need to modify when apply http
-      if(this.userService.getCurrentRole() !== "student"){
+      
+
+
+      if(this.userService.getCurrentRole() !== "Student"){
         return null;
       }
-        return this.http.get(this.serverUrl + "lms/students/1/course").pipe(
+        return this.http.get(this.serverUrl + "lms/"+this.userService.getCurrentRole().toLowerCase()+"s/"+this.userService.getCurrentUser().roleId+"/course").pipe(
           map(responseData => {
-            const currentCourse = responseData;
-            return currentCourse;
+            console.log(responseData);
+            //TODO: back end should send "notfound" instead of 404
+              const currentCourse = responseData;
+              return currentCourse;
           }),
           catchError(errorRes => {
             // Send to analytics server
-            return throwError(errorRes);
+            //TODO: not 404 should notfound
+            return [];
+            // return throwError(errorRes);
           })
         );
       }

@@ -6,8 +6,8 @@ import { throwError } from 'rxjs';
 
 @Injectable({ providedIn: "root" })
 export class UserService{
-    private currentRole: string = null;
-
+    // private currentRole: string = null;
+    private currentUser;
     private serverUrl: string = "";
     
     constructor(private http:HttpClient){
@@ -17,23 +17,47 @@ export class UserService{
 
     getCurrentUser() {
         // return this.currentUser;
-        return this.http.get(this.serverUrl + "lms/users/1").pipe(
-          map(responseData => {
-            console.log(responseData);
-            const currentUser = responseData;
-            return currentUser;
-          }),
-          catchError(errorRes => {
+        // return this.http.get(this.serverUrl + "lms/users/1").pipe(
+        //   map(responseData => {
+        //     console.log(responseData);
+        //     const currentUser = responseData;
+        //     return currentUser;
+        //   }),
+        //   catchError(errorRes => {
+        //     // Send to analytics server
+        //     return throwError(errorRes);
+        //   })
+        // );
+        return this.currentUser;
+      }
+
+    setCurrentUser(currentUser){
+      this.currentUser = currentUser;
+    }
+    
+      getCurrentRole() {
+        //TODO: what if user has multiply role?
+        console.log(this.currentUser);
+        return this.currentUser.roles[0].role;
+      }
+
+      registNewUser(newUser, role:String){
+        return this.http.post(this.serverUrl+"registration?role="+role,newUser).pipe(
+          map(
+            responseData => {
+              if(responseData.hasOwnProperty("user")){
+                this.currentUser = responseData["user"];
+                this.currentUser.roleId = responseData["id"];
+                return true;
+              }else{
+                //TODO: return error
+                return false;
+              }
+            }
+          ),catchError(errorRes => {
             // Send to analytics server
             return throwError(errorRes);
           })
         );
-      }
-    
-      getCurrentRole() {
-        if (this.currentRole === null) {
-          this.currentRole = "tutor";
-        }
-        return this.currentRole;
       }
 }
