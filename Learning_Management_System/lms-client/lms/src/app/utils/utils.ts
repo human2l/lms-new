@@ -25,6 +25,6 @@ export class Utils{
     }
     
     static areSame(a ,b){
-        return this.getIdFromLink(a) === this.getIdFromLink(b);
+        return a!==null && b!==null && this.getIdFromLink(a) === this.getIdFromLink(b);
     }
 }

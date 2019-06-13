@@ -1,3 +1,4 @@
+import { AuthGuard } from './auth/auth.guard';
 import { PersonnelComponent } from "./lms/personnel/personnel.component";
 import { ProfileComponent } from "./lms/profile/profile.component";
 import { LessonComponent } from "./lms/lesson/lesson.component";
@@ -16,6 +17,7 @@ const routes: Routes = [
   {
     path: "lms",
     component: LmsComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: "", redirectTo: "dashboard", pathMatch: "full" },
       { path: "dashboard", component: DashboardComponent },

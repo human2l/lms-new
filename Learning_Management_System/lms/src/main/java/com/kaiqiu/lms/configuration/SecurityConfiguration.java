@@ -37,7 +37,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authoritiesByUsernameQuery(rolesQuery)
                 .dataSource(dataSource)
                 .passwordEncoder(bCryptPasswordEncoder);
-        //TODO: disable bcryptpasswordencoder just for developint, need to uncomment
     }
 
     @Override
@@ -46,6 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.
                 authorizeRequests()
                 .antMatchers("**").permitAll()
+//                .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .and().csrf().disable()
                 .cors().disable();
         //TODO: Disabled csrf,cors just for developing, need to change back
@@ -63,12 +63,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 //                .logoutSuccessUrl("/").and().exceptionHandling()
 //                .accessDeniedPage("/access-denied");
-    }
-
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web
-                .ignoring()
-                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
     }
 }

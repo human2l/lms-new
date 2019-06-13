@@ -23,7 +23,7 @@ import com.kaiqiu.lms.entity.Tutor;
 import com.kaiqiu.lms.entity.User;
 
 @RestController
-public class RegistrationController {
+public class AuthController {
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
@@ -43,12 +43,12 @@ public class RegistrationController {
 		newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
 		Set<Role> roles = new HashSet();
 		//TODO: return error page
-		if(roleRepository.findByRole(role) == null) {
+		Role foundRole = roleRepository.findByRole(role); 
+		if(foundRole == null) {
 			return null;
-		}else {
-			
 		}
-		roles.add(roleRepository.findByRole(role));
+		//TODO: check already exist
+		roles.add(foundRole);
 		
 		newUser.setRoles(roles);
 		
@@ -68,5 +68,23 @@ public class RegistrationController {
 		}
 		return null;
 		
+	}
+	
+	@PostMapping(value="/login")
+	@ResponseBody
+	public User login(@RequestBody User loginUser) {
+		//TODO: 
+		System.out.println(loginUser);
+		User foundUser = userRepository.findByEmail(loginUser.getEmail());
+		if(foundUser!=null) {
+			if(bCryptPasswordEncoder.matches(loginUser.getPassword(), foundUser.getPassword())){
+				return foundUser;
+			}else {
+				return null;
+			}
+		}else {
+			return null;
+			//TODO: user does not exist
+		}
 	}
 }

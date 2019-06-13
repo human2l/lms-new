@@ -13,25 +13,15 @@ export class CourseService{
     }
 
     getCurrentCourse() {
-      //TODO: need to modify when apply http
-      
-
-
       if(this.userService.getCurrentRole() !== "Student"){
         return null;
       }
         return this.http.get(this.serverUrl + "lms/"+this.userService.getCurrentRole().toLowerCase()+"s/"+this.userService.getCurrentUser().roleId+"/course").pipe(
           map(responseData => {
-            console.log(responseData);
-            //TODO: back end should send "notfound" instead of 404
-              const currentCourse = responseData;
-              return currentCourse;
+              return responseData;
           }),
           catchError(errorRes => {
-            // Send to analytics server
-            //TODO: not 404 should notfound
-            return [];
-            // return throwError(errorRes);
+            return throwError(errorRes);
           })
         );
       }
@@ -51,7 +41,7 @@ export class CourseService{
     
       setCurrentCourseById(id: number) {
         return this.http.put(
-          this.serverUrl + "lms/students/1/course",
+          this.serverUrl + "lms/"+this.userService.getCurrentRole().toLowerCase()+"s/"+this.userService.getCurrentUser().roleId+"/course",
           this.serverUrl + "lms/courses/" + id,
           Utils.manyToManyHttpOptions
         );

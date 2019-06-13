@@ -1,8 +1,9 @@
-import { UserService } from './../../service/user.service';
-import { LmsService } from './../../service/lms.service';
+import { UserService } from "./../../service/user.service";
+import { LmsService } from "./../../service/lms.service";
 import { Component, OnInit, ViewChild, TemplateRef } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-profile",
@@ -21,24 +22,20 @@ export class ProfileComponent implements OnInit {
   userPassword = {
     newPassword: "",
     confirmPassword: ""
-  }
+  };
 
-  constructor(private modalService: BsModalService, private lmsService: LmsService, private userService: UserService) {}
+  constructor(
+    private modalService: BsModalService,
+    private lmsService: LmsService,
+    private userService: UserService,
+    private router:Router
+  ) {}
 
   ngOnInit() {
-    this.fetchCurrentUser();
+      this.fetchCurrentUser();
   }
 
-  fetchCurrentUser(){
-    // this.userService.getCurrentUser().subscribe(
-    //   currentUser => {
-    //     this.currentUser = currentUser;
-    //     this.loading = false;
-    //   },
-    //   error => {
-    //     this.error = error.message;
-    //   }
-    // )
+  fetchCurrentUser() {
     this.currentUser = this.userService.getCurrentUser();
     this.loading = false;
   }
@@ -48,12 +45,11 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    // this.userService.updateUser(this.userProfile);
+    this.userService.updateUser(this.currentUser);
     //TODO: http
   }
 
-  //no need, should included in onSubmit method
-  // onSubmitPassword(){
-
-  // }
+  onSubmitPassword(){
+    this.userService.updateUserPassword(this.userPassword.newPassword);
+  }
 }

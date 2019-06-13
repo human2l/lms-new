@@ -1,9 +1,10 @@
-import { CourseService } from './../../service/course.service';
-import { LessonService } from './../../service/lesson.service';
+import { UserService } from "./../../service/user.service";
+import { CourseService } from "./../../service/course.service";
+import { LessonService } from "./../../service/lesson.service";
 import { LmsService } from "./../../service/lms.service";
-// import { Lesson } from './../../shared/models/lesson.model';
 import { Component, OnInit } from "@angular/core";
-// import { Course } from 'src/app/shared/models/course.model';
+import { Router } from "@angular/router";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
   selector: "app-dashboard",
@@ -15,8 +16,14 @@ export class DashboardComponent implements OnInit {
   error = null;
   loading = true;
   currentCourse = null;
-  currentLessons: [] = [];
-  constructor(private lmsService: LmsService, private lessonService:LessonService, private courseService:CourseService) {}
+  currentLessons = null;
+  constructor(
+    private lmsService: LmsService,
+    private lessonService: LessonService,
+    private courseService: CourseService,
+    private userService: UserService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.fetchCurrentCourse();
@@ -30,6 +37,10 @@ export class DashboardComponent implements OnInit {
         this.loading = false;
       },
       error => {
+        if (error.error.message === "Not Found") {
+          this.currentCourse = null;
+          this.loading = false;
+        }
         this.error = error;
       }
     );
@@ -39,8 +50,13 @@ export class DashboardComponent implements OnInit {
     this.lessonService.getCurrentLessons().subscribe(
       currentLessons => {
         this.currentLessons = currentLessons;
+        this.loading = false;
       },
       error => {
+        if (error.error.message === "Not Found") {
+          this.currentCourse = null;
+          this.loading = false;
+        }
         this.error = error.message;
       }
     );

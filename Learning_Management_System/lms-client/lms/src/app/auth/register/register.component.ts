@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
   @ViewChild("registerForm") registerForm: NgForm;
   currentUser = {firstName:"",lastName:"",email:"",mobile:"",password:"",confirmPassword:""}
-  // checkModel: any = { admin: false, tutor: true, student: false };
   role = "";
 
   constructor(private router:Router,private userService:UserService) { }
@@ -29,7 +28,6 @@ export class RegisterComponent implements OnInit {
           console.log("error");
         }
       }
-      // console.log(responseData)
     );  
   }
 }

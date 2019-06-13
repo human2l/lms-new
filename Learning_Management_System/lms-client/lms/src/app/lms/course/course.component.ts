@@ -2,9 +2,9 @@ import { UserService } from './../../service/user.service';
 import { CourseService } from './../../service/course.service';
 import { LessonService } from './../../service/lesson.service';
 import { LmsService } from "./../../service/lms.service";
-// import { Course } from './../../shared/models/course.model';
 import { Component, OnInit } from "@angular/core";
 import { Utils } from "src/app/utils/utils";
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-course",
@@ -21,14 +21,13 @@ export class CourseComponent implements OnInit {
   alerting = false;
   // canAdd = false;
   currentRole = "";
-  constructor(private lmsService: LmsService, private lessonService:LessonService, private courseService: CourseService, private userService:UserService) {}
+  constructor(private lmsService: LmsService, private lessonService:LessonService, private courseService: CourseService, private userService:UserService,private router:Router) {}
 
   ngOnInit() {
     //TODO fetch currentrole, subscribe => if student => fetch current course
     this.fetchCurrentRole();
-    console.log(this.currentRole);
     this.fetchAllCourses();
-    if(this.currentRole === "student")
+    if(this.currentRole === "Student")
     this.fetchCurrentCourse();
     //need to modify when use http
     // this.canAdd = this.userService.getCurrentRole() !== "student";

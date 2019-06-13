@@ -7,6 +7,7 @@ import { LmsService } from "./../../service/lms.service";
 import { Component, OnInit, TemplateRef } from "@angular/core";
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
 import { HttpClient } from "@angular/common/http";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-lesson",
@@ -35,27 +36,28 @@ export class LessonComponent implements OnInit {
     private http: HttpClient,
     private lessonService: LessonService,
     private courseService: CourseService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit() {
     //TODO: fetch currentRole
-    this.currentRole = this.userService.getCurrentRole();
-    switch (this.currentRole) {
-      case "student":
-        this.fetchCurrentCourse();
-        this.fetchAllLessons();
-        this.fetchCurrentLessons();
-        break;
-      case "tutor":
-        this.fetchCurrentLessons();
-        this.allLessons = this.currentLessons;
-        break;
-      case "admin":
-        this.fetchAllLessons();
-        break;
-      default:
-        break;
+      this.currentRole = this.userService.getCurrentRole();
+      switch (this.currentRole) {
+        case "Student":
+          this.fetchCurrentCourse();
+          this.fetchAllLessons();
+          this.fetchCurrentLessons();
+          break;
+        case "Tutor":
+          this.fetchCurrentLessons();
+          this.allLessons = this.currentLessons;
+          break;
+        case "Admin":
+          this.fetchAllLessons();
+          break;
+        default:
+          break;
     }
     //TODO: when tutor click delete
   }
@@ -70,7 +72,7 @@ export class LessonComponent implements OnInit {
   }
 
   canEdit(lesson) {
-    return this.currentRole === "tutor" || this.currentRole === "admin";
+    return this.currentRole === "Tutor" || this.currentRole === "Admin";
   }
 
   showDetails(template: TemplateRef<any>, lesson) {
@@ -133,7 +135,7 @@ export class LessonComponent implements OnInit {
   }
 
   fetchCurrentLessons() {
-    if (this.currentRole === "tutor") {
+    if (this.currentRole === "Tutor") {
       this.lessonService.getTutorLessons().subscribe(
         currentLessons => {
           this.currentLessons = currentLessons;

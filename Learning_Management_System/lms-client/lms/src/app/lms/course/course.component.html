@@ -40,18 +40,18 @@
       </div>
       <div class="card-body">
         <h5 class="card-title">{{ selectedCourse.title }}</h5>
-        <p *ngIf="currentRole === 'student' && hasCourse()">(This is your current course)</p>
+        <p *ngIf="currentRole === 'Student' && hasCourse()">(This is your current course)</p>
         <p class="card-text">{{ selectedCourse.description }}</p>
         <button
           class="btn btn-primary"
-          *ngIf="currentRole === 'student' && !hasCourse() && !isAdmin() && alerting == false"
+          *ngIf="currentRole === 'Student' && !hasCourse() && !isAdmin() && alerting == false"
           (click)="alerting = true"
         >
           Choose and Save
         </button>
         <div
           class="card border-danger"
-          *ngIf="currentRole === 'student' && !hasCourse() && !isAdmin() && alerting === true"
+          *ngIf="currentRole === 'Student' && !hasCourse() && !isAdmin() && alerting === true"
         >
           <div class="card-body text-danger">
             <p class="card-text">

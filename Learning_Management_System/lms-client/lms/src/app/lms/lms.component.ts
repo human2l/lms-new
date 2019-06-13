@@ -1,7 +1,7 @@
-import { UserService } from './../service/user.service';
+import { UserService } from "./../service/user.service";
 import { LmsService } from "./../service/lms.service";
 import { Component, OnInit } from "@angular/core";
-import { Router } from '@angular/router';
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-lms",
@@ -12,13 +12,17 @@ export class LmsComponent implements OnInit {
   title = "lms";
   currentUser = null;
   error = null;
-  loading=true;
+  loading = true;
 
   manageItems: string[] = ["course", "lesson"];
   manageItemsAfterDivider: string[] = ["personnel"];
   userItems: string[] = ["profile"];
   userItemsAfterDivider: string[] = ["logout"];
-  constructor(private router:Router, private lmsService: LmsService, private userService:UserService) {}
+  constructor(
+    private router: Router,
+    private lmsService: LmsService,
+    private userService: UserService
+  ) {}
 
   ngOnInit() {
     // this.userService.getCurrentUser().subscribe(
@@ -31,12 +35,11 @@ export class LmsComponent implements OnInit {
     //   }
     // );
     this.currentUser = this.userService.getCurrentUser();
-    this.loading = false;
-    console.log(this.currentUser);
+      this.loading = false;
   }
 
-  onLogout(){
+  onLogout() {
     //TODO: true logout
-    this.router.navigate['/auth/login'];
+    this.router.navigate(["/auth/login"]);
   }
 }
