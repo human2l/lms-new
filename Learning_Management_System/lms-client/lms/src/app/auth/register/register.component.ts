@@ -24,6 +24,7 @@ export class RegisterComponent implements OnInit {
         if(responseData === true){
           this.router.navigate(['/lms'])
         }else{
+          
           //TODO:handle error
           console.log("error");
         }

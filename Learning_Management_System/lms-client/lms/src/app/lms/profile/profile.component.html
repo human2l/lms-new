@@ -57,7 +57,7 @@
           value="Change Password"
           (click)="openModal(template)"
         />
-        <input class="btn btn-primary" type="submit" value="Save" />
+        <input class="btn btn-primary" type="submit" value="Save Change" />
       </div>
     </form>
   </div>
@@ -76,7 +76,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <form (ngSubmit)="onSubmitPassword()" #passwordForm="ngForm">
+    <form (ngSubmit)="onSavePassword()" #passwordForm="ngForm">
       <div class="form-group">
         <label for="newPassword">New Passowrd:</label>
         <input

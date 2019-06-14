@@ -51,7 +51,7 @@ public class AuthController {
 		roles.add(foundRole);
 		
 		newUser.setRoles(roles);
-		
+		newUser.setActive(1);
 		switch(role) {
 		case "Admin":
 			Admin newAdmin = new Admin();
@@ -73,8 +73,6 @@ public class AuthController {
 	@PostMapping(value="/login")
 	@ResponseBody
 	public User login(@RequestBody User loginUser) {
-		//TODO: 
-		System.out.println(loginUser);
 		User foundUser = userRepository.findByEmail(loginUser.getEmail());
 		if(foundUser!=null) {
 			if(bCryptPasswordEncoder.matches(loginUser.getPassword(), foundUser.getPassword())){

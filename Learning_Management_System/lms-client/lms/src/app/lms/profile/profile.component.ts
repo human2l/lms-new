@@ -45,11 +45,24 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    this.userService.updateUser(this.currentUser);
-    //TODO: http
+    this.userService.updateUser(this.currentUser).subscribe(
+      responseData => {
+        //TODO: show success
+      },
+      error=> {
+        //TODO: show error
+      }
+    )
   }
 
-  onSubmitPassword(){
-    this.userService.updateUserPassword(this.userPassword.newPassword);
+  onSavePassword(){
+    //TODO: password validation
+    this.currentUser.password = this.userPassword.newPassword;
+    if (!this.modalRef) {
+      return;
+    }
+ 
+    this.modalRef.hide();
+    this.modalRef = null;
   }
 }

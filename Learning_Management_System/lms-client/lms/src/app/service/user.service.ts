@@ -18,10 +18,6 @@ export class UserService {
     return this.currentUser;
   }
 
-  setCurrentUser(currentUser) {
-    this.currentUser = currentUser;
-  }
-
   getCurrentRole() {
     //TODO: what if user has multiply role?
     return this.currentUser.roles[0].role;
@@ -32,16 +28,17 @@ export class UserService {
       .post(this.serverUrl + "registration?role=" + role, newUser)
       .pipe(
         map(responseData => {
-          if (responseData.hasOwnProperty("user")) {
-            this.currentUser = responseData["user"];
-            this.currentUser.roleId = responseData["id"];
-            return true;
-          } else {
-            //TODO: return error
-            return false;
-          }
+          const responseUser = responseData["user"];
+          // delete responseUser.password;
+          responseUser.roleId = responseData["id"];
+          this.currentUser = responseUser;
+          console.log("register");
+          console.log(this.currentUser);
+          return true;
         }),
         catchError(errorRes => {
+          //TODO: handle error
+          console.log("register error");
           // Send to analytics server
           return throwError(errorRes);
         })
@@ -52,37 +49,49 @@ export class UserService {
     return this.http.post(this.serverUrl + "login", user).pipe(
       map(responseData => {
         const currentUser = responseData;
-        switch (currentUser["roles"][0]["role"]) {
-          case "Admin":
-            currentUser["roleId"] = currentUser["admin"]["id"];
-            break;
-          case "Tutor":
-              currentUser["roleId"] = currentUser["tutor"]["id"];
-            break;
-          case "Student":
-              currentUser["roleId"] = currentUser["student"]["id"];
-            break;
-          default:
-            break;
-        }
-        this.currentUser = currentUser;
+        this.currentUser = this.formatUser(currentUser);
+        console.log(this.currentUser);
         return true;
       })
     );
   }
 
-  updateUser(user){
-  //   return this.http.post(this.serverUrl + "login", user).pipe(
-  //     map(responseData => {
-  //       const currentUser = responseData;
-      
-      
-  //     // return true;
-  //   })
-  // );
+  updateUser(user) {
+    console.log(user);
+    return this.http
+      .post(this.serverUrl + "updateUser?email=" + user.email, user)
+      .pipe(
+        map(responseData => {
+          const currentUser = responseData;
+          this.currentUser = this.formatUser(currentUser);
+          console.log("updateUser")
+          console.log(this.currentUser);
+          return true;
+        }),
+        catchError(errorRes => {
+          //TODO: handle not found
+          return throwError(errorRes);
+        })
+      );
   }
 
-  updateUserPassword(password){
-
+  private formatUser(currentUser){
+    switch (currentUser["roles"][0]["role"]) {
+      case "Admin":
+        currentUser["roleId"] = currentUser["admin"]["id"];
+        delete currentUser["admin"];
+        break;
+      case "Tutor":
+        currentUser["roleId"] = currentUser["tutor"]["id"];
+        delete currentUser["tutor"];
+        break;
+      case "Student":
+        currentUser["roleId"] = currentUser["student"]["id"];
+        delete currentUser["student"];
+        break;
+      default:
+        break;
+    }
+    return currentUser;
   }
 }
