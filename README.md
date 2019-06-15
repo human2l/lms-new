@@ -9,11 +9,19 @@ After refactoring, the new lms system is built by Angular7, MySql and Spring Dat
 ## Roles:
 There are 3 roles in this system: admin, student and tutor.  
 Admin: Manage all other users with role student and tutor.  
-Student: Manage all the courses he/she has.   
+Student: Manage course and lessons he/she has.   
 Tutor: Manage all the lessons he/she taught.  
 
+## Dashboard:
+* Student: 
+Can view his/her selected course and lessons from course/lesson management page.
+
 ## Course Management:
-  Student: 
+*  Student: 
+Can view all courses in LMS.
+Can select one of the courses to save as his/her course.
+* Tutor:
+
   
 
 ## Lesson Management:  
@@ -36,7 +44,9 @@ Tutor: Manage all the lessons he/she taught.
 ## Personnel Management:  
 
 ## Profile Management:  
+All kinds of users (student, tutor and admin) can view => edit => save their profile. They can reset their password.
 
 ## Authentication:  
-There is a login form and registration. All users should be login to the system.  
+* Login form: All user should login before access to the management system.
+* Registration form: New user can submit their details to sign up.
 
