@@ -11,6 +11,7 @@
           id="firstName"
           class="form-control"
           [(ngModel)]="currentUser.firstName"
+          #firstName="ngModel"
           name="firstName"
           required
         />
@@ -22,6 +23,7 @@
           id="lastName"
           class="form-control"
           [(ngModel)]="currentUser.lastName"
+          #lastName="ngModel"
           name="lastName"
           required
         />
@@ -46,6 +48,7 @@
           id="mobile"
           class="form-control"
           [(ngModel)]="currentUser.mobile"
+          #mobile="ngModel"
           name="mobile"
           required
         />
@@ -84,6 +87,7 @@
           id="newPassword"
           class="form-control"
           [(ngModel)]="userPassword.newPassword"
+          #newPassword="ngModel"
           name="newPassword"
           required
         />
@@ -95,6 +99,7 @@
           id="confirmPassword"
           class="form-control"
           [(ngModel)]="userPassword.confirmPassword"
+          #confirmPassword="ngModel"
           name="confirmPassword"
           required
         />

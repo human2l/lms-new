@@ -5,7 +5,7 @@
     </div>
     <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
       <div class="form-group">
-        <!-- <label for="email">Email:</label> -->
+          
         <input
           type="email"
           id="email"
@@ -17,9 +17,14 @@
           #email="ngModel"
           placeholder="Email"
         />
+        <div *ngIf="email.invalid && loginForm.submitted && email.dirty" class="alert alert-danger">
+            Email is not formatted properly.
+          </div>
+        <div *ngIf="email.invalid && loginForm.submitted && email.pristine" class="alert alert-danger">
+            Email is required.
+          </div>
       </div>
       <div class="form-group">
-        <!-- <label for="password">Password:</label> -->
         <input
           type="text"
           id="password"
@@ -27,28 +32,39 @@
           [(ngModel)]="currentUser.password"
           name="password"
           required
-          #email="ngModel"
+          #password="ngModel"
           placeholder="Password"
         />
+        <div *ngIf="password.invalid && loginForm.submitted && password.pristine" class="alert alert-danger">
+          Password is required.
+        </div>
       </div>
+      
       <div class="row my-3">
         <input
-          class="btn btn-success btn-block mx-3"
+          class="btn btn-block mx-3"
           type="submit"
-          value="Login"
+          
+          [ngClass]="loginForm.submitted && error !== null?'btn-danger':'btn-success'"
+          [value]="submitButtonValue"
         />
       </div>
     </form>
-      <hr>
+    <hr />
     <div class="row" routerLinkActive="active">
-        <button
+      <button
         class="btn btn-warning btn-block mx-3"
         routerLink="/auth/register"
-      >Register</button>
+      >
+        Register
+      </button>
     </div>
 
     <div class="row justify-content-center mx-3 mt-3">
-      <p>Forgot password? <a (click)="onForgotPassword()" href="#">Click here!</a></p>
+      <p>
+        Forgot password?
+        <a (click)="onForgotPassword()" href="#">Click here!</a>
+      </p>
     </div>
   </div>
 </div>

@@ -50,8 +50,10 @@ export class UserService {
       map(responseData => {
         const currentUser = responseData;
         this.currentUser = this.formatUser(currentUser);
-        console.log(this.currentUser);
         return true;
+      }),
+      catchError(errorRes => {
+        return throwError(errorRes);
       })
     );
   }

@@ -1,37 +1,49 @@
-import { UserService } from './../../service/user.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { UserService } from "./../../service/user.service";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { NgForm, NgModel } from "@angular/forms";
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit {
   @ViewChild("loginForm") loginForm: NgForm;
-  currentUser = {email:"", password:""};
-  constructor(private router: Router, private route: ActivatedRoute,private userService:UserService) { }
+  @ViewChild("submitBtn") submitBtn: NgModel;
 
-  ngOnInit() {
-  }
+  currentUser = { email: "", password: "" };
+  error = null;
+  submitButtonValue = "login";
 
-  onSubmit(){
-    this.userService.login(this.currentUser).subscribe(
-      responseData => {
-        if(responseData){
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private userService: UserService
+  ) {}
+
+  ngOnInit() {}
+
+  onSubmit() {
+    if (this.loginForm.valid) {
+      this.userService.login(this.currentUser).subscribe(
+        responseData => {
           this.router.navigate(["/lms/dashboard"]);
-        }else{
-          //TODO: handle error
+        },
+        error => {
+          console.log(error.error.message);
+          if (error.error.message == "User Not Found") {
+            this.submitButtonValue = "User not found, please try again.";
+          } else if (error.error.message == "Password Incorrect") {
+            this.submitButtonValue = "Password incorrect, please try again.";
+          }
+          this.error = error;
         }
-        
-      }
-      //TODO: check if bad response
-    )
+      );
+    }
   }
 
-  onForgotPassword(){
+  onForgotPassword() {
     console.log("onForgotPassword");
   }
-
 }

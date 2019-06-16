@@ -15,6 +15,7 @@
               [(ngModel)]="currentUser.firstName"
               name="firstName"
               required
+              #firstName="ngModel"
               placeholder="First Name"
             />
           </div>
@@ -29,6 +30,7 @@
               [(ngModel)]="currentUser.lastName"
               name="lastName"
               required
+              #lastName="ngModel"
               placeholder="Last Name"
             />
           </div>
@@ -57,6 +59,7 @@
           [(ngModel)]="currentUser.mobile"
           name="mobile"
           required
+          #mobile="ngModel"
           placeholder="Mobile"
         />
       </div>
@@ -71,6 +74,7 @@
               [(ngModel)]="currentUser.password"
               name="password"
               required
+              #password="ngModel"
               placeholder="Password"
             />
           </div>
@@ -85,6 +89,7 @@
               [(ngModel)]="currentUser.confirmPassword"
               name="confirmPassword"
               required
+              #confirmPassword="ngModel"
               placeholder="Confirm Password"
             />
           </div>

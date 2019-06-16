@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +22,8 @@ import com.kaiqiu.lms.entity.Role;
 import com.kaiqiu.lms.entity.Student;
 import com.kaiqiu.lms.entity.Tutor;
 import com.kaiqiu.lms.entity.User;
+import com.kaiqiu.lms.exception.PasswordIncorrectException;
+import com.kaiqiu.lms.exception.UserNotFoundException;
 
 @RestController
 public class AuthController {
@@ -78,11 +81,10 @@ public class AuthController {
 			if(bCryptPasswordEncoder.matches(loginUser.getPassword(), foundUser.getPassword())){
 				return foundUser;
 			}else {
-				return null;
+				throw new PasswordIncorrectException();
 			}
 		}else {
-			return null;
-			//TODO: user does not exist
+			throw new UserNotFoundException();
 		}
 	}
 }
