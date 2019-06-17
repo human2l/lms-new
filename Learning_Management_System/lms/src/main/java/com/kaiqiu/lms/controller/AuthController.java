@@ -23,6 +23,7 @@ import com.kaiqiu.lms.entity.Student;
 import com.kaiqiu.lms.entity.Tutor;
 import com.kaiqiu.lms.entity.User;
 import com.kaiqiu.lms.exception.PasswordIncorrectException;
+import com.kaiqiu.lms.exception.ResourceAlreadyExistException;
 import com.kaiqiu.lms.exception.UserNotFoundException;
 
 @RestController
@@ -43,14 +44,17 @@ public class AuthController {
 	@PostMapping(value="/registration")
 	@ResponseBody
 	public Object registration(@RequestBody User newUser, @RequestParam String role) {
+		User foundUser = userRepository.findByEmail(newUser.getEmail());
+		if(foundUser != null) {
+			throw new ResourceAlreadyExistException();
+		}
+		System.out.println(foundUser);
 		newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
 		Set<Role> roles = new HashSet();
-		//TODO: return error page
 		Role foundRole = roleRepository.findByRole(role); 
 		if(foundRole == null) {
-			return null;
+			throw new ResourceNotFoundException();
 		}
-		//TODO: check already exist
 		roles.add(foundRole);
 		
 		newUser.setRoles(roles);
