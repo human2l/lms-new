@@ -36,7 +36,8 @@ public class UserController {
 		foundUser.setLastName(user.getLastName());
 		foundUser.setEmail(user.getEmail());
 		foundUser.setMobile(user.getMobile());
-		if(user.getPassword() != foundUser.getPassword()) {
+		String userPassword = user.getPassword();
+		if(userPassword != "" && !userPassword.equals(foundUser.getPassword()) ) {
 			foundUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		}
 		System.out.println(foundUser);

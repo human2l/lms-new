@@ -1,20 +1,21 @@
 <div class="row">
   <div class="col my-3">
     <h3>Course Management</h3>
+    <hr>
   </div>
 </div>
 <div class="row">
   <div class="col">
-    <p *ngIf="currentRole === 'student'">
+    <p *ngIf="currentRole === 'Student'">
       Courses available, choose the course you want!
     </p>
-    <p *ngIf="currentRole !== 'student'">All courses show below: </p>
+    <p *ngIf="currentRole !== 'Student'">All courses shown below: </p>
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-4 my-3">
-      <a *ngIf="currentRole === 'admin'"
+      <a *ngIf="currentRole === 'Admin'"
       class="btn-lg btn btn-success btn-block text-white font-weight-bold mb-3"
         >
         Add New Course

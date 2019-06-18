@@ -17,6 +17,8 @@ export class DashboardComponent implements OnInit {
   loading = true;
   currentCourse = null;
   currentLessons = null;
+  showCourse = false;
+  showLesson = false;
   constructor(
     private lmsService: LmsService,
     private lessonService: LessonService,
@@ -26,11 +28,24 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.fetchCurrentCourse();
-    this.fetchCurrentLessons();
+    switch (this.userService.getCurrentRole()) {
+      case "Student":
+        this.fetchCurrentCourse();
+        this.fetchCurrentLessons();
+        break;
+      case "Tutor":
+        this.fetchCurrentLessons();
+        break;
+      case "Admin":
+        //TODO
+        break;
+      default:
+        break;
+    }
   }
 
   fetchCurrentCourse() {
+    this.showCourse = true;
     this.courseService.getCurrentCourse().subscribe(
       currentCourse => {
         this.currentCourse = currentCourse;
@@ -47,6 +62,7 @@ export class DashboardComponent implements OnInit {
   }
 
   fetchCurrentLessons() {
+    this.showLesson = true;
     this.lessonService.getCurrentLessons().subscribe(
       currentLessons => {
         this.currentLessons = currentLessons;

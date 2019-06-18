@@ -27,6 +27,12 @@ export class LessonComponent implements OnInit {
   currentCourse = null;
   loadingCourse = true;
   loadingLesson = true;
+  canAdd = false;
+  canRemove = false;
+  canCreate = false;
+  canEdit = false;
+  canDelete = false;
+  editing = false;
 
   lessonHeader = ["Title", "Start Date", "End Date", "Options"];
 
@@ -41,17 +47,20 @@ export class LessonComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    //TODO: fetch currentRole
       this.currentRole = this.userService.getCurrentRole();
       switch (this.currentRole) {
         case "Student":
           this.fetchCurrentCourse();
           this.fetchAllLessons();
           this.fetchCurrentLessons();
+          this.canRemove = true;
+          this.canAdd = true;
           break;
         case "Tutor":
           this.fetchCurrentLessons();
-          this.allLessons = this.currentLessons;
+          this.canCreate = true;
+          this.canEdit = true;
+          this.canDelete = true;
           break;
         case "Admin":
           this.fetchAllLessons();
@@ -71,10 +80,6 @@ export class LessonComponent implements OnInit {
     return false;
   }
 
-  canEdit(lesson) {
-    return this.currentRole === "Tutor" || this.currentRole === "Admin";
-  }
-
   showDetails(template: TemplateRef<any>, lesson) {
     this.modalRef = this.modalService.show(template);
     this.details = lesson.description;
@@ -92,7 +97,7 @@ export class LessonComponent implements OnInit {
     );
   }
 
-  delete(lesson) {
+  remove(lesson) {
     const lessonId = Utils.getIdFromLink(lesson);
     this.lessonService.deleteOneOfCurrentLessonsById(lessonId).subscribe(
       () => {
@@ -104,17 +109,11 @@ export class LessonComponent implements OnInit {
     );
   }
 
+  edit(lesson){
+    this.editing = true;
+  }
+
   fetchAllLessons() {
-    if (this.currentRole === "tutor") {
-      this.lessonService.getAllLessons().subscribe(
-        allLessons => {
-          this.allLessons = allLessons;
-        },
-        error => {
-          this.error = error.message;
-        }
-      );
-    } else {
       this.courseService.getCurrentCourse().subscribe(
         currentCourse => {
           this.currentCourse = currentCourse;
@@ -131,7 +130,6 @@ export class LessonComponent implements OnInit {
           this.error = error.message;
         }
       );
-    }
   }
 
   fetchCurrentLessons() {

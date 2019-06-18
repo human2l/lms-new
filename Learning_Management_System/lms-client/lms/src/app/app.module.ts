@@ -24,6 +24,7 @@ import { AuthComponent } from './auth/auth.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { LessonEditComponent } from './lms/lesson/lesson-edit/lesson-edit.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     DashboardComponent,
     AuthComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    LessonEditComponent
   ],
   imports: [
     HttpClientModule,
