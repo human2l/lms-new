@@ -101,7 +101,7 @@ export class CourseComponent implements OnInit {
   }
 
   deleteAllCurrentLessons(){
-    this.lessonService.deleteAllCurrentLessons().subscribe(
+    this.lessonService.removeAllCurrentLessons().subscribe(
       ()=> console.log("deleted")
     )
   }

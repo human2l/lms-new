@@ -4,8 +4,11 @@
     <hr />
   </div>
 </div>
-<div class="row mt-3" *ngIf="editing">
-  <app-lesson-edit></app-lesson-edit>
+<div *ngIf="editing">
+  <app-lesson-edit (editCanceled)="editing = false"
+  (lessonSaved)="onLessonSaved($event)"
+  [editLesson] = "editLesson"
+  ></app-lesson-edit>
 </div>
 
 <div *ngIf="!editing">
@@ -38,7 +41,7 @@
   </div>
 
   <div class="row">
-    <div class="table-responsive table-lesson">
+    <div class="table-responsive table-lesson px-3">
       <table class="table table-hover table-bordered">
         <thead>
           <tr>
@@ -54,46 +57,52 @@
             <td>{{ lesson.startDate }}</td>
             <td>{{ lesson.endDate }}</td>
             <td>
-              <div>
-                <button
-                  type="button"
-                  class="btn btn-primary mx-1 my-1"
-                  (click)="showDetails(template, lesson)"
-                >
-                  Details
-                </button>
-                <button
-                  *ngIf="canAdd && !hasLesson(lesson)"
-                  type="button"
-                  class="btn btn-success mx-1 my-1"
-                  (click)="add(lesson)"
-                >
-                  Add
-                </button>
-                <button
-                  *ngIf="canEdit"
-                  type="button"
-                  class="btn btn-warning mx-1 my-1"
-                  (click)="edit(lesson)"
-                >
-                  Edit
-                </button>
-                <button
-                  *ngIf="canRemove && hasLesson(lesson)"
-                  type="button"
-                  class="btn btn-danger mx-1 my-1"
-                  (click)="remove(lesson)"
-                >
-                  Remove
-                </button>
-                <button
-                  *ngIf="canDelete"
-                  type="button"
-                  class="btn btn-danger mx-1 my-1"
-                  (click)="remove(lesson)"
-                >
-                  Delete
-                </button>
+              <div class="row justify-content-start">
+                <div class="col-md-4">
+                  <button
+                    type="button"
+                    class="btn btn-primary btn-block mx-1 my-1"
+                    (click)="showDetails(template, lesson)"
+                  >
+                    Details
+                  </button>
+                </div>
+                <div class="col-md-4" *ngIf="canAdd && !hasLesson(lesson)">
+                  <button
+                    type="button"
+                    class="btn btn-success btn-block mx-1 my-1"
+                    (click)="add(lesson)"
+                  >
+                    Add
+                  </button>
+                </div>
+                <div class="col-md-4" *ngIf="canEdit">
+                  <button
+                    type="button"
+                    class="btn btn-warning btn-block mx-1 my-1"
+                    (click)="edit(lesson)"
+                  >
+                    Edit
+                  </button>
+                </div>
+                <div class="col-md-4" *ngIf="canRemove && hasLesson(lesson)">
+                  <button
+                    type="button"
+                    class="btn btn-danger btn-block mx-1 my-1"
+                    (click)="remove(lesson)"
+                  >
+                    Remove
+                  </button>
+                </div>
+                <div class="col-md-4" *ngIf="canDelete">
+                  <button
+                    type="button"
+                    class="btn btn-danger btn-block mx-1 my-1"
+                    (click)="remove(lesson)"
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             </td>
           </tr>

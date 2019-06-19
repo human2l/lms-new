@@ -13,6 +13,7 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { LmsComponent } from './lms/lms.component';
 import { PersonnelComponent } from './lms/personnel/personnel.component';
@@ -50,6 +51,7 @@ import { LessonEditComponent } from './lms/lesson/lesson-edit/lesson-edit.compon
     PopoverModule.forRoot(),
     ButtonsModule.forRoot(),
     BsDropdownModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     FormsModule,
     BrowserModule,
     AppRoutingModule

@@ -24,6 +24,7 @@ export class LessonComponent implements OnInit {
   //allLessons is all of the lessons available under currentCourse
   allLessons: [] = [];
   currentLessons: [] = [];
+  editLesson = null;
   currentCourse = null;
   loadingCourse = true;
   loadingLesson = true;
@@ -48,27 +49,31 @@ export class LessonComponent implements OnInit {
 
   ngOnInit() {
       this.currentRole = this.userService.getCurrentRole();
-      switch (this.currentRole) {
-        case "Student":
-          this.fetchCurrentCourse();
-          this.fetchAllLessons();
-          this.fetchCurrentLessons();
-          this.canRemove = true;
-          this.canAdd = true;
-          break;
-        case "Tutor":
-          this.fetchCurrentLessons();
-          this.canCreate = true;
-          this.canEdit = true;
-          this.canDelete = true;
-          break;
-        case "Admin":
-          this.fetchAllLessons();
-          break;
-        default:
-          break;
-    }
+      this.fetchData();
     //TODO: when tutor click delete
+  }
+
+  fetchData(){
+    switch (this.currentRole) {
+      case "Student":
+        this.fetchCurrentCourse();
+        this.fetchAllLessons();
+        this.fetchCurrentLessons();
+        this.canRemove = true;
+        this.canAdd = true;
+        break;
+      case "Tutor":
+        this.fetchCurrentLessons();
+        this.canCreate = true;
+        this.canEdit = true;
+        this.canDelete = true;
+        break;
+      case "Admin":
+        this.fetchAllLessons();
+        break;
+      default:
+        break;
+  }
   }
 
   hasLesson(lesson) {
@@ -99,7 +104,7 @@ export class LessonComponent implements OnInit {
 
   remove(lesson) {
     const lessonId = Utils.getIdFromLink(lesson);
-    this.lessonService.deleteOneOfCurrentLessonsById(lessonId).subscribe(
+    this.lessonService.removeOneOfCurrentLessonsById(lessonId).subscribe(
       () => {
         this.fetchCurrentLessons();
       },
@@ -110,7 +115,14 @@ export class LessonComponent implements OnInit {
   }
 
   edit(lesson){
+    this.editLesson = lesson;
     this.editing = true;
+  }
+
+  onLessonSaved(){
+    this.fetchData();
+    this.editing = false;
+    
   }
 
   fetchAllLessons() {
@@ -133,26 +145,17 @@ export class LessonComponent implements OnInit {
   }
 
   fetchCurrentLessons() {
-    if (this.currentRole === "Tutor") {
-      this.lessonService.getTutorLessons().subscribe(
-        currentLessons => {
-          this.currentLessons = currentLessons;
-          this.allLessons = currentLessons;
-        },
-        error => {
-          this.error = error.message;
-        }
-      );
-    } else {
       this.lessonService.getCurrentLessons().subscribe(
         currentLessons => {
           this.currentLessons = currentLessons;
+          if(this.currentRole === "Tutor"){
+            this.allLessons = currentLessons;
+          }
         },
         error => {
           this.error = error.message;
         }
       );
-    }
   }
 
   fetchCurrentCourse() {

@@ -34,12 +34,12 @@ public class Lesson {
 	@Column(name = "description")
 	private String description;
 	@Column(name = "start_date")
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@JsonFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "MM/dd/yyyy")
+	@JsonFormat(pattern = "MM/dd/yyyy")
 	private Date startDate;
 	@Column(name = "end_date")
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@JsonFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "MM/dd/yyyy")
+	@JsonFormat(pattern = "MM/dd/yyyy")
 	private Date endDate;
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "course_id")
