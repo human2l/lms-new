@@ -1,6 +1,6 @@
-<form #lessonEditForm="ngForm" (ngSubmit)="onSaveLesson()">
+<form #lessonEditForm="ngForm" (ngSubmit)="onSaveLesson()" *ngIf="!loading">
   <div class="row justify-content-center">
-    <div class="col-xs-12 col-md-4">
+    <div class="col-md-4">
       <div class="form-group">
         <label for="title">Title:</label>
         <input
@@ -13,7 +13,7 @@
         />
       </div>
     </div>
-    <div class="col-xs-12 col-md-4">
+    <div class="col-md-4">
       <div class="form-group">
         <label for="startDate">Start Date - End Date:</label>
         <input
@@ -29,18 +29,31 @@
       </div>
     </div>
   </div>
+  <div class="row justify-content-center mb-3">
+    <div class="col-md-8">
+      <label for="courseSelector">Course: </label>
+      <input
+        name="courseSelector"
+        [(ngModel)]="selectedCourse"
+        [typeahead]="allCoursesString"
+        class="form-control"
+        autocomplete="off"
+      />
+    </div>
+  </div>
+
   <div class="row justify-content-center">
-    <div class="col-xs-12 col-md-8">
-        <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea
-              name="description"
-              class="form-control"
-              rows="5"
-              [(ngModel)]="description"
-              required
-            ></textarea>
-          </div>
+    <div class="col-md-8">
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea
+          name="description"
+          class="form-control"
+          rows="5"
+          [(ngModel)]="description"
+          required
+        ></textarea>
+      </div>
     </div>
   </div>
   <div class="row justify-content-center">
@@ -50,9 +63,9 @@
       </button>
     </div>
     <div class="col-md-2 pb-3">
-        <button class="btn btn-danger btn-block" (click)="goBack()">
-          Back
-        </button>
-      </div>
+      <button class="btn btn-danger btn-block" (click)="goBack()">
+        Back
+      </button>
+    </div>
   </div>
 </form>

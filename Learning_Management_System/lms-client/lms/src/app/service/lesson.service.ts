@@ -13,18 +13,23 @@ export class LessonService {
   }
 
   getCurrentLessons() {
+    console.log(this.serverUrl + "lms/lessons?role="+this.userService.getCurrentRole().toLowerCase()+"&roleId=" + this.userService.getCurrentUser().roleId);
     return this.http
       .get(
-        this.serverUrl +
-          "lms/" +
-          this.userService.getCurrentRole().toLowerCase() +
-          "s/" +
-          this.userService.getCurrentUser().roleId +
-          "/lessons"
+        // this.serverUrl +
+        //   "lms/" +
+        //   this.userService.getCurrentRole().toLowerCase() +
+        //   "s/" +
+        //   this.userService.getCurrentUser().roleId +
+        //   "/lessons"
+        this.serverUrl + "lms/lessons?role="+this.userService.getCurrentRole().toLowerCase()+"&roleId=" + this.userService.getCurrentUser().roleId
       )
       .pipe(
         map(responseData => {
-          const currentLessons = responseData["_embedded"]["lessons"];
+          console.log("currentlessons");
+          console.log(responseData);
+          // const currentLessons = responseData["_embedded"]["lessons"];
+          const currentLessons = responseData;
           return currentLessons;
         }),
         catchError(errorRes => {
@@ -33,28 +38,13 @@ export class LessonService {
       );
   }
 
-  // getTutorLessons(){
-  //   //TODO: change to tutor's
-  //   //TODO: change to tutor's
-  //   //TODO: change to tutor's
-  //   //TODO: change to tutor's
-  //   //TODO: change to tutor's
-  //   return this.http.get(this.serverUrl + "lms/"+this.userService.getCurrentRole().toLowerCase()+"s/"+this.userService.getCurrentUser().roleId+"/lessons").pipe(
-  //     map(responseData => {
-  //       const currentLessons = responseData["_embedded"]["lessons"];
-  //       return currentLessons;
-  //     }),
-  //     catchError(errorRes => {
-  //       // Send to analytics server
-  //       return throwError(errorRes);
-  //     })
-  //   );
-  // }
-
   getAllLessons() {
     return this.http.get(this.serverUrl + "lms/lessons").pipe(
       map(responseData => {
-        const allLessons = responseData["_embedded"]["lessons"];
+        console.log("alllessons");
+        console.log(responseData);
+        // const allLessons = responseData["_embedded"]["lessons"];
+        const allLessons = responseData;
         return allLessons;
       }),
       catchError(errorRes => {
@@ -117,11 +107,15 @@ export class LessonService {
     );
   }
 
-  updateLesson(lesson){
-    if(lesson.id !== undefined){
-      return this.http.put(this.serverUrl + "lms/lessons/"+lesson.id,lesson)
-    }else{
-      return this.http.post(this.serverUrl + "lms/lessons",lesson)
-    }
+  // updateLesson(lesson){
+  //   if(lesson.id !== undefined){
+  //     return this.http.put(this.serverUrl + "lms/lessons/"+lesson.id,lesson)
+  //   }else{
+  //     return this.http.post(this.serverUrl + "lms/lessons",lesson)
+  //   }
+  // }
+
+  addOrUpdateLesson(lesson){
+    return this.http.post(this.serverUrl + "lms/lessons/updateLesson",lesson);
   }
 }

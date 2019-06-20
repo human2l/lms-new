@@ -22,8 +22,8 @@ export class LessonComponent implements OnInit {
   details = "";
   modalRef: BsModalRef;
   //allLessons is all of the lessons available under currentCourse
-  allLessons: [] = [];
-  currentLessons: [] = [];
+  allLessons;
+  currentLessons;
   editLesson = null;
   currentCourse = null;
   loadingCourse = true;
@@ -112,6 +112,11 @@ export class LessonComponent implements OnInit {
         this.error = error.message;
       }
     );
+  }
+
+  createNewLesson(){
+    this.editLesson = null;
+    this.editing = true;
   }
 
   edit(lesson){

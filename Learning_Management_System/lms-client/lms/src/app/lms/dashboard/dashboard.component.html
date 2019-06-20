@@ -28,7 +28,7 @@
   <div class="col my-3">
     <ng-container *ngIf="!loading && currentLessons !== null">
       <ul
-        class="list-group list-group-flush"
+        class="list-group list-group-flush lesson-list"
         *ngFor="let lesson of currentLessons"
       >
         <li class="list-group-item">{{ lesson.title }}</li>

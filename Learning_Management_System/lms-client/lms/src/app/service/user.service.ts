@@ -24,18 +24,18 @@ export class UserService {
       active: 1,
       admin: null,
       student: null,
-      roleId:3,
+      roleId: 3,
       tutor: {
-          id: 3,
-          user: "62b17674-4770-4b24-945f-af26696dbc40"
+        id: 3,
+        user: "62b17674-4770-4b24-945f-af26696dbc40"
       },
       roles: [
-          {
-              id: 2,
-              role: "Tutor"
-          }
+        {
+          id: 2,
+          role: "Tutor"
+        }
       ]
-  }
+    };
   }
 
   getCurrentUser() {
@@ -91,7 +91,7 @@ export class UserService {
         map(responseData => {
           const currentUser = responseData;
           this.currentUser = this.formatUser(currentUser);
-          console.log("updateUser")
+          console.log("updateUser");
           console.log(this.currentUser);
           return true;
         }),
@@ -102,7 +102,7 @@ export class UserService {
       );
   }
 
-  private formatUser(currentUser){
+  private formatUser(currentUser) {
     switch (currentUser["roles"][0]["role"]) {
       case "Admin":
         currentUser["roleId"] = currentUser["admin"]["id"];

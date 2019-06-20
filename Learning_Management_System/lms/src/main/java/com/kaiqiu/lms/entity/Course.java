@@ -24,9 +24,11 @@ public class Course {
 	private String title;
 	@Column(name = "description")
 	private String description;
+	@JsonIgnore
 	@OneToMany(mappedBy = "course", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
 			CascadeType.REFRESH })
 	private List<Student> students;
+	@JsonIgnore
 	@OneToMany(mappedBy = "course", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
 			CascadeType.REFRESH })
 	private List<Lesson> lessons;
