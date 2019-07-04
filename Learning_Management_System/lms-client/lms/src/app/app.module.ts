@@ -17,7 +17,6 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 import { LmsComponent } from './lms/lms.component';
-import { PersonnelComponent } from './lms/personnel/personnel.component';
 import { ProfileComponent } from './lms/profile/profile.component';
 import { FormsModule } from '@angular/forms';
 
@@ -36,7 +35,6 @@ import { LessonEditComponent } from './lms/lesson/lesson-edit/lesson-edit.compon
     CourseComponent,
     LessonComponent,
     PageNotFoundComponent,
-    PersonnelComponent,
     ProfileComponent,
     DashboardComponent,
     AuthComponent,

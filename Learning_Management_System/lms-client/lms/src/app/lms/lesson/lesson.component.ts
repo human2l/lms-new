@@ -174,4 +174,15 @@ export class LessonComponent implements OnInit {
       }
     );
   }
+
+  delete(lesson){
+    this.lessonService.delete(lesson).subscribe(
+      successRes =>{
+        this.fetchCurrentLessons();
+      },
+      error => {
+        this.error = error;
+      }
+    )
+  }
 }

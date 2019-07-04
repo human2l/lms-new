@@ -1,5 +1,4 @@
 import { AuthGuard } from './auth/auth.guard';
-import { PersonnelComponent } from "./lms/personnel/personnel.component";
 import { ProfileComponent } from "./lms/profile/profile.component";
 import { LessonComponent } from "./lms/lesson/lesson.component";
 import { CourseComponent } from "./lms/course/course.component";
@@ -23,7 +22,6 @@ const routes: Routes = [
       { path: "dashboard", component: DashboardComponent },
       { path: "course", component: CourseComponent },
       { path: "lesson", component: LessonComponent },
-      { path: "personnel", component: PersonnelComponent },
       { path: "profile", component: ProfileComponent },
       //TODO: logout the current session
       { path: "logout", redirectTo: "/auth/login" }

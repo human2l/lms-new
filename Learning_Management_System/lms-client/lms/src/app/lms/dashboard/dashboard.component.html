@@ -24,11 +24,11 @@
     <h5>Your Lessons: <span class="text-primary h3" *ngIf="!loading && (currentLessons === null||currentLessons.length === 0)">You have no lessons.</span></h5>
   </div>
 </div>
-<div class="row">
+<div class="row lesson-list">
   <div class="col my-3">
     <ng-container *ngIf="!loading && currentLessons !== null">
       <ul
-        class="list-group list-group-flush lesson-list"
+        class="list-group list-group-flush"
         *ngFor="let lesson of currentLessons"
       >
         <li class="list-group-item">{{ lesson.title }}</li>

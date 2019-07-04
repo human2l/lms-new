@@ -1,3 +1,4 @@
+import { UserService } from './../../../service/user.service';
 import { LessonService } from "./../../../service/lesson.service";
 import { Component, OnInit, EventEmitter, Output, Input } from "@angular/core";
 import { DateFormatPipe } from "src/app/utils/date-format-pipe";
@@ -26,7 +27,8 @@ export class LessonEditComponent implements OnInit {
   constructor(
     private dateFormatPipe: DateFormatPipe,
     private lessonService: LessonService,
-    private courseService:CourseService
+    private courseService:CourseService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -53,14 +55,24 @@ export class LessonEditComponent implements OnInit {
   }
 
   onSaveLesson() {
-    //pass in COURSE.ID TUTOR.ID
-    this.lessonService.addOrUpdateLesson({
-      id:this.editLesson !== null?Utils.getIdFromLink(this.editLesson):0,
+    // pass in COURSE.ID TUTOR.ID
+    console.log(this.editLesson);
+    console.log({
+      id:this.editLesson !== null?this.editLesson.id:0,
       title: this.title,
       startDate: this.dateFormatPipe.transform(this.bsRangeValue[0]),
       endDate: this.dateFormatPipe.transform(this.bsRangeValue[1]),
       description: this.description
-    }).subscribe(
+      //Asume current user is tutor. Might change in the future design
+    });
+    this.lessonService.addOrUpdateLesson({
+      id:this.editLesson !== null?this.editLesson.id:0,
+      title: this.title,
+      startDate: this.dateFormatPipe.transform(this.bsRangeValue[0]),
+      endDate: this.dateFormatPipe.transform(this.bsRangeValue[1]),
+      description: this.description
+      //Asume current user is tutor. Might change in the future design
+    },this.selectedCourse,this.userService.getCurrentUser().roleId).subscribe(
       responseData =>{
         console.log(this.editLesson);
         this.lessonSaved.emit();

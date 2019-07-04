@@ -115,7 +115,19 @@ export class LessonService {
   //   }
   // }
 
-  addOrUpdateLesson(lesson){
-    return this.http.post(this.serverUrl + "lms/lessons/updateLesson",lesson);
+  addOrUpdateLesson(lesson, courseTitle, tutorId){
+    return this.http.post(this.serverUrl + "lms/lessons?courseTitle=" + courseTitle + "&tutorId=" + tutorId,lesson);
+  }
+
+  delete(lesson){
+    return this.http.delete(
+      this.serverUrl+"lms/lessons/" + lesson.id
+    ).pipe(
+      catchError(
+        errorRes => {
+          return throwError(errorRes);
+        }
+      )
+    )
   }
 }
