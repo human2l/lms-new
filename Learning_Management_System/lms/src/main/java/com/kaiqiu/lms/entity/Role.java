@@ -8,20 +8,20 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="role")
+@Table(name = "role")
 public class Role {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private int id;
-	@Column(name="role")
+	@Column(name = "role")
 	private String role;
-	
+
 	public Role() {
-		
+
 	}
-	
+
 	public Role(int id, String role) {
 		this.id = id;
 		this.role = role;
@@ -47,6 +47,5 @@ public class Role {
 	public String toString() {
 		return "Role [id=" + id + ", role=" + role + "]";
 	}
-	
-	
+
 }

@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { AlertModule } from 'ngx-bootstrap/alert';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { PopoverModule } from 'ngx-bootstrap/popover';
@@ -45,6 +46,7 @@ import { LessonEditComponent } from './lms/lesson/lesson-edit/lesson-edit.compon
   imports: [
     HttpClientModule,
     BrowserAnimationsModule,
+    AlertModule.forRoot(),
     CollapseModule.forRoot(),
     ModalModule.forRoot(),
     PopoverModule.forRoot(),

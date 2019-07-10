@@ -1,0 +1,12 @@
+.bg{
+    background: url(../../assets/study-people.jpg);
+    background-size: cover;
+    background-position:50% 50%;
+    height:50em;
+    width: auto;
+}
+
+.trans{
+    background: transparent;
+    opacity: 0.9;
+}

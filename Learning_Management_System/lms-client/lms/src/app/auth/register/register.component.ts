@@ -12,22 +12,20 @@ export class RegisterComponent implements OnInit {
   @ViewChild("registerForm") registerForm: NgForm;
   currentUser = {firstName:"",lastName:"",email:"",mobile:"",password:"",confirmPassword:""}
   role = "";
+  error;
 
   constructor(private router:Router,private userService:UserService) { }
 
   ngOnInit() {
   }
 
+  //User press register button
   onSubmit(){
     this.userService.registNewUser(this.currentUser,this.role).subscribe(
       responseData => {
-        if(responseData === true){
           this.router.navigate(['/lms'])
-        }else{
-          
-          //TODO:handle error
-          console.log("error");
-        }
+      },error=>{
+        this.error = error;
       }
     );  
   }

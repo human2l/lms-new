@@ -2,6 +2,8 @@ package com.kaiqiu.lms.exception;
 
 public class ResourceAlreadyExistException extends RuntimeException{
 	
+	private static final long serialVersionUID = 2023963488657230400L;
+
 	public ResourceAlreadyExistException() {
 		super();
 	}

@@ -36,9 +36,8 @@ export class DashboardComponent implements OnInit {
       case "Tutor":
         this.fetchCurrentLessons();
         break;
-      case "Admin":
-        //TODO
-        break;
+      // case "Admin":
+      //   break;
       default:
         break;
     }

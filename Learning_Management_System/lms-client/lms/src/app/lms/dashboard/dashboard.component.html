@@ -1,40 +1,49 @@
-<div class="row">
-  <div class="col mt-3">
-    <h3>Dashboard</h3>
-    <hr>
+<div class="container bg-light rounded trans mt-5">
+  <div class="row">
+    <div class="col mt-3">
+      <h3>Dashboard</h3>
+      <hr />
+    </div>
   </div>
-</div>
-<div class="row" *ngIf="showCourse">
-  <div class="col mt-3">
-    <h5>
-      Your Course:
-      <span
-        class="text-primary h3"
-        *ngIf="!loading && currentCourse !== null"
-        >{{ currentCourse.title }}</span
-      >
-      <span class="text-primary h3" *ngIf="!loading && currentCourse === null"
-        >You have no course.</span
-      >
-    </h5>
+  <div class="row" *ngIf="showCourse">
+    <div class="col mt-3">
+      <h5>
+        Your Course:
+        <span
+          class="text-primary h3"
+          *ngIf="!loading && currentCourse !== null"
+          >{{ currentCourse.title }}</span
+        >
+        <span class="text-primary h3" *ngIf="!loading && currentCourse === null"
+          >You have no course.</span
+        >
+      </h5>
+    </div>
   </div>
-</div>
-<div class="row" *ngIf="showLesson">
-  <div class="col mt-3">
-    <h5>Your Lessons: <span class="text-primary h3" *ngIf="!loading && (currentLessons === null||currentLessons.length === 0)">You have no lessons.</span></h5>
+  <div class="row" *ngIf="showLesson">
+    <div class="col mt-3">
+      <h5>
+        Your Lessons:
+        <span
+          class="text-primary h3"
+          *ngIf="
+            !loading && (currentLessons === null || currentLessons.length === 0)
+          "
+          >You have no lessons.</span
+        >
+      </h5>
+    </div>
   </div>
-</div>
-<div class="row lesson-list">
-  <div class="col my-3">
-    <ng-container *ngIf="!loading && currentLessons !== null">
-      <ul
-        class="list-group list-group-flush"
-        *ngFor="let lesson of currentLessons"
-      >
-        <li class="list-group-item">{{ lesson.title }}</li>
-      </ul>
-    </ng-container>
-
-    
+  <div class="row lesson-list">
+    <div class="col my-3">
+      <ng-container *ngIf="!loading && currentLessons !== null">
+        <ul
+          class="list-group list-group-flush"
+          *ngFor="let lesson of currentLessons"
+        >
+          <li class="list-group-item">{{ lesson.title }}</li>
+        </ul>
+      </ng-container>
+    </div>
   </div>
 </div>

@@ -40,26 +40,26 @@ public class AuthController {
 	private TutorRepository tutorRepository;
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-		
-	@PostMapping(value="/registration")
+
+	@PostMapping(value = "/registration")
 	@ResponseBody
 	public Object registration(@RequestBody User newUser, @RequestParam String role) {
 		User foundUser = userRepository.findByEmail(newUser.getEmail());
-		if(foundUser != null) {
+		if (foundUser != null) {
 			throw new ResourceAlreadyExistException();
 		}
 		System.out.println(foundUser);
 		newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
 		Set<Role> roles = new HashSet();
-		Role foundRole = roleRepository.findByRole(role); 
-		if(foundRole == null) {
+		Role foundRole = roleRepository.findByRole(role);
+		if (foundRole == null) {
 			throw new ResourceNotFoundException();
 		}
 		roles.add(foundRole);
-		
+
 		newUser.setRoles(roles);
 		newUser.setActive(1);
-		switch(role) {
+		switch (role) {
 		case "Admin":
 			Admin newAdmin = new Admin();
 			newAdmin.setUser(newUser);
@@ -69,25 +69,25 @@ public class AuthController {
 			newTutor.setUser(newUser);
 			return tutorRepository.save(newTutor);
 		case "Student":
-			Student newStudent = new Student();		
+			Student newStudent = new Student();
 			newStudent.setUser(newUser);
 			return studentRepository.save(newStudent);
 		}
 		return null;
-		
+
 	}
-	
-	@PostMapping(value="/login")
+
+	@PostMapping(value = "/login")
 	@ResponseBody
 	public User login(@RequestBody User loginUser) {
 		User foundUser = userRepository.findByEmail(loginUser.getEmail());
-		if(foundUser!=null) {
-			if(bCryptPasswordEncoder.matches(loginUser.getPassword(), foundUser.getPassword())){
+		if (foundUser != null) {
+			if (bCryptPasswordEncoder.matches(loginUser.getPassword(), foundUser.getPassword())) {
 				return foundUser;
-			}else {
+			} else {
 				throw new PasswordIncorrectException();
 			}
-		}else {
+		} else {
 			throw new UserNotFoundException();
 		}
 	}

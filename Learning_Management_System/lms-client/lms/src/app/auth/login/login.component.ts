@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {}
 
+  //User press login button
   onSubmit() {
     if (this.loginForm.valid) {
       this.userService.login(this.currentUser).subscribe(
@@ -43,6 +44,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  //User press forget password button
   onForgotPassword() {
     console.log("onForgotPassword");
   }

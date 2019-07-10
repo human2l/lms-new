@@ -68,9 +68,9 @@ export class LessonComponent implements OnInit {
         this.canEdit = true;
         this.canDelete = true;
         break;
-      case "Admin":
-        this.fetchAllLessons();
-        break;
+      // case "Admin":
+      //   this.fetchAllLessons();
+      //   break;
       default:
         break;
   }

@@ -4,6 +4,7 @@ import { Component, OnInit, ViewChild, TemplateRef } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
 import { Router } from '@angular/router';
+import { AlertComponent } from 'ngx-bootstrap/alert/alert.component';
 
 @Component({
   selector: "app-profile",
@@ -18,11 +19,33 @@ export class ProfileComponent implements OnInit {
   @ViewChild("passwordForm") passwordForm: NgForm;
   currentUser = null;
   loading = true;
+  alerting = false;
 
   userPassword = {
     newPassword: "",
     confirmPassword: ""
   };
+
+  alerts: any[] = [
+
+  ];
+
+  addAlert(messageType, message): void {
+    this.alerting = true;
+    this.alerts.push({
+      type: messageType,
+      msg: message,
+      timeout: 5000
+    });
+  }
+  
+  onClosedAlert(dismissedAlert: AlertComponent): void {
+    this.alerts = this.alerts.filter(alert => alert !== dismissedAlert);
+    if(this.alerts.length === 0){
+      this.alerting = false;
+    }
+  }
+
 
   constructor(
     private modalService: BsModalService,
@@ -47,10 +70,10 @@ export class ProfileComponent implements OnInit {
   onSubmit() {
     this.userService.updateUser(this.currentUser).subscribe(
       responseData => {
-        //TODO: show success
+        this.addAlert("success", `Profile saved! ${new Date().toLocaleTimeString()}`);
       },
       error=> {
-        //TODO: show error
+        this.addAlert("danger", `Saving failed! Please try again. ${new Date().toLocaleTimeString()}`);
       }
     )
   }

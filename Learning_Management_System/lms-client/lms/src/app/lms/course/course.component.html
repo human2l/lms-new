@@ -1,87 +1,98 @@
-<div class="row">
-  <div class="col my-3">
-    <h3>Course Management</h3>
-    <hr>
-  </div>
-</div>
-<div class="row">
-  <div class="col">
-    <p *ngIf="currentRole === 'Student'">
-      Courses available, choose the course you want!
-    </p>
-    <p *ngIf="currentRole !== 'Student'">All courses shown below: </p>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-4 my-3">
-      <a *ngIf="currentRole === 'Admin'"
-      class="btn-lg btn btn-success btn-block text-white font-weight-bold mb-3"
-        >
-        Add New Course
-      </a>
-    <div class="list-group">
-        
-      <a
-        *ngFor="let course of allCourses"
-        class="list-group-item list-group-item-action"
-        (click)="onSelectCourse(course)"
-        [class.list-group-item-warning]="isCurrentCourse(course)"
-        [class.list-group-item-primary]="isSelectedCourse(course)"
-      >
-        {{ course.title }}
-      </a>
-      
+<div class="container bg-light rounded trans mt-5">
+  <div class="row">
+    <div class="col my-3">
+      <h3>Course Management</h3>
+      <hr />
     </div>
   </div>
-  <div class="col-md-8 my-3">
-    <div class="card" *ngIf="!isCollapsed">
-      <div class="card-header">
-        Description
+  <div class="row">
+    <div class="col">
+      <p *ngIf="currentRole === 'Student'">
+        Courses available, choose the course you want!
+      </p>
+      <p *ngIf="currentRole !== 'Student'">All courses shown below:</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 my-3">
+      <!-- <a
+        *ngIf="currentRole === 'Admin'"
+        class="btn-lg btn btn-success btn-block text-white font-weight-bold mb-3"
+      >
+        Add New Course
+      </a> -->
+      <div class="list-group">
+        <a
+          *ngFor="let course of allCourses"
+          class="list-group-item list-group-item-action"
+          (click)="onSelectCourse(course)"
+          [class.list-group-item-warning]="isCurrentCourse(course)"
+          [class.list-group-item-primary]="isSelectedCourse(course)"
+        >
+          {{ course.title }}
+        </a>
       </div>
-      <div class="card-body">
-        <h5 class="card-title">{{ selectedCourse.title }}</h5>
-        <p *ngIf="currentRole === 'Student' && hasCourse()">(This is your current course)</p>
-        <p class="card-text">{{ selectedCourse.description }}</p>
-        <button
-          class="btn btn-primary"
-          *ngIf="currentRole === 'Student' && !hasCourse() && !isAdmin() && alerting == false"
-          (click)="alerting = true"
-        >
-          Choose and Save
-        </button>
-        <div
-          class="card border-danger"
-          *ngIf="currentRole === 'Student' && !hasCourse() && !isAdmin() && alerting === true"
-        >
-          <div class="card-body text-danger">
-            <p class="card-text">
-              By choosing this course, all lessons from other
-              course will be deselected. Are you sure?
-            </p>
-            <div class="row justify-content-center">
-              <div class="col">
-                <button
-                  class="btn btn-warning btn-block"
-                  (click)="alerting = false"
-                >
-                  Cancel
-                </button>
-              </div>
-              <div class="col">
-                <button
-                  class="btn btn-success btn-block"
-                  (click)="onSaveCourse()"
-                >
-                  Yes
-                </button>
+    </div>
+    <div class="col-md-8 my-3">
+      <div class="card" *ngIf="!isCollapsed">
+        <div class="card-header">
+          Description
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ selectedCourse.title }}</h5>
+          <p *ngIf="currentRole === 'Student' && hasCourse()">
+            (This is your current course)
+          </p>
+          <p class="card-text">{{ selectedCourse.description }}</p>
+          <button
+            class="btn btn-primary"
+            *ngIf="
+              currentRole === 'Student' &&
+              !hasCourse() &&
+              alerting == false
+            "
+            (click)="alerting = true"
+          >
+            Choose and Save
+          </button>
+          <div
+            class="card border-danger"
+            *ngIf="
+              currentRole === 'Student' &&
+              !hasCourse() &&
+              alerting === true
+            "
+          >
+            <div class="card-body text-danger">
+              <p class="card-text">
+                By choosing this course, all lessons from other course will be
+                deselected. Are you sure?
+              </p>
+              <div class="row justify-content-center">
+                <div class="col">
+                  <button
+                    class="btn btn-warning btn-block"
+                    (click)="alerting = false"
+                  >
+                    Cancel
+                  </button>
+                </div>
+                <div class="col">
+                  <button
+                    class="btn btn-success btn-block"
+                    (click)="onSaveCourse()"
+                  >
+                    Yes
+                  </button>
+                </div>
               </div>
             </div>
           </div>
+          <!-- <button class="btn btn-warning" *ngIf="isAdmin()" (click)="onEdit()">
+            Edit
+          </button> -->
         </div>
-        <button class="btn btn-warning" *ngIf="isAdmin()" (click)="onEdit()">
-          Edit
-        </button>
       </div>
     </div>
   </div>

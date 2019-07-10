@@ -1,3 +1,7 @@
+.trans{
+    background: transparent;
+    opacity: 0.9;
+}
 .lesson-list{
     height:400px;
 }

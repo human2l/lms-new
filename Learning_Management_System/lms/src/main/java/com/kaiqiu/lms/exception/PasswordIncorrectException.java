@@ -2,6 +2,8 @@ package com.kaiqiu.lms.exception;
 
 public class PasswordIncorrectException extends RuntimeException{
 	
+	private static final long serialVersionUID = 8820486876722381739L;
+
 	public PasswordIncorrectException() {
 		super();
 	}

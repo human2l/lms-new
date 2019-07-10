@@ -25,15 +25,6 @@ export class LmsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.userService.getCurrentUser().subscribe(
-    //   responseData => {
-    //     this.currentUser = responseData;
-    //     this.loading = false;
-    //   },
-    //   error => {
-    //     this.error = error;
-    //   }
-    // );
     this.currentUser = this.userService.getCurrentUser();
       this.loading = false;
   }

@@ -17,29 +17,29 @@ import com.kaiqiu.lms.exception.UserNotFoundException;
 public class GlobalExceptionHandler {
 	@ExceptionHandler
 	public ResponseEntity<Map<String, String>> notFoundHandler(ResourceNotFoundException e) {
-		 Map<String, String> response = new HashMap<String, String>();
-	        response.put("message", "Not Found");
-	        return new ResponseEntity<Map<String, String>>(response, HttpStatus.NOT_FOUND);
+		Map<String, String> response = new HashMap<String, String>();
+		response.put("message", "Not Found");
+		return new ResponseEntity<Map<String, String>>(response, HttpStatus.NOT_FOUND);
 	}
-	
+
 	@ExceptionHandler
 	public ResponseEntity<Map<String, String>> userNotFoundHandler(UserNotFoundException e) {
-		 Map<String, String> response = new HashMap<String, String>();
-	        response.put("message", "User Not Found");
-	        return new ResponseEntity<Map<String, String>>(response, HttpStatus.UNAUTHORIZED);
+		Map<String, String> response = new HashMap<String, String>();
+		response.put("message", "User Not Found");
+		return new ResponseEntity<Map<String, String>>(response, HttpStatus.UNAUTHORIZED);
 	}
-	
+
 	@ExceptionHandler
 	public ResponseEntity<Map<String, String>> passwordIncorrectHandler(PasswordIncorrectException e) {
-		 Map<String, String> response = new HashMap<String, String>();
-	        response.put("message", "Password Incorrect");
-	        return new ResponseEntity<Map<String, String>>(response, HttpStatus.UNAUTHORIZED);
+		Map<String, String> response = new HashMap<String, String>();
+		response.put("message", "Password Incorrect");
+		return new ResponseEntity<Map<String, String>>(response, HttpStatus.UNAUTHORIZED);
 	}
-	
+
 	@ExceptionHandler
 	public ResponseEntity<Map<String, String>> resourceAlreadyExistHandler(ResourceAlreadyExistException e) {
-		 Map<String, String> response = new HashMap<String, String>();
-	        response.put("message", "Resource Already Exist");
-	        return new ResponseEntity<Map<String, String>>(response, HttpStatus.CONFLICT);
+		Map<String, String> response = new HashMap<String, String>();
+		response.put("message", "Resource Already Exist");
+		return new ResponseEntity<Map<String, String>>(response, HttpStatus.CONFLICT);
 	}
 }

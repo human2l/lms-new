@@ -8,10 +8,9 @@ import {
   } from '@angular/router';
   import { Injectable } from '@angular/core';
   import { Observable } from 'rxjs';
-  import { map, tap, take } from 'rxjs/operators';
   
 
-  
+  //Check if current user is null. If so, redirect to login page
   @Injectable({ providedIn: 'root' })
   export class AuthGuard implements CanActivate {
     constructor(private userService:UserService, private router: Router) {}

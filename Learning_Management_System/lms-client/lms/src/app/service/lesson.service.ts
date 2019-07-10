@@ -12,23 +12,14 @@ export class LessonService {
     this.serverUrl = Utils.serverUrl;
   }
 
+  //Get current role's lesson. Role can be student or tutor
   getCurrentLessons() {
-    console.log(this.serverUrl + "lms/lessons?role="+this.userService.getCurrentRole().toLowerCase()+"&roleId=" + this.userService.getCurrentUser().roleId);
     return this.http
       .get(
-        // this.serverUrl +
-        //   "lms/" +
-        //   this.userService.getCurrentRole().toLowerCase() +
-        //   "s/" +
-        //   this.userService.getCurrentUser().roleId +
-        //   "/lessons"
         this.serverUrl + "lms/lessons?role="+this.userService.getCurrentRole().toLowerCase()+"&roleId=" + this.userService.getCurrentUser().roleId
       )
       .pipe(
         map(responseData => {
-          console.log("currentlessons");
-          console.log(responseData);
-          // const currentLessons = responseData["_embedded"]["lessons"];
           const currentLessons = responseData;
           return currentLessons;
         }),
@@ -38,22 +29,20 @@ export class LessonService {
       );
   }
 
+  //Get ALL lessons in database.
   getAllLessons() {
     return this.http.get(this.serverUrl + "lms/lessons").pipe(
       map(responseData => {
-        console.log("alllessons");
-        console.log(responseData);
-        // const allLessons = responseData["_embedded"]["lessons"];
         const allLessons = responseData;
         return allLessons;
       }),
       catchError(errorRes => {
-        // Send to analytics server
         return throwError(errorRes);
       })
     );
   }
 
+  //Get all lessons belong to one specific course
   getAllLessonsOfOneCourse(course) {
     const id = Utils.getIdFromLink(course);
     return this.http
@@ -64,12 +53,13 @@ export class LessonService {
           return currentLessons;
         }),
         catchError(errorRes => {
-          // Send to analytics server
           return throwError(errorRes);
         })
       );
   }
 
+  //input: lesson id
+  //Add one lesson to the current user's lesson list
   addOneLessonToCurrentLessonsById(id: number) {
     return this.http.post(
       this.serverUrl +
@@ -83,6 +73,7 @@ export class LessonService {
     );
   }
 
+  //Clear up all current lessons from one specific role
   removeAllCurrentLessons() {
     return this.http.put(
       this.serverUrl +

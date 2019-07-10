@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -20,19 +19,16 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerator;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@Table(name="user")
+@Table(name = "user")
 @JsonIdentityInfo(generator = ObjectIdGenerators.StringIdGenerator.class, property = "id")
 public class User {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private int id;
 	@Column(name = "first_name")
 	@NotEmpty(message = "*Please provide your first name")
@@ -42,37 +38,32 @@ public class User {
 	private String lastName;
 	@Column(name = "email")
 	@Email(message = "*Please provide a valid Email")
-    @NotEmpty(message = "*Please provide an email")
+	@NotEmpty(message = "*Please provide an email")
 	private String email;
 	@Column(name = "password")
 	@Length(min = 5, message = "*Your password must have at least 5 characters")
-    @NotEmpty(message = "*Please provide your password")
+	@NotEmpty(message = "*Please provide your password")
 	private String password;
 	@Column(name = "mobile")
 	private String mobile;
 	@Column(name = "active")
 	private int active;
-	@OneToOne(mappedBy = "user",
-			cascade= {CascadeType.ALL})
-			@JoinColumn(name = "admin_id")
+	@OneToOne(mappedBy = "user", cascade = { CascadeType.ALL })
+	@JoinColumn(name = "admin_id")
 	private Admin admin;
-	@OneToOne(mappedBy = "user",
-	cascade= {CascadeType.ALL})
+	@OneToOne(mappedBy = "user", cascade = { CascadeType.ALL })
 	@JoinColumn(name = "student_id")
 	private Student student;
-	@OneToOne(mappedBy = "user",
-			cascade= {CascadeType.ALL})
-			@JoinColumn(name = "tutor_id")
+	@OneToOne(mappedBy = "user", cascade = { CascadeType.ALL })
+	@JoinColumn(name = "tutor_id")
 	private Tutor tutor;
-	@ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
-	
-	public User() {
-		
-	}
 
-	
+	public User() {
+
+	}
 
 	public User(int id, String firstName, String lastName, String email, String password, String mobile, int active) {
 		this.id = id;
@@ -83,8 +74,6 @@ public class User {
 		this.mobile = mobile;
 		this.active = active;
 	}
-
-
 
 	public String getFirstName() {
 		return firstName;
@@ -165,8 +154,6 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-	
-	
 
 	public int getActive() {
 		return active;
@@ -182,7 +169,4 @@ public class User {
 				+ ", password=" + password + ", mobile=" + mobile + ", active=" + active + "]";
 	}
 
-	
-	
-	
 }

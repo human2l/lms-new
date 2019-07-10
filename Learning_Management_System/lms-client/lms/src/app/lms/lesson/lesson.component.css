@@ -1,3 +1,7 @@
 .table-lesson {
     height:400px;
 }
+.trans{
+    background: transparent;
+    opacity: 0.9;
+}

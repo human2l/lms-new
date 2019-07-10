@@ -19,18 +19,14 @@ export class CourseComponent implements OnInit {
   selectedCourse = null;
   currentCourse = null;
   alerting = false;
-  // canAdd = false;
   currentRole = "";
   constructor(private lmsService: LmsService, private lessonService:LessonService, private courseService: CourseService, private userService:UserService,private router:Router) {}
 
   ngOnInit() {
-    //TODO fetch currentrole, subscribe => if student => fetch current course
     this.fetchCurrentRole();
     this.fetchAllCourses();
     if(this.currentRole === "Student")
     this.fetchCurrentCourse();
-    //need to modify when use http
-    // this.canAdd = this.userService.getCurrentRole() !== "student";
   }
 
   onSelectCourse(course) {
@@ -65,13 +61,15 @@ export class CourseComponent implements OnInit {
       this.alerting = false;
   }
 
-  isAdmin() {
-    return this.userService.getCurrentRole() === "admin";
-  }
+  //Admin function
+  // isAdmin() {
+  //   return this.userService.getCurrentRole() === "admin";
+  // }
 
-  onEdit() {
-    //TODO: edit the course selected
-  }
+  //Admin function
+  // onEdit() {
+  //   //TODO: edit the course selected
+  // }
 
   fetchAllCourses() {
     this.courseService.getAllCourses().subscribe(
@@ -84,6 +82,7 @@ export class CourseComponent implements OnInit {
     );
   }
 
+  //Get the current user's course
   fetchCurrentCourse() {
     this.courseService.getCurrentCourse().subscribe(
       currentCourse => {
@@ -96,13 +95,18 @@ export class CourseComponent implements OnInit {
   }
 
   fetchCurrentRole(){
-    //TODO:modify
     this.currentRole = this.userService.getCurrentRole();
   }
 
+
   deleteAllCurrentLessons(){
     this.lessonService.removeAllCurrentLessons().subscribe(
-      ()=> console.log("deleted")
+      responseData => {
+
+      },
+      error =>{
+        this.error = error.message;
+      }
     )
   }
 }

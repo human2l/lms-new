@@ -2,6 +2,8 @@ package com.kaiqiu.lms.exception;
 
 public class UserNotFoundException extends RuntimeException{
 	
+	private static final long serialVersionUID = -8530761694365686794L;
+
 	public UserNotFoundException() {
 		super();
 	}

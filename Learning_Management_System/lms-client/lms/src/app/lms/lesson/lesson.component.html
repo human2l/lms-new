@@ -1,113 +1,118 @@
-<div class="row mt-3">
-  <div class="col my-3">
-    <h3>Lesson Management</h3>
-    <hr />
-  </div>
-</div>
-<div *ngIf="editing">
-  <app-lesson-edit (editCanceled)="editing = false"
-  (lessonSaved)="onLessonSaved($event)"
-  [editLesson] = "editLesson"
-  ></app-lesson-edit>
-</div>
-
-<div *ngIf="!editing">
-  <div class="row" *ngIf="canCreate">
-    <div class="col">
-      <button class="btn btn-success" (click)="createNewLesson()">Create New Lesson</button>
-    </div>
-  </div>
+<div class="container bg-light rounded trans mt-5">
   <div class="row mt-3">
-    <div class="col">
-      <div
-        class="row justify-content-start"
-        *ngIf="currentRole === 'Student' && !loadingCourse"
-      >
-        <div class="col-sm-3">
-          <p>Available lessons for course:</p>
-        </div>
-        <div class="col-sm-3">
-          <h5 class="text-weight-bold text-primary">
-            {{ currentCourse.title }}
-          </h5>
-        </div>
+    <div class="col my-3">
+      <h3>Lesson Management</h3>
+      <hr />
+    </div>
+  </div>
+  <div *ngIf="editing">
+    <app-lesson-edit
+      (editCanceled)="editing = false"
+      (lessonSaved)="onLessonSaved($event)"
+      [editLesson]="editLesson"
+    ></app-lesson-edit>
+  </div>
+
+  <div *ngIf="!editing">
+    <div class="row" *ngIf="canCreate">
+      <div class="col">
+        <button class="btn btn-success" (click)="createNewLesson()">
+          Create New Lesson
+        </button>
       </div>
-      <div class="row justify-content-start" *ngIf="currentRole === 'Tutor'">
-        <div class="col-sm-3">
-          <p>All lessons you are teaching:</p>
+    </div>
+    <div class="row mt-3">
+      <div class="col">
+        <div
+          class="row justify-content-start"
+          *ngIf="currentRole === 'Student' && !loadingCourse"
+        >
+          <div class="col-sm-3">
+            <p>Available lessons for course:</p>
+          </div>
+          <div class="col-sm-3">
+            <h5 class="text-weight-bold text-primary">
+              {{ currentCourse.title }}
+            </h5>
+          </div>
+        </div>
+        <div class="row justify-content-start" *ngIf="currentRole === 'Tutor'">
+          <div class="col-sm-3">
+            <p>All lessons you are teaching:</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="table-responsive table-lesson px-3">
-      <table class="table table-hover table-bordered">
-        <thead>
-          <tr>
-            <th *ngFor="let head of lessonHeader" scope="col">{{ head }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            *ngFor="let lesson of allLessons"
-            [ngClass]="hasLesson(lesson) ? 'table-warning' : ''"
-          >
-            <th scope="row">{{ lesson.title }}</th>
-            <td>{{ lesson.startDate }}</td>
-            <td>{{ lesson.endDate }}</td>
-            <td>
-              <div class="row justify-content-start">
-                <div class="col-md-4">
-                  <button
-                    type="button"
-                    class="btn btn-primary btn-block mx-1 my-1"
-                    (click)="showDetails(template, lesson)"
-                  >
-                    Details
-                  </button>
+    <div class="row">
+      <div class="table-responsive table-lesson px-3">
+        <table class="table table-hover table-bordered">
+          <thead>
+            <tr>
+              <th *ngFor="let head of lessonHeader" scope="col">{{ head }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let lesson of allLessons"
+              [ngClass]="hasLesson(lesson) ? 'table-warning' : ''"
+            >
+              <th scope="row">{{ lesson.title }}</th>
+              <td>{{ lesson.startDate }}</td>
+              <td>{{ lesson.endDate }}</td>
+              <td>
+                <div class="row justify-content-start">
+                  <div class="col-md-4">
+                    <button
+                      type="button"
+                      class="btn btn-primary btn-block mx-1 my-1"
+                      (click)="showDetails(template, lesson)"
+                    >
+                      Details
+                    </button>
+                  </div>
+                  <div class="col-md-4" *ngIf="canAdd && !hasLesson(lesson)">
+                    <button
+                      type="button"
+                      class="btn btn-success btn-block mx-1 my-1"
+                      (click)="add(lesson)"
+                    >
+                      Add
+                    </button>
+                  </div>
+                  <div class="col-md-4" *ngIf="canEdit">
+                    <button
+                      type="button"
+                      class="btn btn-warning btn-block mx-1 my-1"
+                      (click)="edit(lesson)"
+                    >
+                      Edit
+                    </button>
+                  </div>
+                  <div class="col-md-4" *ngIf="canRemove && hasLesson(lesson)">
+                    <button
+                      type="button"
+                      class="btn btn-danger btn-block mx-1 my-1"
+                      (click)="remove(lesson)"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                  <div class="col-md-4" *ngIf="canDelete">
+                    <button
+                      type="button"
+                      class="btn btn-danger btn-block mx-1 my-1"
+                      (click)="delete(lesson)"
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
-                <div class="col-md-4" *ngIf="canAdd && !hasLesson(lesson)">
-                  <button
-                    type="button"
-                    class="btn btn-success btn-block mx-1 my-1"
-                    (click)="add(lesson)"
-                  >
-                    Add
-                  </button>
-                </div>
-                <div class="col-md-4" *ngIf="canEdit">
-                  <button
-                    type="button"
-                    class="btn btn-warning btn-block mx-1 my-1"
-                    (click)="edit(lesson)"
-                  >
-                    Edit
-                  </button>
-                </div>
-                <div class="col-md-4" *ngIf="canRemove && hasLesson(lesson)">
-                  <button
-                    type="button"
-                    class="btn btn-danger btn-block mx-1 my-1"
-                    (click)="remove(lesson)"
-                  >
-                    Remove
-                  </button>
-                </div>
-                <div class="col-md-4" *ngIf="canDelete">
-                  <button
-                    type="button"
-                    class="btn btn-danger btn-block mx-1 my-1"
-                    (click)="delete(lesson)"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

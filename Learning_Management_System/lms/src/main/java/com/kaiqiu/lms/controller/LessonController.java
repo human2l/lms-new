@@ -36,7 +36,6 @@ public class LessonController {
 	@GetMapping(value = "/lms/lessons", params = { "role", "roleId" })
 	@ResponseBody
 	public List<Lesson> getCurrentLessons(@RequestParam String role, @RequestParam int roleId) {
-		// TODO: admin
 		switch (role) {
 		case "tutor":
 			return this.lessonRepository.findByTutor_Id(roleId);
