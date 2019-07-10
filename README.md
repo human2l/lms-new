@@ -66,3 +66,14 @@ ng serve
 * open your browser, enter url: http://localhost:4200 It will directly heading to http://localhost:4200/auth/login page.
 
 ## Techniques:
+
+## TODO:
+### System:
+* Add function to user role: Admin
+### Front End:
+* Forgot password page
+### Back End:
+* csrf
+* cors
+* end point security
+
