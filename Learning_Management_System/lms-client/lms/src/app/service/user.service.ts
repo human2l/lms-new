@@ -53,11 +53,8 @@ export class UserService {
       .pipe(
         map(responseData => {
           const responseUser = responseData["user"];
-          // delete responseUser.password;
           responseUser.roleId = responseData["id"];
           this.currentUser = responseUser;
-          console.log("register");
-          console.log(this.currentUser);
           return true;
         }),
         catchError(errorRes => {

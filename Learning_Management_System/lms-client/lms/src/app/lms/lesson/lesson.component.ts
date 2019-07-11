@@ -97,7 +97,7 @@ export class LessonComponent implements OnInit {
         this.fetchCurrentLessons();
       },
       error => {
-        this.error = error.message;
+        this.error = error;
       }
     );
   }
@@ -109,7 +109,7 @@ export class LessonComponent implements OnInit {
         this.fetchCurrentLessons();
       },
       error => {
-        this.error = error.message;
+        this.error = error;
       }
     );
   }
@@ -139,12 +139,12 @@ export class LessonComponent implements OnInit {
               this.allLessons = allLessons;
             },
             error => {
-              this.error = error.message;
+              this.error = error;
             }
           );
         },
         error => {
-          this.error = error.message;
+          this.error = error;
         }
       );
   }
@@ -158,7 +158,7 @@ export class LessonComponent implements OnInit {
           }
         },
         error => {
-          this.error = error.message;
+          this.error = error;
         }
       );
   }
@@ -170,7 +170,7 @@ export class LessonComponent implements OnInit {
         this.loadingCourse = false;
       },
       error => {
-        this.error = error.message;
+        this.error = error;
       }
     );
   }

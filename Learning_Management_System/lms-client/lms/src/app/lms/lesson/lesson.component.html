@@ -41,10 +41,17 @@
             <p>All lessons you are teaching:</p>
           </div>
         </div>
+        <div class="row justify-content-start" *ngIf="currentCourse === null">
+          <div class="col-sm-6">
+            <p>You do not have any course now.</p>
+            <br>
+            <p>You have to choose your course before lesson selection.</p>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="row">
+    <div class="row" *ngIf="currentRole === 'Tutor'|| currentCourse !== null">
       <div class="table-responsive table-lesson px-3">
         <table class="table table-hover table-bordered">
           <thead>
@@ -62,7 +69,7 @@
               <td>{{ lesson.endDate }}</td>
               <td>
                 <div class="row justify-content-start">
-                  <div class="col-md-4">
+                  <div class="col-lg-6">
                     <button
                       type="button"
                       class="btn btn-primary btn-block mx-1 my-1"
@@ -71,7 +78,7 @@
                       Details
                     </button>
                   </div>
-                  <div class="col-md-4" *ngIf="canAdd && !hasLesson(lesson)">
+                  <div class="col-lg-6" *ngIf="canAdd && !hasLesson(lesson)">
                     <button
                       type="button"
                       class="btn btn-success btn-block mx-1 my-1"
@@ -80,7 +87,7 @@
                       Add
                     </button>
                   </div>
-                  <div class="col-md-4" *ngIf="canEdit">
+                  <div class="col-lg-6" *ngIf="canEdit">
                     <button
                       type="button"
                       class="btn btn-warning btn-block mx-1 my-1"
@@ -89,7 +96,7 @@
                       Edit
                     </button>
                   </div>
-                  <div class="col-md-4" *ngIf="canRemove && hasLesson(lesson)">
+                  <div class="col-lg-6" *ngIf="canRemove && hasLesson(lesson)">
                     <button
                       type="button"
                       class="btn btn-danger btn-block mx-1 my-1"
@@ -98,7 +105,7 @@
                       Remove
                     </button>
                   </div>
-                  <div class="col-md-4" *ngIf="canDelete">
+                  <div class="col-lg-6" *ngIf="canDelete">
                     <button
                       type="button"
                       class="btn btn-danger btn-block mx-1 my-1"

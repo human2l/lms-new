@@ -3,8 +3,8 @@ import { LmsService } from "./../../service/lms.service";
 import { Component, OnInit, ViewChild, TemplateRef } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
-import { Router } from '@angular/router';
-import { AlertComponent } from 'ngx-bootstrap/alert/alert.component';
+import { Router } from "@angular/router";
+import { AlertComponent } from "ngx-bootstrap/alert/alert.component";
 
 @Component({
   selector: "app-profile",
@@ -26,9 +26,7 @@ export class ProfileComponent implements OnInit {
     confirmPassword: ""
   };
 
-  alerts: any[] = [
-
-  ];
+  alerts: any[] = [];
 
   addAlert(messageType, message): void {
     this.alerting = true;
@@ -38,24 +36,23 @@ export class ProfileComponent implements OnInit {
       timeout: 5000
     });
   }
-  
+
   onClosedAlert(dismissedAlert: AlertComponent): void {
     this.alerts = this.alerts.filter(alert => alert !== dismissedAlert);
-    if(this.alerts.length === 0){
+    if (this.alerts.length === 0) {
       this.alerting = false;
     }
   }
-
 
   constructor(
     private modalService: BsModalService,
     private lmsService: LmsService,
     private userService: UserService,
-    private router:Router
+    private router: Router
   ) {}
 
   ngOnInit() {
-      this.fetchCurrentUser();
+    this.fetchCurrentUser();
   }
 
   fetchCurrentUser() {
@@ -70,22 +67,32 @@ export class ProfileComponent implements OnInit {
   onSubmit() {
     this.userService.updateUser(this.currentUser).subscribe(
       responseData => {
-        this.addAlert("success", `Profile saved! ${new Date().toLocaleTimeString()}`);
+        this.addAlert(
+          "success",
+          `Profile saved! ${new Date().toLocaleTimeString()}`
+        );
       },
-      error=> {
-        this.addAlert("danger", `Saving failed! Please try again. ${new Date().toLocaleTimeString()}`);
+      error => {
+        this.addAlert(
+          "danger",
+          `Saving failed! Please try again. ${new Date().toLocaleTimeString()}`
+        );
       }
-    )
+    );
   }
 
-  onSavePassword(){
-    //TODO: password validation
-    this.currentUser.password = this.userPassword.newPassword;
-    if (!this.modalRef) {
+  onSavePassword() {
+    if (this.userPassword.newPassword !== this.userPassword.confirmPassword) {
       return;
+    } else if (this.userPassword.newPassword === "") {
+      return;
+    } else {
+      this.currentUser.password = this.userPassword.newPassword;
+      if (!this.modalRef) {
+        return;
+      }
+      this.modalRef.hide();
+      this.modalRef = null;
     }
- 
-    this.modalRef.hide();
-    this.modalRef = null;
   }
 }

@@ -34,14 +34,13 @@
       </h5>
     </div>
   </div>
-  <div class="row lesson-list">
+  <div class="row">
     <div class="col my-3">
       <ng-container *ngIf="!loading && currentLessons !== null">
-        <ul
-          class="list-group list-group-flush"
-          *ngFor="let lesson of currentLessons"
-        >
-          <li class="list-group-item">{{ lesson.title }}</li>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" *ngFor="let lesson of currentLessons">
+            {{ lesson.title }}
+          </li>
         </ul>
       </ng-container>
     </div>

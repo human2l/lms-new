@@ -2,6 +2,7 @@
     background: transparent;
     opacity: 0.9;
 }
-.lesson-list{
-    height:400px;
+.list-group{
+    max-height: 350px;
+    overflow:scroll;
 }

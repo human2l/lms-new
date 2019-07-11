@@ -80,7 +80,9 @@ public class AuthController {
 	@PostMapping(value = "/login")
 	@ResponseBody
 	public User login(@RequestBody User loginUser) {
+		System.out.println(loginUser);
 		User foundUser = userRepository.findByEmail(loginUser.getEmail());
+		System.out.println(foundUser);
 		if (foundUser != null) {
 			if (bCryptPasswordEncoder.matches(loginUser.getPassword(), foundUser.getPassword())) {
 				return foundUser;
