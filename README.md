@@ -5,13 +5,19 @@ There used to be an old lms system build with AngularJs, MySql and Spring REST.
 
 After refactoring, the new lms system is built by Angular7, MySql and Spring Data Jpa with REST.
 
+Note: For now I have not develop functions for Admin. So all of the below features about admin does not work. I will update it in the future.
 
-### Roles:
+
+## ER Diagram
+![Alt Text](/document/lms-new_ERD.jpg)
+
+## Roles:
 There are 3 roles in this system: admin, student and tutor.  
 Admin: Manage all other users with role student and tutor.  
 Student: Manage course and lessons he/she has.   
 Tutor: Manage all the lessons he/she taught.  
 
+## Feature:
 ### Dashboard:
 * Student: 
 Can view his/her selected course and lessons from course/lesson management page.
@@ -21,8 +27,7 @@ Can view his/her selected course and lessons from course/lesson management page.
 Can view all courses in LMS.
 Can select one of the courses to save as his/her course.
 * Tutor:
-
-  
+Can view all courses in LMS.
 
 ### Lesson Management:  
 *  Student:  
@@ -42,9 +47,10 @@ Can select one of the courses to save as his/her course.
     Modify one or more lessons.  
 
 ### Personnel Management:  
+Admin function, undeveloped for now.
 
 ### Profile Management:  
-All kinds of users (student, tutor and admin) can view => edit => save their profile. They can reset their password.
+All kinds of users (student, tutor) can view => edit => save their profile. They can reset their password.
 
 ### Authentication:  
 * Login form: All user should login before access to the management system.
@@ -68,11 +74,16 @@ ng serve
 ## Techniques:
 
 ## TODO:
+
 ### System:
 * Add function to user role: Admin
+* Register form validation
+
 ### Front End:
 * Forgot password page
+
 ### Back End:
+* Server side validation
 * csrf
 * cors
 * end point security
