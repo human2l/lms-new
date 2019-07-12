@@ -13,14 +13,17 @@ Note: For now I have not develop functions for Admin. So all of the below featur
 
 ## Roles:
 There are 3 roles in this system: admin, student and tutor.  
-Admin: Manage all other users with role student and tutor.  
-Student: Manage course and lessons he/she has.   
-Tutor: Manage all the lessons he/she taught.  
+Admin(available in the future): Manage all other users with role student and tutor.  
+Student: Manage course and lessons they has.   
+Tutor: Manage all the lessons they taught.  
 
 ## Feature:
 ### Dashboard:
 * Student: 
-Can view his/her selected course and lessons from course/lesson management page.
+Can view they selected course and lessons from course/lesson management page.
+* Tutor:
+Can view all the lessons they are responsible for.
+* Admin(available in the future):N/A
 
 ### Course Management:
 *  Student: 
@@ -28,25 +31,26 @@ Can view all courses in LMS.
 Can select one of the courses to save as his/her course.
 * Tutor:
 Can view all courses in LMS.
+* Admin(available in the future):N/A
 
 ### Lesson Management:  
 *  Student:  
-    View all of the lessons under his/her course.  
-    View all of the lessons he/she have chosen.  
-    Choose one or more lessons as their lessons about to study.  
-    Remove one or more lessons from their lesson list.  
+    View all of the lessons belong to their course.  
+    View all of the lessons they have chosen.  
+    Select one or more lessons to their lesson-list for studying.  
+    Remove one or more lessons from their lesson-list.  
 *  Tutor:  
-    View all of the lessons he teach.  
-    Create new lesson under one specific course.  
+    View all of the lessons they teach.  
+    Create new lessons to a course.  
     Delete one or more of lessons he teach.  
     Modify one or more of lessons he teach.  
-*  Admin:  
-    View all of the lessons.  
-    Create one new lesson and assign to a tutor.  
-    Delete one or more lessons.  
-    Modify one or more lessons.  
+*  Admin: N/A  
+    ~~View all of the lessons.  
+    ~~Create one new lesson and assign to a tutor.  
+    ~~Delete one or more lessons.  
+    ~~Modify one or more lessons.  
 
-### Personnel Management:  
+### Personnel Management: N/A 
 Admin function, undeveloped for now.
 
 ### Profile Management:  
@@ -72,6 +76,29 @@ ng serve
 * open your browser, enter url: http://localhost:4200 It will directly heading to http://localhost:4200/auth/login page.
 
 ## Techniques:
+### Front End:
+* Using Angular 7 framework
+* Single-page web app
+* Using bootstrap + ngx-bootstrap for style
+
+### Back End:
+* Springboot
+* Restful api
+* Spring Data JPA
+* Spring Security
+* Spring WebMVC
+
+### Database:
+* MySQL 8
+
+### Tools:
+* Eclipse
+* Visual Studio Code
+* Chrome
+* MySQLworkbench
+* Postman
+* Github
+* npm
 
 ## TODO:
 
@@ -86,5 +113,5 @@ ng serve
 * Server side validation
 * csrf
 * cors
-* end point security
+* end-point(path) security
 
