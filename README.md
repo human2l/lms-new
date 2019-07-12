@@ -110,10 +110,13 @@ ng serve
 ### Front End:
 * Forgot password page
 * Use JWT to store "session" in local storage
+* Fix bug: collapsed navbar could not shown the children dropdown list correctly. Should not use ngx-bootstrap's drop down list.
 
 ### Back End:
 * Server side validation
 * csrf
 * cors
 * end-point(path) security
+
+
 
