@@ -19,6 +19,8 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 
+	//POST: /udateUser
+	//Update user properties
 	@PostMapping(value = "/updateUser")
 	@ResponseBody
 	public User updateUser(@RequestBody User user, @RequestParam String email) {

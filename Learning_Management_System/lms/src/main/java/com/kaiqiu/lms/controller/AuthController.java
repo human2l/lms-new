@@ -48,7 +48,6 @@ public class AuthController {
 		if (foundUser != null) {
 			throw new ResourceAlreadyExistException();
 		}
-		System.out.println(foundUser);
 		newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
 		Set<Role> roles = new HashSet();
 		Role foundRole = roleRepository.findByRole(role);
@@ -80,9 +79,7 @@ public class AuthController {
 	@PostMapping(value = "/login")
 	@ResponseBody
 	public User login(@RequestBody User loginUser) {
-		System.out.println(loginUser);
 		User foundUser = userRepository.findByEmail(loginUser.getEmail());
-		System.out.println(foundUser);
 		if (foundUser != null) {
 			if (bCryptPasswordEncoder.matches(loginUser.getPassword(), foundUser.getPassword())) {
 				return foundUser;

@@ -33,6 +33,8 @@ public class LessonController {
 		return lessonRepository.findAll();
 	}
 
+	//GET: /lms/lessons
+	//Get lesson list of user base on userRole
 	@GetMapping(value = "/lms/lessons", params = { "role", "roleId" })
 	@ResponseBody
 	public List<Lesson> getCurrentLessons(@RequestParam String role, @RequestParam int roleId) {
@@ -47,6 +49,8 @@ public class LessonController {
 		}
 	}
 
+	//POST: /lms/lessons
+	//Add or update a lesson
 	@PostMapping(value = "/lms/lessons", params = { "courseTitle", "tutorId" })
 	@ResponseBody
 	public Lesson addOrUpdateLesson(@RequestBody Lesson submitLesson, @RequestParam String courseTitle,

@@ -1,7 +1,6 @@
 import { UserService } from './../../service/user.service';
 import { CourseService } from './../../service/course.service';
 import { LessonService } from './../../service/lesson.service';
-import { LmsService } from "./../../service/lms.service";
 import { Component, OnInit } from "@angular/core";
 import { Utils } from "src/app/utils/utils";
 import { Router } from '@angular/router';
@@ -9,8 +8,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: "app-course",
   templateUrl: "./course.component.html",
-  styleUrls: ["./course.component.css"],
-  providers: [LmsService]
+  styleUrls: ["./course.component.css"]
 })
 export class CourseComponent implements OnInit {
   error = null;
@@ -20,7 +18,7 @@ export class CourseComponent implements OnInit {
   currentCourse = null;
   alerting = false;
   currentRole = "";
-  constructor(private lmsService: LmsService, private lessonService:LessonService, private courseService: CourseService, private userService:UserService,private router:Router) {}
+  constructor(private lessonService:LessonService, private courseService: CourseService, private userService:UserService,private router:Router) {}
 
   ngOnInit() {
     this.fetchCurrentRole();

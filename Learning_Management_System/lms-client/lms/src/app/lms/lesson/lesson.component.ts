@@ -2,8 +2,6 @@ import { UserService } from "./../../service/user.service";
 import { CourseService } from "./../../service/course.service";
 import { LessonService } from "./../../service/lesson.service";
 import { Utils } from "./../../utils/utils";
-import { LmsService } from "./../../service/lms.service";
-// import { Lesson } from './../../shared/models/lesson.model';
 import { Component, OnInit, TemplateRef } from "@angular/core";
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
 import { HttpClient } from "@angular/common/http";
@@ -12,8 +10,7 @@ import { Router } from "@angular/router";
 @Component({
   selector: "app-lesson",
   templateUrl: "./lesson.component.html",
-  styleUrls: ["./lesson.component.css"],
-  providers: [LmsService]
+  styleUrls: ["./lesson.component.css"]
 })
 export class LessonComponent implements OnInit {
   error = null;
@@ -39,7 +36,6 @@ export class LessonComponent implements OnInit {
 
   constructor(
     private modalService: BsModalService,
-    private lmsService: LmsService,
     private http: HttpClient,
     private lessonService: LessonService,
     private courseService: CourseService,

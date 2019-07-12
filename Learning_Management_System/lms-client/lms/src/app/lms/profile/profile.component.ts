@@ -1,5 +1,4 @@
 import { UserService } from "./../../service/user.service";
-import { LmsService } from "./../../service/lms.service";
 import { Component, OnInit, ViewChild, TemplateRef } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
@@ -9,8 +8,7 @@ import { AlertComponent } from "ngx-bootstrap/alert/alert.component";
 @Component({
   selector: "app-profile",
   templateUrl: "./profile.component.html",
-  styleUrls: ["./profile.component.css"],
-  providers: [LmsService]
+  styleUrls: ["./profile.component.css"]
 })
 export class ProfileComponent implements OnInit {
   error = null;
@@ -46,7 +44,6 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private modalService: BsModalService,
-    private lmsService: LmsService,
     private userService: UserService,
     private router: Router
   ) {}

@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
           this.router.navigate(["/lms/dashboard"]);
         },
         error => {
-          console.log(error.error.message);
           if (error.error.message == "User Not Found") {
             this.submitButtonValue = "User not found, please try again.";
           } else if (error.error.message == "Password Incorrect") {

@@ -86,6 +86,7 @@ export class LessonService {
     );
   }
 
+  //Remove one lesson from current user's lesson list
   removeOneOfCurrentLessonsById(id: number) {
     return this.http.delete(
       this.serverUrl +
@@ -98,18 +99,12 @@ export class LessonService {
     );
   }
 
-  // updateLesson(lesson){
-  //   if(lesson.id !== undefined){
-  //     return this.http.put(this.serverUrl + "lms/lessons/"+lesson.id,lesson)
-  //   }else{
-  //     return this.http.post(this.serverUrl + "lms/lessons",lesson)
-  //   }
-  // }
-
+  //Add or Update a lesson to database
   addOrUpdateLesson(lesson, courseTitle, tutorId){
     return this.http.post(this.serverUrl + "lms/lessons?courseTitle=" + courseTitle + "&tutorId=" + tutorId,lesson);
   }
 
+  //Remove one lesson from database
   delete(lesson){
     return this.http.delete(
       this.serverUrl+"lms/lessons/" + lesson.id

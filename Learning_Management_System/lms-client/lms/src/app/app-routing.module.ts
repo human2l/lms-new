@@ -23,7 +23,6 @@ const routes: Routes = [
       { path: "course", component: CourseComponent },
       { path: "lesson", component: LessonComponent },
       { path: "profile", component: ProfileComponent },
-      //TODO: logout the current session
       { path: "logout", redirectTo: "/auth/login" }
     ]
   },

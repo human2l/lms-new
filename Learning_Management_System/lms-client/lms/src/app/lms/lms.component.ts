@@ -1,5 +1,4 @@
 import { UserService } from "./../service/user.service";
-import { LmsService } from "./../service/lms.service";
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 
@@ -20,7 +19,6 @@ export class LmsComponent implements OnInit {
   userItemsAfterDivider: string[] = ["logout"];
   constructor(
     private router: Router,
-    private lmsService: LmsService,
     private userService: UserService
   ) {}
 

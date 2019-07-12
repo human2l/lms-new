@@ -12,30 +12,6 @@ export class UserService {
 
   constructor(private http: HttpClient, private router: Router) {
     this.serverUrl = Utils.serverUrl;
-
-    //FOR DEVELOPING, SHOULD DELETE!!!
-    // this.currentUser = {
-    //   id: 20,
-    //   firstName: "tutor1",
-    //   lastName: "ln",
-    //   email: "t@t.com",
-    //   password: "$2a$10$giHnUtNgfPjdk5lTLu8T4Om8eLcufBuxKDFbdlguRk43cNAkcmFZ.",
-    //   mobile: "mobile123",
-    //   active: 1,
-    //   admin: null,
-    //   student: null,
-    //   roleId: 3,
-    //   tutor: {
-    //     id: 3,
-    //     user: "62b17674-4770-4b24-945f-af26696dbc40"
-    //   },
-    //   roles: [
-    //     {
-    //       id: 2,
-    //       role: "Tutor"
-    //     }
-    //   ]
-    // };
   }
 
   getCurrentUser() {
@@ -58,9 +34,6 @@ export class UserService {
           return true;
         }),
         catchError(errorRes => {
-          //TODO: handle error
-          console.log("register error");
-          // Send to analytics server
           return throwError(errorRes);
         })
       );
@@ -71,7 +44,6 @@ export class UserService {
       map(responseData => {
         const currentUser = responseData;
         this.currentUser = this.formatUser(currentUser);
-        console.log(currentUser);
         return true;
       }),
       catchError(errorRes => {
@@ -81,24 +53,21 @@ export class UserService {
   }
 
   updateUser(user) {
-    console.log(user);
     return this.http
       .post(this.serverUrl + "updateUser?email=" + user.email, user)
       .pipe(
         map(responseData => {
           const currentUser = responseData;
           this.currentUser = this.formatUser(currentUser);
-          console.log("updateUser");
-          console.log(this.currentUser);
           return true;
         }),
         catchError(errorRes => {
-          //TODO: handle not found
           return throwError(errorRes);
         })
       );
   }
 
+  //Format user got from back end.
   private formatUser(currentUser) {
     switch (currentUser["roles"][0]["role"]) {
       case "Admin":

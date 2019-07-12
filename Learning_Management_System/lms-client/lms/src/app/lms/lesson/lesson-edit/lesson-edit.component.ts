@@ -21,7 +21,7 @@ export class LessonEditComponent implements OnInit {
   selectedCourse: string;
   allCourses = null;
   loading = true;
-  allCoursesString: string[] = [];
+  allCoursesStringArray: string[] = [];
   constructor(
     private dateFormatPipe: DateFormatPipe,
     private lessonService: LessonService,
@@ -34,7 +34,7 @@ export class LessonEditComponent implements OnInit {
       responseData => {
         this.allCourses = responseData;
         for(let index in this.allCourses){
-          this.allCoursesString.push((this.allCourses[index].title));
+          this.allCoursesStringArray.push((this.allCourses[index].title));
         }
         this.loading = false;
       },
@@ -51,7 +51,14 @@ export class LessonEditComponent implements OnInit {
     }
   }
 
+  courseExist(){
+    return this.allCoursesStringArray.includes(this.selectedCourse);
+  }
+
   onSaveLesson() {
+    if(!this.courseExist()){
+      return;
+    }
     this.lessonService.addOrUpdateLesson({
       id:this.editLesson !== null?this.editLesson.id:0,
       title: this.title,

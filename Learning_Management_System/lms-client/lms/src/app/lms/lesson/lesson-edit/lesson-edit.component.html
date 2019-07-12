@@ -10,7 +10,11 @@
           name="title"
           [(ngModel)]="title"
           required
+          #titleText="ngModel"
         />
+        <div *ngIf="lessonEditForm.submitted && titleText.invalid" class="alert alert-danger">
+          Title is required!
+        </div>
       </div>
     </div>
     <div class="col-md-4">
@@ -25,7 +29,11 @@
           [bsConfig]="{ isAnimated: true }"
           [(ngModel)]="bsRangeValue"
           required
+          #dates="ngModel"
         />
+        <div *ngIf="lessonEditForm.submitted && dates.invalid" class="alert alert-danger">
+          Dates is required!
+        </div>
       </div>
     </div>
   </div>
@@ -35,10 +43,18 @@
       <input
         name="courseSelector"
         [(ngModel)]="selectedCourse"
-        [typeahead]="allCoursesString"
+        [typeahead]="allCoursesStringArray"
         class="form-control"
         autocomplete="off"
+        #course = "ngModel"
+        required
       />
+      <div *ngIf="lessonEditForm.submitted && course.invalid" class="alert alert-danger">
+        Course is required!
+      </div>
+      <div *ngIf="lessonEditForm.submitted && course.dirty && !courseExist()" class="alert alert-danger">
+        Course does not exist!
+      </div>
     </div>
   </div>
 
@@ -52,7 +68,11 @@
           rows="5"
           [(ngModel)]="description"
           required
+          #descriptionText="ngModel"
         ></textarea>
+        <div *ngIf="lessonEditForm.submitted && descriptionText.invalid" class="alert alert-danger">
+          Description is required!
+        </div>
       </div>
     </div>
   </div>

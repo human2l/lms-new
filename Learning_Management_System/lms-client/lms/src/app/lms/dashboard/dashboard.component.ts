@@ -1,7 +1,6 @@
 import { UserService } from "./../../service/user.service";
 import { CourseService } from "./../../service/course.service";
 import { LessonService } from "./../../service/lesson.service";
-import { LmsService } from "./../../service/lms.service";
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { HttpErrorResponse } from "@angular/common/http";
@@ -9,8 +8,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 @Component({
   selector: "app-dashboard",
   templateUrl: "./dashboard.component.html",
-  styleUrls: ["./dashboard.component.css"],
-  providers: [LmsService]
+  styleUrls: ["./dashboard.component.css"]
 })
 export class DashboardComponent implements OnInit {
   error = null;
@@ -20,7 +18,6 @@ export class DashboardComponent implements OnInit {
   showCourse = false;
   showLesson = false;
   constructor(
-    private lmsService: LmsService,
     private lessonService: LessonService,
     private courseService: CourseService,
     private userService: UserService,

@@ -41,7 +41,7 @@
             <p>All lessons you are teaching:</p>
           </div>
         </div>
-        <div class="row justify-content-start" *ngIf="currentCourse === null">
+        <div class="row justify-content-start" *ngIf="currentRole === 'Student' && currentCourse === null">
           <div class="col-sm-6">
             <p>You do not have any course now.</p>
             <br>
