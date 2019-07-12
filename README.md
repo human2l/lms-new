@@ -13,9 +13,9 @@ Note: For now I have not develop functions for Admin. So all of the below featur
 
 ## Roles:
 There are 3 roles in this system: admin, student and tutor.  
-Admin(available in the future): Manage all other users with role student and tutor.  
-Student: Manage course and lessons they has.   
-Tutor: Manage all the lessons they taught.  
+* Admin(available in the future): Manage all other users with role student and tutor.  
+* Student: Manage course and lessons they has.   
+* Tutor: Manage all the lessons they taught.  
 
 ## Feature:
 ### Dashboard:
@@ -29,6 +29,7 @@ Can view all the lessons they are responsible for.
 *  Student: 
 Can view all courses in LMS.
 Can select one of the courses to save as his/her course.
+Note: Student can only select one course. When student select other course, lessons of previous course will be removed from their lesson-list.
 * Tutor:
 Can view all courses in LMS.
 * Admin(available in the future):N/A
@@ -45,10 +46,10 @@ Can view all courses in LMS.
     Delete one or more of lessons he teach.  
     Modify one or more of lessons he teach.  
 *  Admin: N/A  
-    ~~View all of the lessons.  
-    ~~Create one new lesson and assign to a tutor.  
-    ~~Delete one or more lessons.  
-    ~~Modify one or more lessons.  
+    ~~View all of the lessons.~~  
+    ~~Create one new lesson and assign to a tutor.~~  
+    ~~Delete one or more lessons.~~  
+    ~~Modify one or more lessons.~~  
 
 ### Personnel Management: N/A 
 Admin function, undeveloped for now.
@@ -77,7 +78,7 @@ ng serve
 
 ## Techniques:
 ### Front End:
-* Using Angular 7 framework
+* Using Angular 8 framework
 * Single-page web app
 * Using bootstrap + ngx-bootstrap for style
 
@@ -108,6 +109,7 @@ ng serve
 
 ### Front End:
 * Forgot password page
+* Use JWT to store "session" in local storage
 
 ### Back End:
 * Server side validation
