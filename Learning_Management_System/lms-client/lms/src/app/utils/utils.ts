@@ -1,7 +1,8 @@
+import { environment } from './../../environments/environment.prod';
 import { HttpHeaders } from '@angular/common/http';
 
 export class Utils{
-    public static serverUrl: string = "http://localhost:8080/";
+    public static serverUrl: string = environment.serverUrl;
 
     public static manyToManyHttpOptions = {
         headers: new HttpHeaders({

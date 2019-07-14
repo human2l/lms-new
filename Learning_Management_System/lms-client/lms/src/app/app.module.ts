@@ -27,10 +27,12 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LessonEditComponent } from './lms/lesson/lesson-edit/lesson-edit.component';
+import { DateFormatPipe } from './utils/date-format-pipe';
 
 
 @NgModule({
   declarations: [
+    DateFormatPipe,
     AppComponent,
     LmsComponent,
     CourseComponent,
