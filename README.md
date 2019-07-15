@@ -63,8 +63,13 @@ All kinds of users (student, tutor) can view => edit => save their profile. They
 
 ## Getting start:  
 * Since this is not a deployed version. You have to have one java ide (prefer Eclipse) installed.
+
+### Back End: 
 * Download all the files to local. 
+* Open it on Eclipse, and run.
 * The back-end code is in lms directory, run it on Eclipse. The server will choose 8080 as it's port.
+### Front End:
+Way1: Download the front-end file to local,
 * The front-end code is in lms-client/lms directory. 
 ```
 cd lms
@@ -75,6 +80,9 @@ ng serve
 ```
 * The front-end would choose 4200 as it's port.
 * open your browser, enter url: http://localhost:4200 It will directly heading to http://localhost:4200/auth/login page.
+
+Way2: I've deployed it through github pages, see https://human2l.github.io
+
 
 ## Techniques:
 ### Front End:
