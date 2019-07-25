@@ -1,0 +1,1 @@
+Code under this directory is the early program I made, which has been refracted. Just put it here as a backup
