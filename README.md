@@ -1,11 +1,12 @@
 # LMS (Learning Management System)
 
-This is a current system I am working on. Not for commercial purpose. Not for uni assignment.
-This system is built to demonstrate the techniques I've already learnt.
-As you can see from the project name, it is built for tutors and students to manage their educational resources.
+This is a current system I am working on. Not for commercial purpose. Not for uni assignment.  
+This system is built to demonstrate the techniques I've already learnt.  
+As you can see from the project name, it is built for tutors and students to manage their educational resources.  
 
-The back end code used to be built with Hibernate. Now it has been refactored, and the old code has been moved to backup directory.
-After refactoring, the new lms system is built by Angular7, MySql and Spring Data Jpa with REST.
+I built this system from scratch including setup all programming environment.  
+The back end code used to be built with Hibernate. Now it has been refactored, and the old code has been moved to backup directory.  
+After refactoring, the new lms system is built by Angular7, MySql and Spring Data Jpa with REST.  
 
 Note: For now I have not develop functions for Admin. So all of the below features about admin does not work. I will update it in the future.
 
@@ -21,33 +22,35 @@ There are 3 roles in this system: admin, student and tutor.
 
 ## Feature:
 ### Dashboard:
-* Student: 
+* Student:   
 Can view they selected course and lessons from course/lesson management page.
-* Tutor:
+* Tutor:  
 Can view all the lessons they are responsible for.
-* Admin(available in the future):N/A
+* Admin(available in the future):  
+N/A
 
 ### Course Management:
-*  Student: 
-Can view all courses in LMS.
-Can select one of the courses to save as his/her course.
-Note: Student can only select one course. When student select other course, lessons of previous course will be removed from their lesson-list.
-* Tutor:
-Can view all courses in LMS.
+*  Student:   
+Can view all courses in LMS.  
+Can select one of the courses to save as his/her course.  
+Note: Student can only select one course. When student select other course, lessons of previous course will be removed from their lesson-list.  
+* Tutor:  
+Can view all courses in LMS.  
 * Admin(available in the future):N/A
 
 ### Lesson Management:  
-*  Student:  
+*  Student:    
     View all of the lessons belong to their course.  
     View all of the lessons they have chosen.  
     Select one or more lessons to their lesson-list for studying.  
     Remove one or more lessons from their lesson-list.  
-*  Tutor:  
+*  Tutor:    
     View all of the lessons they teach.  
     Create new lessons to a course.  
     Delete one or more of lessons he teach.  
     Modify one or more of lessons he teach.  
-*  Admin: N/A  
+*  Admin:   
+N/A  
     ~~View all of the lessons.~~  
     ~~Create one new lesson and assign to a tutor.~~  
     ~~Delete one or more lessons.~~  
@@ -76,10 +79,11 @@ All kinds of users (student, tutor) can view => edit => save their profile. They
 * The back-end code is in lms directory, run it on Eclipse. The server will choose 8080 as it's port.
 
 ### Front End:
-Way1: I've deployed it by using github pages, front-end page can be view directly through https://human2l.github.io
+Way1: I've deployed it by using github pages, front-end page can be view directly through https://human2l.github.io  
 Note: To login to the system. Back-end service and MySQL database should be working in advance.
 
-Way2(if you wanna see how the code exactly working): Download the front-end file to local,
+Way2(if you wanna see how the code exactly working): 
+* Download the front-end file to local
 * The front-end code is in "lms-new/Learning Management System/lms-client/lms" directory.
 * Make sure npm and Angular CLI installed.
 ```
