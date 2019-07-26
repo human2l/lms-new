@@ -1,8 +1,10 @@
-# lms-new
-The old lms is in chaos. I decided to create a new repo to rebuild it.
+# LMS (Learning Management System)
 
-There used to be an old lms system build with AngularJs, MySql and Spring REST.
+This is a current system I am working on. Not for commercial purpose. Not for uni assignment.
+This system is built to demonstrate the techniques I've already learnt.
+As you can see from the project name, it is built for tutors and students to manage their educational resources.
 
+The back end code used to be built with Hibernate. Now it has been refactored, and the old code has been moved to backup directory.
 After refactoring, the new lms system is built by Angular7, MySql and Spring Data Jpa with REST.
 
 Note: For now I have not develop functions for Admin. So all of the below features about admin does not work. I will update it in the future.
