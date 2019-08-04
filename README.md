@@ -1,4 +1,5 @@
 # LMS (Learning Management System)
+There used to be an old LMS System built with my teammates. Unfortunately, due to the dismiss of our team, we lost the code of the project.
 
 This is a current system I am working on. Not for commercial purpose. Not for uni assignment.  
 This system is built to demonstrate the techniques I've already learnt.  
