@@ -1,15 +1,15 @@
 # LMS (Learning Management System)
-There used to be an old LMS System built with my teammates. Unfortunately, due to the dismiss of our team, we lost the code of the project.
+This is a Learning Management System built for: 1. Handling students' course & lessons selection. 2. Handling tutors' manage their lessons. 3. Helping Administrator to deal with personnel management (including students and tutors) and to manage all data of courses and lessons.
 
-This is a current system I am working on. Not for commercial purpose. Not for uni assignment.  
-This system is built to demonstrate the techniques I've already learnt.  
-As you can see from the project name, it is built for tutors and students to manage their educational resources.  
+Note:
+* There used to be an old LMS System built with my teammates. Unfortunately, due to the dismiss of our team, we lost the code of the project.
+* This is a current system I am working on. Not for commercial purpose. Not for uni assignment.  
+* This system is built to demonstrate the techniques I've already learnt.  
 
-I built this system from scratch including setup all programming environment.  
-The back end code used to be built with Hibernate. Now it has been refactored, and the old code has been moved to backup directory.  
-After refactoring, the new lms system is built by Angular7, MySql and Spring Data Jpa with REST.  
-
-Note: For now I have not develop functions for Admin. So all of the below features about admin does not work. I will update it in the future.
+* I built this system from scratch including setup all programming environment.  
+* The back end code used to be built with Hibernate. Now it has been refactored, and the old code has been moved to backup directory.  
+* After refactoring, the new lms system is built by Angular7, MySql and Spring Data Jpa with REST.  
+* For now I have not develop functions for Admin. So all of the below features about admin does not work. I will update it in the future.
 
 
 ## ER Diagram
